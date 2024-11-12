@@ -1,0 +1,170 @@
+<?php
+session_start();
+include_once "includes/header.php";
+
+$id_user = $_SESSION['idUser'];
+$permiso = "nueva_venta";
+
+$sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso' ");
+$existe = mysqli_fetch_all($sql);
+if (empty($existe) && $id_user != 1) {
+   // header('Location: permisos.php');
+   include "permisos.php";
+   
+}else{ 
+
+?>
+<div class="row">
+    <div class="col-lg-12">
+        
+        <div class="card">
+
+                              <div class="card-header card-header-primary ">
+									<h4 class="card-title">Venta de Productos</h4>
+									
+								</div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="hidden" id="idcliente" value="1" name="idcliente" required>
+                                <label class=" text-dark font-weight-bold">Nombre del Cliente</label>
+                                <input type="text" name="nom_cliente" id="nom_cliente" class="form-control" placeholder="Ingrese nombre del cliente" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class=" text-dark font-weight-bold">Teléfono del Cliente</label>
+                                <input type="number" name="tel_cliente" id="tel_cliente" class="form-control" disabled required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class=" text-dark font-weight-bold">Dirección del Cliente</label>
+                                <input type="text" name="dir_cliente" id="dir_cliente" class="form-control" disabled required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+                Buscar Productos
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="producto" class=" text-dark font-weight-bold">Código o Nombre del Porducto</label>
+                            <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre" autofocus required>
+                            <input id="id" type="hidden" name="id">
+                            <input id="id_presentacion" type="hidden" name="id_presentacion">
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="form-group" >
+                            <label for="cantidad" class=" text-dark font-weight-bold">Unidad/Venta</label>
+                            <input id="cantidad" class="form-control text-center" type="number" name="cantidad" placeholder="Unidades" title="Presionar tecla Enter para agregar producto a la venta."  onkeyup="calcularPrecio(event)" required>
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <div class="form-group">
+                            <label for="stock" class=" text-dark font-weight-bold">Stock Bod.</label>
+                            <input id="stock" class="form-control text-center" type="text" name="stock" style="background-color: #f8fbac; text-content:center;"  disabled>
+                           
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="precioPVP" class=" text-dark font-weight-bold">Precio PVP/u.</label>
+                            <input id="precioPVP" class="form-control text-center" type="text" name="precioPVP"  disabled>
+                            <input id="precioC"  name="precioC" type="hidden" />
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group" class=" text-dark font-weight-bold">
+                              <label for="iva" class=" text-dark font-weight-bold">Valor IVA</label>
+                              <input id="iva" class="form-control text-center" type="text" name="iva"  disabled>
+                           
+                        </div>
+
+                   </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label for="sub_total" class=" text-dark font-weight-bold">Sub Total</label>
+                            <input id="sub_total" class="form-control text-center" type="text" name="sub_total" placeholder="Sub Total" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="panelFraccion" style="display:none;">
+                     <div class="col-lg-12">
+                       <div class="row">
+                            <div class="col-lg-2">
+                                
+                                    <div class="form-group">
+                                       <label for="tipoUnidad" class=" text-dark font-weight-bold">Tipo Unidad:</label>
+                                       <select class="form-control" id="tipoUnidad" name="tipoUnidad">
+                                           <option value="U">Unidad</option>
+                                           <option value="F">Fracción</option>
+
+                                       </select>
+                                       
+                                    </div>
+                            </div>
+                         </div>
+                     </div>
+                     <div class="row">
+                     <div class="col-lg-12">
+                     <h4><span class="badge badge-pill badge-warning">Seleccionar para este tipo de medicamento si la venta es por caja (unidad) o por fracción.</span></h4>
+                       </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            
+        <div class="table-responsive">
+            <table class="table table-hover" id="tblDetalle">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Descripción</th>
+                        <th>Unidades</th>
+                        <th>Aplicar Desc.(%)</th>
+                        <th>Desc.</th>
+                        <th>Precio PVP/u.</th>
+                        <th>Precio Total</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="detalle_venta">
+
+                </tbody>
+                <tfoot>
+                    <tr class="font-weight-bold">
+                        <td style="font-size:20px; font-weight: bold;">Total Pagar:</td>
+                        <td style="font-size:20px; font-weight: bold;"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+      
+      
+        
+        
+        </div>
+</div>
+    </div>
+    <div class="col-md-6">
+        <a href="#" class="btn btn-primary" id="btn_generar"><i class="fas fa-save"></i> Generar Venta</a>
+    </div>
+
+</div>
+<?php 
+ } ?>
+<?php include_once "includes/footer.php"; ?>
