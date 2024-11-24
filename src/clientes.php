@@ -2,6 +2,8 @@
 session_start();
 include_once "includes/header.php";
 
+if (!empty($_SESSION['idUser']))
+{
 $id_user = $_SESSION['idUser'];
 $permiso = "clientes";
 $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
@@ -160,4 +162,10 @@ if (!empty($_POST)) {
         </div>
     </div>
 </div>
+<?php
+}else{
+
+    header("Location: ../index.php");
+}
+?>
 <?php include_once "includes/footer.php"; ?>

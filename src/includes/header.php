@@ -10,6 +10,9 @@ if (empty($_SESSION['active'])) {
 $id_user = $_SESSION['idUser'];
 
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

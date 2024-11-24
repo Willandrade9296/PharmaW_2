@@ -2,6 +2,9 @@
 session_start();
 include_once "includes/header.php";
 
+if (!empty($_SESSION['idUser'])){  
+
+
 $id_user = $_SESSION['idUser'];
 $permiso = "nueva_venta";
 
@@ -26,20 +29,29 @@ if (empty($existe) && $id_user != 1) {
             <div class="card-body">
                 <form method="post">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <input type="hidden" id="idcliente" value="1" name="idcliente" required>
                                 <label class=" text-dark font-weight-bold">Nombre del Cliente</label>
                                 <input type="text" name="nom_cliente" id="nom_cliente" class="form-control" placeholder="Ingrese nombre del cliente" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <input type="hidden" id="idcliente" value="1" name="idcedula" required>
+                                <label class=" text-dark font-weight-bold">Cédula</label>
+                                <input type="text" name="idcedula" id="idcedula" class="form-control" disabled required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class=" text-dark font-weight-bold">Teléfono del Cliente</label>
                                 <input type="number" name="tel_cliente" id="tel_cliente" class="form-control" disabled required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class=" text-dark font-weight-bold">Dirección del Cliente</label>
                                 <input type="text" name="dir_cliente" id="dir_cliente" class="form-control" disabled required>
@@ -65,15 +77,27 @@ if (empty($existe) && $id_user != 1) {
                     </div>
                     <div class="col-lg-1">
                         <div class="form-group" >
+                        <div id="areaFraccion" style="display:none;">
+                        <label for="fraccion" class=" text-dark font-weight-bold">Fracción/Venta</label>
+                        <input id="fraccion" class="form-control text-center" type="number" name="fraccion" placeholder="Fracciones" title="Presionar tecla Enter para agregar fracción a la venta."  onkeyup="calcularPrecioFraccion(event)" required>
+                        </div>
+                           <div id="areaUnidad">
                             <label for="cantidad" class=" text-dark font-weight-bold">Unidad/Venta</label>
                             <input id="cantidad" class="form-control text-center" type="number" name="cantidad" placeholder="Unidades" title="Presionar tecla Enter para agregar producto a la venta."  onkeyup="calcularPrecio(event)" required>
+                           </div>
                         </div>
                     </div>
                     <div class="col-lg-1">
                         <div class="form-group">
+                        <div id="areaStockFr" style="display:none;">
+                        <label for="stockFr" class=" text-dark font-weight-bold" style="font-size:11px;">Stock Bod. Fr.</label>
+                        <input id="stockFr" class="form-control text-center" type="text" name="stock" style="background-color: #f8fbac; text-content:center;"  disabled>
+                        </div>
+
+                        <div id="areaStock" >
                             <label for="stock" class=" text-dark font-weight-bold">Stock Bod.</label>
                             <input id="stock" class="form-control text-center" type="text" name="stock" style="background-color: #f8fbac; text-content:center;"  disabled>
-                           
+                        </div>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -106,7 +130,7 @@ if (empty($existe) && $id_user != 1) {
                                 
                                     <div class="form-group">
                                        <label for="tipoUnidad" class=" text-dark font-weight-bold">Tipo Unidad:</label>
-                                       <select class="form-control" id="tipoUnidad" name="tipoUnidad">
+                                       <select class="form-control" id="tipoUnidad" name="tipoUnidad" onchange="unidad_o_fraccion(event)">
                                            <option value="U">Unidad</option>
                                            <option value="F">Fracción</option>
 
@@ -166,5 +190,8 @@ if (empty($existe) && $id_user != 1) {
 
 </div>
 <?php 
+ }
+ }else{
+    header("Location: ../index.php");
  } ?>
 <?php include_once "includes/footer.php"; ?>

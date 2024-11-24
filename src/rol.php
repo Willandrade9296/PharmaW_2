@@ -1,8 +1,12 @@
 <?php
 session_start();
-require_once "../conexion.php";
-include "includes/components.php";
+
+include_once "includes/header.php";
+
 $id = $_GET['id'];
+if (!empty ($id)){
+
+
 $sqlpermisos = mysqli_query($conexion, "SELECT * FROM permisos");
 $usuarios = mysqli_query($conexion, "SELECT * FROM usuario WHERE idusuario = $id");
 $consulta = mysqli_query($conexion, "SELECT * FROM detalle_permisos WHERE id_usuario = $id");
@@ -29,7 +33,7 @@ if (isset($_POST['permisos'])) {
       
     }
 }
-include_once "includes/header.php";
+
 ?>
 
 <div class="row">
@@ -59,5 +63,8 @@ include_once "includes/header.php";
         </div>
     </div>
 </div>
-<?php   }  ?>
+<?php   } 
+}else{
+    header("Location: ../index.php");
+} ?>
 <?php include_once "includes/footer.php"; ?>

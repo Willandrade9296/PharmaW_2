@@ -11,6 +11,7 @@ if (isset($_GET['q'])) {
     $cliente = mysqli_query($conexion, "SELECT * FROM cliente WHERE nombre LIKE '%$nombre%'");
     while ($row = mysqli_fetch_assoc($cliente)) {
         $data['id'] = $row['idcliente'];
+        $data['idcedula'] = $row['cedula'];
         $data['label'] = $row['nombre'];
         $data['direccion'] = $row['direccion'];
         $data['telefono'] = $row['telefono'];

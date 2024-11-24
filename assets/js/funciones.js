@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         select: function (event, ui) {
             $("#idcliente").val(ui.item.id);
             $("#nom_cliente").val(ui.item.label);
+            $("#idcedula").val(ui.item.idcedula);
             $("#tel_cliente").val(ui.item.telefono);
             $("#dir_cliente").val(ui.item.direccion);
         }
@@ -794,6 +795,45 @@ function editarLab(id) {
             }else{
                         $('#precioIva').val(0.00);
                         
+            }
+
+          }
+
+
+
+          // VENTAS
+
+          function unidad_o_fraccion(e){
+            e.preventDefault();
+             
+            var valorSelect= $('#tipoUnidad').val();
+            if(valorSelect === 'U'){
+
+                $('#areaUnidad').css('display','initial');
+                
+                $('#cantidad').prop('required',true);
+                $('#cantidad').val('');
+
+                $('#areaStockFr').css('display','none');
+                $('#areaStock').css('display','initial');
+
+                $('#areaFraccion').css('display','none');
+                $('#fraccion').removeAttr("required");
+                $('#fraccion').val('0');
+
+            }else if(valorSelect === 'F'){
+
+                $('#areaFraccion').css('display','initial');
+                $('#fraccion').prop('required',true);
+                $('#fraccion').val('');
+                
+                $('#areaStockFr').css('display','initial');
+                $('#areaStock').css('display','none');
+                
+
+                $('#areaUnidad').css('display','none');
+                $('#cantidad').removeAttr("required");
+                $('#cantidad').val('0');
             }
 
           }

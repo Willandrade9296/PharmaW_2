@@ -2,6 +2,8 @@
 session_start();
 include_once "includes/header.php";
 
+ if (!empty($_SESSION['idUser'])){ 
+    
 $id_user = $_SESSION['idUser'];
 $permiso = "productos";
 $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
@@ -182,6 +184,9 @@ if (!empty($_POST)) {
                             <div class="row">
                                 <div class="col-md-1 ">
                                     <div class="form-group">
+
+                                  
+
                                         <label for="cantidad" class=" text-dark font-weight-bold">Unidades</label>
                                         <input type="number" placeholder="Unidad" class="form-control" name="cantidad" id="cantidad" required>
                                     </div>
@@ -261,5 +266,10 @@ if (!empty($_POST)) {
         </div>
     </div>
 </div>
-<?php  } ?>
+<?php  } 
+ }else{
+
+    header("Location: ../index.php");
+ }
+?>
 <?php include_once "includes/footer.php"; ?>
