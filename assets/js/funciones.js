@@ -68,8 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#id_presentacion").val(ui.item.id_presentacion);
             $("#producto").val(ui.item.value);
             $('#stock').val(ui.item.cantidad);
+            $('#stockFr').val(ui.item.stockFr);
             $("#precioC").val(ui.item.precioC);
             $("#precioPVP").val(ui.item.precioPVP);
+            /*Precio PVP unidad almacena el precio PVP mientras que preciofr almacena el precio de unidad fracción */
+            $("#precioPVPu").val(ui.item.precioPVP);
+            $("#precioPVPfr").val(ui.item.precioFr);
+
             $("#iva").val(ui.item.iva);
             $("#cantidad").focus();
 
@@ -80,14 +85,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             $('#tipoUnidad').prop('required',true);
           
-
+            unidad_o_fraccion(event);
 
            }else{
             $('#panelFraccion').css('display','none');
 
             $('#tipoUnidad').removeAttr("required");
             $('#tipoUnidad').val('U');
-
+            unidad_o_fraccion(event);
            }
 
         }
@@ -152,10 +157,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function calcularPrecio(e) {
     e.preventDefault();
-    const cant = $("#cantidad").val();
-    const stock = $("#stock").val();
+    var cant = $("#cantidad").val();
+    var stock = $("#stock").val();
 
-    if (stock >= cant)
+
+if (cant != '')
+{
+    if (Number(stock) >= Number(cant))
     { 
 
 
@@ -181,7 +189,7 @@ function calcularPrecio(e) {
 
 
   }else{
-    if (cant > 0 && cant != '') {
+   
     Swal.fire({
         position: 'top-end',
         icon: 'error',
@@ -190,11 +198,85 @@ function calcularPrecio(e) {
         timer: 3000
     })
     $("#stock").focus();
-   }
+   
 
   }
 
 
+
+           var presentac= $("#id_presentacion").val();
+
+           if(presentac === '4'){
+            $('#panelFraccion').css('display','initial');
+
+            $('#tipoUnidad').prop('required',true);
+           
+
+
+           }else{
+            $('#panelFraccion').css('display','none');
+
+            $('#tipoUnidad').removeAttr("required");
+            $('#tipoUnidad').val('U');
+
+           }
+
+        }
+
+}
+
+
+function calcularPrecioFraccion(e) {
+    e.preventDefault();
+    var cantFr = $("#fraccion").val();
+    var stockFr = $("#stockFr").val();
+
+    
+
+   if(cantFr != ''){ 
+
+    
+    if (Number(stockFr) >= Number(cantFr))
+    { 
+
+
+
+    
+    const precio = $('#precioPVP').val();
+    
+    const total = cantFr * precio;
+
+    $('#sub_total').val(total);
+
+    if (e.which == 13) {
+        if (cantFr > 0 && cantFr != '') {
+            const id = $('#id').val();
+            registrarDetalle(e, id,cantFr,stockFr,'0', precio,'0');
+            $('#producto').focus();
+        } else {
+            $('#fraccion').focus();
+            return false;
+        }
+    }
+
+
+
+
+  }else{
+    
+    Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'No se puede agregar producto a esta venta, revisar stock en fracciones.',
+        showConfirmButton: false,
+        timer: 3000
+    })
+    $("#stockFr").focus();
+   
+
+  }
+
+   }
 
            var presentac= $("#id_presentacion").val();
 
@@ -669,6 +751,7 @@ function editarProducto(e,id) {
             presentacion_caja(e);
 
             $('#fraccion').val(datos.fraccion);
+            $('#PrecioFr').val(datos.precioFr);
 
             $('#btnAccion').val('Modificar');
         },
@@ -769,6 +852,8 @@ function editarLab(id) {
 
                 $('#fraccion').prop('required',true);
                 $('#fraccion').val('');
+                
+                $('#PrecioFr').val('');
 
                
                }else{
@@ -776,6 +861,7 @@ function editarLab(id) {
 
                 $('#fraccion').removeAttr("required");
                 $('#fraccion').val('0');
+                $('#PrecioFr').val('0');
                }
           }
 
@@ -818,8 +904,14 @@ function editarLab(id) {
                 $('#areaStock').css('display','initial');
 
                 $('#areaFraccion').css('display','none');
+
                 $('#fraccion').removeAttr("required");
                 $('#fraccion').val('0');
+                
+               $('#precioPVP').val($('#precioPVPu').val());
+
+                
+                $('#sub_total').val('');
 
             }else if(valorSelect === 'F'){
 
@@ -832,8 +924,13 @@ function editarLab(id) {
                 
 
                 $('#areaUnidad').css('display','none');
+
                 $('#cantidad').removeAttr("required");
                 $('#cantidad').val('0');
+
+                $('#precioPVP').val($('#precioPVPfr').val());
+
+                $('#sub_total').val('');
             }
 
           }

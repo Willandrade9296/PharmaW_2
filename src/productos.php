@@ -2,6 +2,29 @@
 session_start();
 include_once "includes/header.php";
 
+
+
+function  precioFraccion($PprecioPVP,$numeroFracciones,$precioFraccion){
+     
+    if($precioFraccion == 0){
+            if($numeroFracciones > 0){
+
+            return round(($PprecioPVP/$numeroFracciones),2);
+
+            }else{
+
+            return 0;
+
+            }
+        }else{
+
+            return $precioFraccion;
+        }
+
+}
+
+
+
  if (!empty($_SESSION['idUser'])){ 
     
 $id_user = $_SESSION['idUser'];
@@ -25,6 +48,7 @@ if (!empty($_POST)) {
     $precioPVP=$_POST['precioPVP'];
     $cantidad = $_POST['cantidad'];
     $fraccion = $_POST['fraccion'];
+    $precioFr= $_POST['PrecioFr'];
     $tipo = $_POST['tipo'];
     $presentacion = $_POST['presentacion'];
     $laboratorio = $_POST['laboratorio'];
@@ -45,7 +69,10 @@ if (!empty($_POST)) {
               
                     $alert = mostrarMensaje('El codigo ya existe','w');
             } else {
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,id_lab,id_presentacion,id_tipo, vencimiento,iva) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion', $laboratorio, $presentacion, $tipo, '$vencimiento','$iva')");
+               
+                 $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,precioFr,id_lab,id_presentacion,id_tipo, vencimiento,iva) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion',$precioCalcFr, $laboratorio, $presentacion, $tipo, '$vencimiento','$iva')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -53,9 +80,15 @@ if (!empty($_POST)) {
                   
                      $alert = mostrarMensaje('Error al registrar el producto','e');
                 }
+
+
+
             }
         } else {
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion,id_lab = $laboratorio,id_presentacion=$presentacion,id_tipo=$tipo ,vencimiento = '$vencimiento', iva = $iva WHERE codproducto = $id");
+
+            $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, precioFr= $precioCalcFr,id_lab = $laboratorio,id_presentacion=$presentacion,id_tipo=$tipo ,vencimiento = '$vencimiento', iva = $iva WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -66,6 +99,9 @@ if (!empty($_POST)) {
         }
     }
 }
+
+
+
 
 ?>
 <div class="card shadow-lg">
@@ -182,19 +218,32 @@ if (!empty($_POST)) {
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-1 ">
+                                <div class="col-md-2 ">
                                     <div class="form-group">
 
                                   
 
                                         <label for="cantidad" class=" text-dark font-weight-bold">Unidades</label>
-                                        <input type="number" placeholder="Unidad" class="form-control" name="cantidad" id="cantidad" required>
+                                        <input type="number" placeholder="Unidades" class="form-control" name="cantidad" id="cantidad" required>
                                     </div>
                                 </div>
-                                <div class="col-md-1 " style="margin-top:6px; display:none;" id="areaFraccion">
-                                        <label for="fraccion" class="text-dark font-weight-bold">Fracción/U:</label>
-                                        <input type="number" placeholder="Frac/U." class="form-control" name="fraccion" id="fraccion" >
-                                 </div>
+                                <div class="col-md-2 ">
+                                        <div   id="areaFraccion" style="margin-top:6px; display:none;">
+                                            
+                                              <div class="form-group">
+                                                    <label for="fraccion" class="text-dark font-weight-bold">Fracciones por U:</label>
+                                                    <input type="number" placeholder="Fracciones" class="form-control" name="fraccion" id="fraccion" min="0" step="1">
+                                             </div>
+                                            
+                                            
+                                               <div class="form-group">
+                                                    <label for="PrecioFr" class="text-dark font-weight-bold">Precio por Fr.:</label>
+                                                    <input type="number" placeholder="Precio Fracción" class="form-control" name="PrecioFr" id="PrecioFr" min="0" step="0.01">
+                                              </div>
+                                           
+                                        </div>
+                              </div>
+
                             </div>
                             <div class="row">   
                                 <div class="col-md-6">
@@ -226,6 +275,7 @@ if (!empty($_POST)) {
                             <th>Precio PVP</th>
                             <th>Unidades</th>
                             <th>Frac./Unid.</th>
+                            <th>Prec./Frac.</th>
                             <th>IVA</th>
                             <th>Acciones</th>
                         </tr>
@@ -248,6 +298,7 @@ if (!empty($_POST)) {
                                     <td><?php echo $data['precioPVP']; ?></td>
                                     <td><?php echo $data['existencia']; ?></td>
                                     <td><?php echo $data['fraccion']; ?></td>
+                                    <td><?php echo $data['precioFr']; ?></td>
                                     <td><?php echo $data['iva']; ?></td>
                                     <td>
                                         <a href="#" onclick="editarProducto(event,<?php echo $data['codproducto']; ?>)" class="btn btn-primary"><i class='fas fa-edit'></i></a>

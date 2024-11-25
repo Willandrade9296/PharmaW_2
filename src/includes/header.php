@@ -32,7 +32,7 @@ $id_user = $_SESSION['idUser'];
 
 <body>
     <div class="wrapper ">
-        <div class="sidebar" data-color="white" data-background-color="blue" >
+        <div class="sidebar" data-color="white"  >
             <div class="logo "><a href="./" class="simple-text logo-normal">
                     Pharma W
                 </a></div>

@@ -39,7 +39,7 @@ if (empty($existe) && $id_user != 1) {
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="hidden" id="idcliente" value="1" name="idcedula" required>
+                                
                                 <label class=" text-dark font-weight-bold">Cédula</label>
                                 <input type="text" name="idcedula" id="idcedula" class="form-control" disabled required>
                             </div>
@@ -69,7 +69,7 @@ if (empty($existe) && $id_user != 1) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label for="producto" class=" text-dark font-weight-bold">Código o Nombre del Porducto</label>
+                            <label for="producto" class=" text-dark font-weight-bold">Código o Nombre del Producto</label>
                             <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre" autofocus required>
                             <input id="id" type="hidden" name="id">
                             <input id="id_presentacion" type="hidden" name="id_presentacion">
@@ -102,9 +102,15 @@ if (empty($existe) && $id_user != 1) {
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
+                           <input id="precioC"  name="precioC" type="hidden" />
+
+                          
                             <label for="precioPVP" class=" text-dark font-weight-bold">Precio PVP/u.</label>
                             <input id="precioPVP" class="form-control text-center" type="text" name="precioPVP"  disabled>
-                            <input id="precioC"  name="precioC" type="hidden" />
+                            <input id="precioPVPu"  type="hidden" name="precioPVPu" />
+                            <input id="precioPVPfr"  type="hidden" name="precioPVPfr" />
+                          
+                           
                         </div>
                     </div>
                     <div class="col-lg-2">

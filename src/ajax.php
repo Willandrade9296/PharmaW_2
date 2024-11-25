@@ -33,6 +33,8 @@ if (isset($_GET['q'])) {
         $data['precioPVP'] = $row['precioPVP'];
         $data['cantidad'] = $row['existencia'];
         $data['fraccion'] = $row['fraccion'];
+        $data['precioFr'] = $row['precioFr'];
+        $data['stockFr']= $row['existencia'] * $row['fraccion'];
         $data['iva'] = $row['iva'];
         array_push($datos, $data);
     }
