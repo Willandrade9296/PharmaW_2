@@ -68,37 +68,53 @@ if (isset($_GET['q'])) {
 } else if (isset($_GET['procesarVenta'])) {
     $id_cliente = $_GET['id'];
     $id_user = $_SESSION['idUser'];
-    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user");
-    $result = mysqli_fetch_assoc($consulta);
-    $total = $result['total_pagar'];
-    $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total', $id_user)");
-    if ($insertar) {
-        $id_maximo = mysqli_query($conexion, "SELECT MAX(id) AS total FROM ventas");
-        $resultId = mysqli_fetch_assoc($id_maximo);
-        $ultimoId = $resultId['total'];
-        $consultaDetalle = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_usuario = $id_user");
-        while ($row = mysqli_fetch_assoc($consultaDetalle)) {
-            $id_producto = $row['id_producto'];
-            $cantidad = $row['cantidad'];
-            $desc = $row['descuento'];
-            $precio = $row['precio_costo'];
-            $precioPVP = $row['precio_venta'];
-            $total = $row['total'];
-            $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId, $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
-            $stockActual = mysqli_query($conexion, "SELECT * FROM producto WHERE codproducto = $id_producto");
-            $stockNuevo = mysqli_fetch_assoc($stockActual);
-            $stockTotal = $stockNuevo['existencia'] - $cantidad;
-            $stock = mysqli_query($conexion, "UPDATE producto SET existencia = $stockTotal WHERE codproducto = $id_producto");
-        } 
-        if ($insertarDet) {
-            $eliminar = mysqli_query($conexion, "DELETE FROM detalle_temp WHERE id_usuario = $id_user");
-            $msg = array('id_cliente' => $id_cliente, 'id_venta' => $ultimoId);
-        } 
+
+
+    if (comprobar_cliente($conexion,$id_cliente))
+    { 
+                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user");
+                    $result = mysqli_fetch_assoc($consulta);
+                    $total = $result['total_pagar'];
+                    $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total', $id_user)");
+                    if ($insertar) {
+                        $id_maximo = mysqli_query($conexion, "SELECT MAX(id) AS total FROM ventas");
+                        $resultId = mysqli_fetch_assoc($id_maximo);
+                        $ultimoId = $resultId['total'];
+                        $consultaDetalle = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_usuario = $id_user");
+                        while ($row = mysqli_fetch_assoc($consultaDetalle)) {
+                            $id_producto = $row['id_producto'];
+                            $cantidad = $row['cantidad'];
+                            $desc = $row['descuento'];
+                            $precio = $row['precio_costo'];
+                            $precioPVP = $row['precio_venta'];
+                            $total = $row['total'];
+                            $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId, $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                            $stockActual = mysqli_query($conexion, "SELECT * FROM producto WHERE codproducto = $id_producto");
+                            $stockNuevo = mysqli_fetch_assoc($stockActual);
+                            $stockTotal = $stockNuevo['existencia'] - $cantidad;
+                            $stock = mysqli_query($conexion, "UPDATE producto SET existencia = $stockTotal WHERE codproducto = $id_producto");
+                        } 
+                        if ($insertarDet) {
+                            $eliminar = mysqli_query($conexion, "DELETE FROM detalle_temp WHERE id_usuario = $id_user");
+                            $msg = array('id_cliente' => $id_cliente, 'id_venta' => $ultimoId);
+                        } 
+                            
+                    }else{
+                        $msg = array('mensaje' => 'error');
+                    } 
+                  
     }else{
         $msg = array('mensaje' => 'error');
     }
+
+
+
+
+
     echo json_encode($msg);
     die();
+
+
 }else if (isset($_GET['descuento'])) {
     $id = $_GET['id'];
     $desc = $_GET['desc'];
@@ -216,5 +232,32 @@ if (isset($_POST['regDetalle'])) {
     echo $msg;
     die();
     
+}
+
+
+
+function comprobar_cliente($conexion,$id_cliente){
+
+if (!empty($id_cliente) || $id_cliente>0){
+
+        $consulta = mysqli_query($conexion, "SELECT * FROM cliente WHERE idcliente='$id_cliente'");
+        $result = mysqli_num_rows($consulta);
+        if ($result > 0) {
+
+            return true;
+        }else{
+            return false;
+        }
+
+
+        die();
+
+}else{
+
+return false;
+
+}
+
+
 }
 

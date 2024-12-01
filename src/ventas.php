@@ -31,7 +31,7 @@ if (empty($existe) && $id_user != 1) {
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <input type="hidden" id="idcliente" value="1" name="idcliente" required>
+                                <input type="hidden" id="idcliente" value="0" name="idcliente" required>
                                 <label class=" text-dark font-weight-bold">Nombre del Cliente</label>
                                 <input type="text" name="nom_cliente" id="nom_cliente" class="form-control" placeholder="Ingrese nombre del cliente" required>
                             </div>
@@ -90,8 +90,10 @@ if (empty($existe) && $id_user != 1) {
                     <div class="col-lg-1">
                         <div class="form-group">
                         <div id="areaStockFr" style="display:none;">
+
                         <label for="stockFr" class=" text-dark font-weight-bold" style="font-size:11px;">Stock Bod. Fr.</label>
                         <input id="stockFr" class="form-control text-center" type="text" name="stock" style="background-color: #f8fbac; text-content:center;"  disabled>
+                      
                         </div>
 
                         <div id="areaStock" >
@@ -156,8 +158,8 @@ if (empty($existe) && $id_user != 1) {
             </div>
         </div>
 
+       
         <div class="card">
-            
         <div class="table-responsive">
             <table class="table table-hover" id="tblDetalle">
                 <thead class="thead-dark">
@@ -188,8 +190,15 @@ if (empty($existe) && $id_user != 1) {
         
         
         </div>
+        </div>
+
+
+
+   </div>
 </div>
-    </div>
+
+
+<div class="row">
     <div class="col-md-6">
         <a href="#" class="btn btn-primary" id="btn_generar"><i class="fas fa-save"></i> Generar Venta</a>
     </div>

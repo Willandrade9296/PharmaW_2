@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 success: function (response) {
 
                     const res = JSON.parse(response);
-                    if (response != 'error') {
+                    if (res['mensaje'] != 'error') {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -122,10 +122,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             showConfirmButton: false,
                             timer: 2000
                         })
+
+
                         setTimeout(() => {
                             generarPDF(res.id_cliente, res.id_venta);
                             location.reload();
                         }, 300);
+
+
                     } else {
                         Swal.fire({
                             position: 'top-end',
@@ -150,6 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
         }
     });
+
     if (document.getElementById("detalle_venta")) {
         listar();
     }
@@ -221,7 +226,7 @@ if (cant != '')
 
            }
 
-        }
+}
 
 }
 
@@ -276,7 +281,7 @@ function calcularPrecioFraccion(e) {
 
   }
 
-   }
+   
 
            var presentac= $("#id_presentacion").val();
 
@@ -294,6 +299,7 @@ function calcularPrecioFraccion(e) {
             $('#tipoUnidad').val('U');
 
            }
+    }
 
 
 
@@ -364,7 +370,7 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva) {
     if (document.getElementById('producto').value != '') {
         if (id != null) {
 
-            if( stock >= cant){ 
+            if( Number(stock) >= Number(cant)){ 
             let action = 'regDetalle';
             $.ajax({
                 url: "ajax.php",
@@ -384,7 +390,9 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva) {
                     if (response == 'registrado') {
                         $('#id_presentacion').val('');
                         $('#cantidad').val('');
-                        $('#stock').val('');
+                        $('#fraccion').val('');
+                        $('#stock').val('0');
+                        $('#stockFr').val('0');
                         $('#precioC').val('');
                         $('#precioPVP').val('');
                         $('#iva').val('');
@@ -402,7 +410,9 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva) {
                     } else if (response == 'actualizado') {
                         $('#id_presentacion').val('');
                         $('#cantidad').val('');
-                        $('#stock').val('');
+                        $('#fraccion').val('');
+                        $('#stock').val('0');
+                        $('#stockFr').val('0');
                         $('#precioC').val('');
                         $('#precioPVP').val('');
                         $('#iva').val('');
@@ -420,7 +430,9 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva) {
                         $('#id').val('');
                         $('#id_presentacion').val('');
                         $('#cantidad').val('');
-                        $('#stock').val('');
+                        $('#fraccion').val('');
+                        $('#stock').val('0');
+                        $('#stockFr').val('0');
                         $('#precioC').val('');
                         $('#precioPVP').val('');
                         $('#iva').val('');
