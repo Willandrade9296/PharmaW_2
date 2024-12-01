@@ -6,7 +6,7 @@ include_once "includes/header.php";
 
 function  precioFraccion($PprecioPVP,$numeroFracciones,$precioFraccion){
      
-    if($precioFraccion == 0){
+   /* if($precioFraccion <= 0){  */
             if($numeroFracciones > 0){
 
             return round(($PprecioPVP/$numeroFracciones),2);
@@ -16,10 +16,10 @@ function  precioFraccion($PprecioPVP,$numeroFracciones,$precioFraccion){
             return 0;
 
             }
-        }else{
+     /*   }else{
 
             return $precioFraccion;
-        }
+        }  */
 
 }
 
@@ -72,7 +72,7 @@ if (!empty($_POST)) {
                
                  $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,precioFr,id_lab,id_presentacion,id_tipo, vencimiento,iva) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion',$precioCalcFr, $laboratorio, $presentacion, $tipo, '$vencimiento','$iva')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, vencimiento,iva) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, '$vencimiento','$iva')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -88,7 +88,7 @@ if (!empty($_POST)) {
 
             $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, precioFr= $precioCalcFr,id_lab = $laboratorio,id_presentacion=$presentacion,id_tipo=$tipo ,vencimiento = '$vencimiento', iva = $iva WHERE codproducto = $id");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, precioFr=$precioFr ,precioFr_o= $precioCalcFr,id_lab = $laboratorio,id_presentacion=$presentacion,id_tipo=$tipo ,vencimiento = '$vencimiento', iva = $iva WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -282,7 +282,7 @@ if (!empty($_POST)) {
                     </thead>
                     <tbody>
                         <?php
-                        include "../conexion.php";
+                      //  include "../conexion.php";
 
                         $query = mysqli_query($conexion, "SELECT p.*, t.id, t.tipo, pr.id, pr.nombre FROM producto p INNER JOIN tipos t ON p.id_tipo = t.id INNER JOIN presentacion pr ON p.id_presentacion = pr.id");
                         $result = mysqli_num_rows($query);

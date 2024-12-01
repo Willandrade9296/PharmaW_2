@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'error',
-                            title: 'Error al generar la venta',
+                            title: 'Error al generar la venta, verificar cliente.',
                             showConfirmButton: false,
                             timer: 2000
                         })
