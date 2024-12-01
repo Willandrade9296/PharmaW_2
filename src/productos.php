@@ -6,20 +6,17 @@ include_once "includes/header.php";
 
 function  precioFraccion($PprecioPVP,$numeroFracciones,$precioFraccion){
      
-   /* if($precioFraccion <= 0){  */
+   
             if($numeroFracciones > 0){
-
-            return round(($PprecioPVP/$numeroFracciones),2);
+            
+                     return round(($PprecioPVP/$numeroFracciones),2);
 
             }else{
 
             return 0;
 
             }
-     /*   }else{
-
-            return $precioFraccion;
-        }  */
+    
 
 }
 
@@ -54,6 +51,7 @@ if (!empty($_POST)) {
     $laboratorio = $_POST['laboratorio'];
     $vencimiento = '';
     $iva=$_POST['iva'];
+    $infor=$_POST['inform'];
     if (!empty($_POST['accion'])) {
         $vencimiento = $_POST['vencimiento'];
     }
@@ -62,6 +60,12 @@ if (!empty($_POST)) {
      
                     $alert = mostrarMensaje('Todos los campos son obligatorios','w');
     } else {
+
+        if(empty($precioFr)){
+            $precioFr="0";
+        }
+
+
         if (empty($id)) {
             $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
             $result = mysqli_fetch_array($query);
@@ -70,9 +74,18 @@ if (!empty($_POST)) {
                     $alert = mostrarMensaje('El codigo ya existe','w');
             } else {
                
+
+                
+
+
                  $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, vencimiento,iva) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, '$vencimiento','$iva')");
+                 if ($precioFr==0){
+
+                    $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                 }
+
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, '$vencimiento','$iva','$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -88,7 +101,12 @@ if (!empty($_POST)) {
 
             $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, precioFr=$precioFr ,precioFr_o= $precioCalcFr,id_lab = $laboratorio,id_presentacion=$presentacion,id_tipo=$tipo ,vencimiento = '$vencimiento', iva = $iva WHERE codproducto = $id");
+            if ($precioFr==0){
+
+                $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+             }
+
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, precioFr= $precioFr ,precioFr_o= $precioCalcFr, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -228,6 +246,9 @@ if (!empty($_POST)) {
                                     </div>
                                 </div>
                                 <div class="col-md-2 ">
+
+
+
                                         <div   id="areaFraccion" style="margin-top:6px; display:none;">
                                             
                                               <div class="form-group">
@@ -242,7 +263,22 @@ if (!empty($_POST)) {
                                               </div>
                                            
                                         </div>
-                              </div>
+                                            </div>
+                                <div class="col-md-8 ">
+
+                                          <div class="form-group">
+                                               <label for="inform" class="text-dark font-weight-bold">Información:</label>
+                                               <textarea placeholder="Información" class="form-control" name="inform" id="inform" rows="4" ></textarea>
+
+
+                                            </div>
+
+                                            </div>
+
+
+
+                             
+                          
 
                             </div>
                             <div class="row">   
@@ -287,7 +323,9 @@ if (!empty($_POST)) {
                         $query = mysqli_query($conexion, "SELECT p.*, t.id, t.tipo, pr.id, pr.nombre FROM producto p INNER JOIN tipos t ON p.id_tipo = t.id INNER JOIN presentacion pr ON p.id_presentacion = pr.id");
                         $result = mysqli_num_rows($query);
                         if ($result > 0) {
-                            while ($data = mysqli_fetch_assoc($query)) { ?>
+                            while ($data = mysqli_fetch_assoc($query)) { 
+                              
+                                ?>
                                 <tr>
                                     <td><?php echo $data['codproducto']; ?></td>
                                     <td><?php echo $data['codigo']; ?></td>
