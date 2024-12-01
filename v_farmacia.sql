@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 05:01:50
+-- Tiempo de generación: 01-12-2024 a las 08:11:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -82,20 +82,21 @@ CREATE TABLE `detalle_permisos` (
 --
 
 INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
-(1, 3, 1),
-(2, 5, 1),
-(3, 6, 1),
-(4, 7, 1),
-(5, 8, 1),
-(6, 9, 1),
-(12, 1, 1),
-(13, 2, 1),
 (15, 3, 9),
 (16, 5, 9),
 (17, 6, 9),
 (18, 7, 9),
 (19, 8, 9),
-(20, 9, 9);
+(20, 9, 9),
+(30, 1, 1),
+(31, 2, 1),
+(32, 3, 1),
+(33, 4, 1),
+(34, 5, 1),
+(35, 6, 1),
+(36, 7, 1),
+(37, 8, 1),
+(38, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -137,7 +138,9 @@ CREATE TABLE `detalle_venta` (
 --
 
 INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `cantidad`, `descuento`, `precio`, `precioPVP`, `total`) VALUES
-(15, 8, 47, 1, 0.00, 1.30, 2.50, 2.50);
+(16, 1, 67, 12, 0.00, 0.00, 0.06, 0.72),
+(17, 1, 68, 1, 0.00, 3.00, 3.00, 3.00),
+(18, 1, 69, 2, 0.00, 3.00, 3.00, 6.00);
 
 -- --------------------------------------------------------
 
@@ -180,7 +183,7 @@ INSERT INTO `permisos` (`id`, `nombre`, `archivo`, `logo_opcion`) VALUES
 (1, 'configuración', 'config', 'fas fa-cogs mr-2 fa-2x'),
 (2, 'usuarios', 'usuarios', 'fas fa-user mr-2 fa-2x'),
 (3, 'clientes', 'clientes', 'fas fa-users mr-2 fa-2x'),
-(4, 'productos', 'productos', 'fas fa-product-hunt mr-2 fa-2x'),
+(4, 'productos', 'productos', 'fas fa-cubes mr-2 fa-2x'),
 (5, 'ventas', 'lista_ventas', 'fas fa-cash-register mr-2 fa-2x'),
 (6, 'nueva_venta', 'ventas', 'fas fa-cash-register mr-2 fa-2x'),
 (7, 'tipos', 'tipo', 'fas fa-tags mr-2 fa-2x'),
@@ -221,6 +224,8 @@ CREATE TABLE `producto` (
   `descripcion` varchar(200) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `precioPVP` decimal(10,2) NOT NULL,
+  `precioFr` decimal(10,2) NOT NULL,
+  `precioFr_o` decimal(10,2) NOT NULL,
   `existencia` int(11) NOT NULL,
   `fraccion` int(11) NOT NULL,
   `id_lab` int(11) NOT NULL,
@@ -234,12 +239,12 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `existencia`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `vencimiento`, `iva`) VALUES
-(1, '45454545', 'Cataflan', 3.00, 3.00, 4, 50, 1, 4, 1, '2030-08-12', 0.00),
-(5, '7800063810065', 'Carbamazepina', 23.00, 0.00, 2, 0, 1, 1, 1, '2025-02-02', 0.00),
-(6, '8902305015494', 'Betametasona', 5.00, 6.00, 31, 5, 2, 4, 1, '2025-01-02', 0.00),
-(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0, 0, 2, 1, 2, '2025-07-01', 0.00),
-(8, '7703763320127', 'Loratadina 10mg', 1.30, 2.50, 1, 20, 1, 4, 1, '2028-04-01', 0.00);
+INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `existencia`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `vencimiento`, `iva`) VALUES
+(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.05, 7, 55, 1, 4, 1, '2030-08-12', 0.00),
+(5, '7800063810065', 'Carbamazepina', 23.00, 0.00, 0.00, 0.00, 2, 0, 1, 1, 1, '2025-02-02', 0.00),
+(6, '8902305015494', 'Betametasona', 5.00, 6.00, 0.00, 0.00, 31, 5, 2, 4, 1, '2025-01-02', 0.00),
+(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 23, 0, 2, 1, 2, '2025-07-01', 0.00),
+(8, '7703763320127', 'Loratadina 10mg', 1.30, 2.50, 0.20, 0.13, 1, 20, 1, 4, 1, '2028-04-01', 0.00);
 
 -- --------------------------------------------------------
 
@@ -303,7 +308,9 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
-(47, 6, 2.50, 1, '2024-11-12 03:54:17');
+(67, 6, 0.72, 1, '2024-12-01 04:09:12'),
+(68, 6, 3.00, 1, '2024-12-01 04:51:29'),
+(69, 4, 6.00, 1, '2024-12-01 04:56:57');
 
 -- --------------------------------------------------------
 
@@ -434,19 +441,19 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -488,7 +495,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- Restricciones para tablas volcadas
