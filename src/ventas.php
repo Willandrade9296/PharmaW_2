@@ -108,7 +108,7 @@ if (empty($existe) && $id_user != 1) {
 
                           
                             <label for="precioPVP" class=" text-dark font-weight-bold">Precio PVP/u.</label>
-                            <input id="precioPVP" class="form-control text-center" type="text" name="precioPVP"  disabled>
+                            <input id="precioPVP" class="form-control text-center" type="text" name="precioPVP" style="background-color:#f7b77f"  disabled>
                             <input id="precioPVPu"  type="hidden" name="precioPVPu" />
                             <input id="precioPVPfr"  type="hidden" name="precioPVPfr" />
                           
@@ -126,7 +126,7 @@ if (empty($existe) && $id_user != 1) {
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="sub_total" class=" text-dark font-weight-bold">Sub Total</label>
-                            <input id="sub_total" class="form-control text-center" type="text" name="sub_total" placeholder="Sub Total" disabled>
+                            <input id="sub_total" class="form-control text-center" type="number" step="0,01" name="sub_total" style="background-color:#a8f45b" placeholder="Sub Total" disabled>
                         </div>
                     </div>
                 </div>

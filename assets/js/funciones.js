@@ -178,7 +178,7 @@ if (cant != '')
     const iva= $('#iva').val();
     const total = cant * (parseFloat(precio) + parseFloat(precio * iva));
 
-    $('#sub_total').val(total);
+    $('#sub_total').val(parseFloat(Number(total).toFixed(2)));
     if (e.which == 13) {
         if (cant > 0 && cant != '') {
             const id = $('#id').val();
@@ -251,7 +251,7 @@ function calcularPrecioFraccion(e) {
     
     const total = cantFr * precio;
 
-    $('#sub_total').val(total);
+    $('#sub_total').val(parseFloat(Number(total).toFixed(2)));
 
     if (e.which == 13) {
         if (cantFr > 0 && cantFr != '') {
