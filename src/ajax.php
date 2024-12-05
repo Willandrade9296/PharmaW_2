@@ -120,11 +120,11 @@ if (isset($_GET['q'])) {
                            
                                                  
                                    
-                                    $stockTotalFr= $stockNuevo['existencia_fr'] - $cantidad;
+                                 //   $stockTotalFr= $stockNuevo['existencia_fr'] - $cantidad;
 
-                                   
+                                 $stockTotal = $stockNuevo['existencia'] - $cantidad;
 
-                                    $stock = mysqli_query($conexion, "UPDATE producto SET  existencia = $stockTotal , existencia_fr= $stockTotalFr WHERE codproducto = $id_producto");
+                                    $stock = mysqli_query($conexion, "UPDATE producto SET  existencia = $stockTotal  WHERE codproducto = $id_producto");
    
 
                  }  
