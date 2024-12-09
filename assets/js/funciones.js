@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             /*Precio PVP unidad almacena el precio PVP mientras que preciofr almacena el precio de unidad fracción */
             $("#precioPVPu").val(ui.item.precioPVP);
             $("#precioPVPfr").val(ui.item.precioFr);
+            $("#precioPVPfr_o").val(ui.item.precioFr_o);
 
             $("#iva").val(ui.item.iva);
             $("#cantidad").focus();
@@ -104,12 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
         if (rows > 2) {
             var action = 'procesarVenta';
             var id = $('#idcliente').val();
+          
+       //   var tipo_unidad= $("#tipoUnidad option:selected").val();
+          
             $.ajax({
                 url: 'ajax.php',
                 async: true,
                 data: {
                     procesarVenta: action,
                     id: id
+                   
                 },
                 success: function (response) {
 
@@ -172,7 +177,7 @@ if (cant != '')
     { 
 
 
-
+    
     const precioC=$("#precioC").val();
     const precio = $('#precioPVP').val();
     const iva= $('#iva').val();
@@ -182,7 +187,7 @@ if (cant != '')
     if (e.which == 13) {
         if (cant > 0 && cant != '') {
             const id = $('#id').val();
-            registrarDetalle(e, id,cant,stock,precioC, precio,iva);
+            registrarDetalle(e, id,cant,stock,precioC, precio,iva,'U');
             $('#producto').focus();
         } else {
             $('#cantidad').focus();
@@ -246,7 +251,7 @@ function calcularPrecioFraccion(e) {
 
 
 
-    
+    const precioC=$("#precioPVPfr_o").val();
     const precio = $('#precioPVP').val();
     
     const total = cantFr * precio;
@@ -256,7 +261,7 @@ function calcularPrecioFraccion(e) {
     if (e.which == 13) {
         if (cantFr > 0 && cantFr != '') {
             const id = $('#id').val();
-            registrarDetalle(e, id,cantFr,stockFr,'0', precio,'0');
+            registrarDetalle(e, id,cantFr,stockFr,precioC, precio,'0','F');
             $('#producto').focus();
         } else {
             $('#fraccion').focus();
@@ -366,7 +371,7 @@ function listar() {
     });
 }
 
-function registrarDetalle(e, id, cant,stock, precioC,precio,iva) {
+function registrarDetalle(e, id, cant,stock, precioC,precio,iva,tipo_unidad) {
     if (document.getElementById('producto').value != '') {
         if (id != null) {
 
@@ -383,7 +388,8 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva) {
                     precioC:precioC,
                     precio: precio,
                     stock:stock,
-                    iva:iva
+                    iva:iva,
+                    tipo_unidad:tipo_unidad
                 },
                 success: function (response) {
 

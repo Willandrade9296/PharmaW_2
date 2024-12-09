@@ -111,6 +111,7 @@ if (empty($existe) && $id_user != 1) {
                             <input id="precioPVP" class="form-control text-center" type="text" name="precioPVP" style="background-color:#f7b77f"  disabled>
                             <input id="precioPVPu"  type="hidden" name="precioPVPu" />
                             <input id="precioPVPfr"  type="hidden" name="precioPVPfr" />
+                            <input id="precioPVPfr_o"  type="hidden" name="precioPVPfr_o" />
                           
                            
                         </div>
@@ -161,9 +162,9 @@ if (empty($existe) && $id_user != 1) {
        
         <div class="card">
         <div class="table-responsive">
-            <table class="table table-hover" id="tblDetalle">
-                <thead class="thead-dark">
-                    <tr>
+            <table class="table table-sm table-bordered table-hover" id="tblDetalle">
+                <thead class="thead-light">
+                    <tr >
                         <th>Id</th>
                         <th>Descripción</th>
                         <th>Unidades</th>

@@ -304,21 +304,21 @@ if (!empty($_POST)) {
         </div>
         <div class="col-md-12">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered" id="tbl">
-                    <thead class="thead-dark">
+                <table class="table table-sm  table-bordered table-hover" id="tbl">
+                    <thead class="thead-light">
                         <tr>
-                            <th>#</th>
-                            <th>Código</th>
-                            <th>Producto</th>
-                            <th>Tipo</th>
-                            <th>Presentacion</th>
-                            <th>Precio Costo</th>
-                            <th>Precio PVP</th>
-                            <th>Unidades</th>
-                            <th>Frac./Unid.</th>
-                            <th>Prec./Frac.</th>
-                            <th>IVA</th>
-                            <th>Acciones</th>
+                            <th><b>#</b></th>
+                            <th><b>Código</b></th>
+                            <th><b>Producto</b></th>
+                            <th><b>Tipo</b></th>
+                            <th><b>Presentacion</b></th>
+                            <th><b>Precio Costo</b></th>
+                            <th><b>Precio PVP</b></th>
+                            <th><b>Unidades</b></th>
+                            <th><b>Frac./Unid.</b></th>
+                            <th><b>Prec./Frac.</b></th>
+                            <th><b>IVA</b></th>
+                            <th><b>Acciones</b></th>
                         </tr>
                     </thead>
                     <tbody>

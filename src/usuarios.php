@@ -119,8 +119,8 @@ if (!empty($_POST)) {
    <div class="card-body">
        <div class="table-responsive">
 
-    <table class="table  table-striped table-bordered" id="tbl">
-        <thead class="thead-dark">
+    <table class="table table-bordered table-hover table-sm" id="tbl">
+        <thead class="thead-light">
             <tr>
                 <th>#</th>
                 <th>Nombre</th>

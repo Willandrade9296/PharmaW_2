@@ -20,8 +20,8 @@ $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas 
     </div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-light" id="tbl">
-                <thead class="thead-dark">
+            <table class="table table-sm table-bordered table-hover" id="tbl">
+                <thead class="thead-light">
                     <tr>
                         <th>#</th>
                         <th>Cliente</th>

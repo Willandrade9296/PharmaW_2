@@ -120,8 +120,8 @@ if (!empty($_POST)) {
             </div>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered" id="tbl">
-                        <thead class="thead-dark">
+                    <table class="table table-bordered table-sm table-hover" id="tbl">
+                        <thead class="thead-light">
                             <tr>
                                 <th>#</th>
                                 <th>Cédula</th>

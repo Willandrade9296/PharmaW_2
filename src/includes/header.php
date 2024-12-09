@@ -46,7 +46,7 @@ $id_user = $_SESSION['idUser'];
                       <li class="nav-item">
                         <a class="nav-link d-flex" href=<?php echo $opcion['archivo'].".php"  ?>>
                             <i class="<?php echo $opcion['logo_opcion']  ?>"></i>
-                            <p> <?php echo $opcion['nombre']  ?></p>
+                            <p> <?php echo $opcion['nombre_op']  ?></p>
                         </a>
                       </li>
 

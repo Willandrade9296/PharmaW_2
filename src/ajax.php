@@ -34,6 +34,7 @@ if (isset($_GET['q'])) {
         $data['cantidad'] = $row['existencia'];
         $data['fraccion'] = $row['fraccion'];
         $data['precioFr'] = $row['precioFr'];
+        $data['precioFr_o'] = $row['precioFr_o'];
      //   $data['stockFr']= $row['existencia'] * $row['fraccion'];
         $data['stockFr'] = $row['existencia_fr'];
         $data['iva'] = $row['iva'];
@@ -68,8 +69,9 @@ if (isset($_GET['q'])) {
     die();
 } else if (isset($_GET['procesarVenta'])) {
     $id_cliente = $_GET['id'];
+   // $tipo_unidad= $_GET['tipoUnidad'];
     $id_user = $_SESSION['idUser'];
-
+    
 
     if (comprobar_cliente($conexion,$id_cliente))
     { 
@@ -84,60 +86,91 @@ if (isset($_GET['q'])) {
                         $consultaDetalle = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_usuario = $id_user");
                         while ($row = mysqli_fetch_assoc($consultaDetalle)) {
                             $id_producto = $row['id_producto'];
+                            $tipo_unidad = $row['tipo_prod'];
                             $cantidad = $row['cantidad'];
                             $desc = $row['descuento'];
                             $precio = $row['precio_costo'];
                             $precioPVP = $row['precio_venta'];
                             $total = $row['total'];
-                            $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId, $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                         /*   $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId, $cantidad,'$precio', '$precioPVP', '$desc', '$total')");  */
                             $stockActual = mysqli_query($conexion, "SELECT * FROM producto WHERE codproducto = $id_producto");
-                            $stockNuevo = mysqli_fetch_assoc($stockActual);
+                            $stockNuevo = mysqli_fetch_assoc($stockActual); 
 
                             if($stockNuevo['id_presentacion'] == "4"){   //Se menora en caso de que se venda por fracciones
+
+
+                                                                $existencia_fraccion = $stockNuevo['existencia_fr'];   // fracciones en stock
+                                                                $fraccion_por_unidad = $stockNuevo['fraccion'];   // fracciones por unidad en stock
+
+
+                                                        if ( $tipo_unidad == "F" )
+                                                        { 
+                                                                
+                                                            
+
+                                                                $obtener_residuo = (int)( $cantidad % $fraccion_por_unidad  );
+
+
+                                                                if($obtener_residuo == 0)
+                                                                { 
+
+
+                                                                               $obtener_unidades= (int)( $cantidad / $fraccion_por_unidad);
+
+                                                                            
+                                                                                  $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                                                                            
+
+                                                                            
+                                                                                    $stockTotal = $stockNuevo['existencia'] - $obtener_unidades;
+                                                                                    $stockTotalFr= $existencia_fraccion - $cantidad;
+
+
+
+
+                                                                                    $stock = mysqli_query($conexion, "UPDATE producto SET existencia = $stockTotal , existencia_fr= $stockTotalFr WHERE codproducto = $id_producto");
+                                                                                
+                                                
+                                                                } else{  // Se menora en caso que se venda por unidades
+                                                                        
+                                                                                                
+                                                                              $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                                                                
+                                                                                $stockTotalFr= $stockNuevo['existencia_fr'] - $cantidad;
+
+                                                                            
+
+                                                                                    $stock = mysqli_query($conexion, "UPDATE producto SET existencia_fr= $stockTotalFr  WHERE codproducto = $id_producto");
+                                                
+
+                                                                }  
+
+                                                        }else {   // Se menora en caso que se venda por unidades por caja
+
+                                                                $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad ,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'U', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                              
+                                                                $stockTotal = $stockNuevo['existencia'] - $cantidad;
+                                                                
+                                                                $stockTotalFr= $stockNuevo['existencia_fr'] - ($cantidad * $fraccion_por_unidad);
                                 
-                                $existencia_fraccion = $stockNuevo['existencia_fr'];   // fracciones en stock
-                                $fraccion_por_unidad = $stockNuevo['fraccion'];   // fracciones por unidad en stock
-                               
-
-                                $obtener_residuo = (int)( $cantidad % $fraccion_por_unidad  );
-
-
-                 if($obtener_residuo == 0)
-                 { 
-
-
-                                $obtener_unidades= (int)( $cantidad / $fraccion_por_unidad);
-
-                               // $obtener_residuo= (int) ($existencia_fraccion %  $cantidad );
+                                                                 $stock = mysqli_query($conexion, "UPDATE producto SET existencia = $stockTotal , existencia_fr= $stockTotalFr WHERE codproducto = $id_producto");
                                 
-                               
-                                    $stockTotal = $stockNuevo['existencia'] - $obtener_unidades;
-                                    $stockTotalFr= $stockNuevo['existencia_fr'] - $cantidad;
-
-                                    $stock = mysqli_query($conexion, "UPDATE producto SET existencia = $stockTotal , existencia_fr= $stockTotalFr WHERE codproducto = $id_producto");
-   
-                 } else{
-                           
-                                                 
-                                   
-                                 //   $stockTotalFr= $stockNuevo['existencia_fr'] - $cantidad;
-
-                                 $stockTotal = $stockNuevo['existencia'] - $cantidad;
-
-                                    $stock = mysqli_query($conexion, "UPDATE producto SET  existencia = $stockTotal  WHERE codproducto = $id_producto");
-   
-
-                 }  
+                                                              
+                                                               
 
 
-                                
+
+                                                         }
+                                                                                
                              
 
 
 
                             }else{    // Se menora en caso que se venda por unidades
+                              
 
-                                
+                                $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad ,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'U', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                              
                                 $stockTotal = $stockNuevo['existencia'] - $cantidad;
                                 
 
@@ -145,6 +178,8 @@ if (isset($_GET['q'])) {
 
                             }
                         } 
+
+
                         if ($insertarDet) {
                             $eliminar = mysqli_query($conexion, "DELETE FROM detalle_temp WHERE id_usuario = $id_user");
                             $msg = array('id_cliente' => $id_cliente, 'id_venta' => $ultimoId);
@@ -235,6 +270,7 @@ if (isset($_POST['regDetalle'])) {
     $precio = $_POST['precio'];
     $stock = $_POST['stock'];
     $iva = $_POST['iva'];
+    $tipo_unidad=$_POST['tipo_unidad'];
     $id_user = $_SESSION['idUser'];
     $total = $precio * $cant;
     $verificar = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_producto = $id AND id_usuario = $id_user");
@@ -243,14 +279,14 @@ if (isset($_POST['regDetalle'])) {
     if ($result > 0) {
         $cantidad = $datos['cantidad'] + $cant;
         $total_precio = ($cantidad * $total);
-        $query = mysqli_query($conexion, "UPDATE detalle_temp SET cantidad = $cantidad, total = '$total_precio' WHERE id_producto = $id AND id_usuario = $id_user");
+        $query = mysqli_query($conexion, "UPDATE detalle_temp SET tipo_prod= $tipo_unidad,  cantidad = $cantidad, precio_costo= $precioC, precio_venta=$precio  , total = '$total_precio' WHERE id_producto = $id AND id_usuario = $id_user");
         if ($query) {
             $msg = "actualizado";
         } else {
             $msg = "Error al ingresar";
         }
     }else{
-        $query = mysqli_query($conexion, "INSERT INTO detalle_temp(id_usuario, id_producto, cantidad ,precio_costo,precio_venta,iva, total) VALUES ($id_user, $id, $cant,'$precioC','$precio', '$iva','$total')");
+        $query = mysqli_query($conexion, "INSERT INTO detalle_temp(id_usuario, id_producto,tipo_prod, cantidad ,precio_costo,precio_venta,iva, total) VALUES ($id_user, $id,'$tipo_unidad', $cant,'$precioC','$precio', '$iva','$total')");
         if ($query) {
             $msg = "registrado";
         }else{
