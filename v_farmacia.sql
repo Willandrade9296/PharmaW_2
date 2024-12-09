@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-12-2024 a las 04:20:25
+-- Tiempo de generación: 09-12-2024 a las 02:44:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -83,12 +83,6 @@ CREATE TABLE `detalle_permisos` (
 --
 
 INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
-(15, 3, 9),
-(16, 5, 9),
-(17, 6, 9),
-(18, 7, 9),
-(19, 8, 9),
-(20, 9, 9),
 (30, 1, 1),
 (31, 2, 1),
 (32, 3, 1),
@@ -97,7 +91,10 @@ INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
 (35, 6, 1),
 (36, 7, 1),
 (37, 8, 1),
-(38, 9, 1);
+(38, 9, 1),
+(59, 3, 9),
+(60, 5, 9),
+(61, 6, 9);
 
 -- --------------------------------------------------------
 
@@ -109,6 +106,7 @@ CREATE TABLE `detalle_temp` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
+  `tipo_prod` varchar(10) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
   `precio_costo` decimal(10,2) NOT NULL,
@@ -127,6 +125,7 @@ CREATE TABLE `detalle_venta` (
   `id` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `id_venta` int(11) NOT NULL,
+  `tipo_prod` varchar(10) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `descuento` decimal(10,2) NOT NULL DEFAULT 0.00,
   `precio` decimal(10,2) NOT NULL,
@@ -138,29 +137,47 @@ CREATE TABLE `detalle_venta` (
 -- Volcado de datos para la tabla `detalle_venta`
 --
 
-INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `cantidad`, `descuento`, `precio`, `precioPVP`, `total`) VALUES
-(16, 1, 67, 12, 0.00, 0.00, 0.06, 0.72),
-(17, 1, 68, 1, 0.00, 3.00, 3.00, 3.00),
-(18, 1, 69, 2, 0.00, 3.00, 3.00, 6.00),
-(19, 8, 70, 6, 0.00, 0.00, 0.42, 2.52),
-(20, 8, 71, 6, 0.00, 0.00, 0.42, 2.52),
-(21, 8, 72, 6, 0.00, 0.00, 0.42, 2.52),
-(22, 8, 73, 6, 0.00, 0.00, 0.42, 2.52),
-(23, 8, 74, 3, 0.00, 0.00, 0.42, 1.26),
-(24, 8, 75, 5, 0.00, 0.00, 0.42, 2.10),
-(25, 8, 76, 5, 0.00, 0.00, 0.42, 2.10),
-(26, 8, 77, 5, 0.00, 0.00, 0.42, 2.10),
-(27, 8, 78, 5, 0.00, 0.00, 0.42, 2.10),
-(28, 8, 79, 5, 0.00, 0.00, 0.42, 2.10),
-(29, 8, 80, 5, 0.00, 0.00, 0.42, 2.10),
-(30, 8, 81, 3, 0.00, 0.00, 0.42, 1.26),
-(31, 8, 82, 4, 0.00, 0.00, 0.42, 1.68),
-(32, 8, 83, 12, 0.00, 0.00, 0.42, 5.04),
-(33, 8, 84, 2, 0.00, 0.00, 0.42, 0.84),
-(34, 8, 85, 3, 0.00, 0.00, 0.15, 0.45),
-(35, 5, 86, 1, 0.00, 23.00, 25.00, 25.00),
-(36, 5, 87, 1, 6.25, 23.00, 25.00, 18.75),
-(37, 7, 88, 1, 0.00, 3.00, 5.00, 5.00);
+INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `tipo_prod`, `cantidad`, `descuento`, `precio`, `precioPVP`, `total`) VALUES
+(55, 8, 106, 'U', 1, 0.00, 0.20, 0.30, 0.30),
+(56, 8, 107, 'FR', 10, 0.00, 0.20, 0.30, 3.00),
+(57, 8, 108, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(58, 8, 109, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(59, 8, 110, 'FR', 10, 0.00, 0.20, 0.30, 3.00),
+(60, 8, 111, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(61, 8, 112, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(62, 8, 113, 'U', 10, 0.00, 0.20, 0.30, 3.00),
+(63, 8, 114, 'U', 10, 0.00, 0.20, 0.30, 3.00),
+(64, 8, 115, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(65, 8, 116, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(66, 8, 117, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(67, 8, 118, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(68, 8, 122, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(69, 8, 123, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(70, 8, 124, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(71, 8, 125, 'U', 10, 0.00, 0.20, 0.30, 3.00),
+(72, 8, 126, 'U', 10, 0.00, 0.20, 0.30, 3.00),
+(73, 8, 127, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(74, 8, 128, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(75, 8, 129, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(76, 8, 130, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(77, 8, 131, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(78, 8, 132, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(79, 8, 133, 'U', 2, 0.00, 1.00, 2.00, 4.00),
+(80, 8, 134, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(81, 8, 140, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(82, 8, 149, 'U', 3, 0.00, 1.00, 2.00, 12.00),
+(83, 8, 150, 'U', 1, 0.00, 0.20, 0.30, 0.30),
+(84, 8, 151, 'U', 1, 0.00, 0.20, 0.30, 0.30),
+(85, 8, 152, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(86, 8, 153, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(87, 8, 154, 'U', 2, 0.00, 0.20, 0.30, 0.60),
+(88, 8, 155, 'U', 1, 0.00, 0.20, 0.30, 0.30),
+(89, 8, 156, 'F', 1, 0.00, 0.20, 0.30, 0.30),
+(90, 8, 157, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(91, 8, 158, 'F', 10, 0.00, 0.20, 0.30, 3.00),
+(92, 8, 159, 'F', 20, 0.00, 0.20, 0.30, 6.00),
+(93, 8, 160, 'F', 100, 0.00, 0.20, 0.30, 30.00),
+(94, 7, 161, 'U', 3, 0.00, 3.00, 5.00, 15.00);
 
 -- --------------------------------------------------------
 
@@ -192,6 +209,7 @@ INSERT INTO `laboratorios` (`id`, `laboratorio`, `direccion`) VALUES
 CREATE TABLE `permisos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
+  `nombre_op` varchar(200) NOT NULL,
   `archivo` varchar(100) NOT NULL,
   `logo_opcion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -200,16 +218,16 @@ CREATE TABLE `permisos` (
 -- Volcado de datos para la tabla `permisos`
 --
 
-INSERT INTO `permisos` (`id`, `nombre`, `archivo`, `logo_opcion`) VALUES
-(1, 'configuración', 'config', 'fas fa-cogs mr-2 fa-2x'),
-(2, 'usuarios', 'usuarios', 'fas fa-user mr-2 fa-2x'),
-(3, 'clientes', 'clientes', 'fas fa-users mr-2 fa-2x'),
-(4, 'productos', 'productos', 'fas fa-cubes mr-2 fa-2x'),
-(5, 'ventas', 'lista_ventas', 'fas fa-cash-register mr-2 fa-2x'),
-(6, 'nueva_venta', 'ventas', 'fas fa-cash-register mr-2 fa-2x'),
-(7, 'tipos', 'tipo', 'fas fa-tags mr-2 fa-2x'),
-(8, 'presentacion', 'presentacion', 'fas fa-list mr-2 fa-2x'),
-(9, 'laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x');
+INSERT INTO `permisos` (`id`, `nombre`, `nombre_op`, `archivo`, `logo_opcion`) VALUES
+(1, 'configuración', 'Configuración', 'config', 'fas fa-cogs mr-2 fa-2x'),
+(2, 'usuarios', 'Usuarios', 'usuarios', 'fas fa-user mr-2 fa-2x'),
+(3, 'clientes', 'Clientes', 'clientes', 'fas fa-users mr-2 fa-2x'),
+(4, 'productos', 'Productos', 'productos', 'fas fa-cubes mr-2 fa-2x'),
+(5, 'ventas', 'Historial Ventas', 'lista_ventas', 'fas fa-cash-register mr-2 fa-2x'),
+(6, 'nueva_venta', 'Nueva Venta', 'ventas', 'fas fa-cash-register mr-2 fa-2x'),
+(7, 'tipos', 'Tipos', 'tipo', 'fas fa-tags mr-2 fa-2x'),
+(8, 'presentacion', 'Presentaciones', 'presentacion', 'fas fa-list mr-2 fa-2x'),
+(9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x');
 
 -- --------------------------------------------------------
 
@@ -270,11 +288,11 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `existencia`, `existencia_fr`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `vencimiento`, `iva`, `info_prod`) VALUES
-(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.05, 7, 385, 55, 1, 4, 1, '2030-08-12', 0.00, ''),
-(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 2, 38, 20, 1, 4, 1, '2025-02-02', 0.00, 'antiepileptico'),
-(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 31, 155, 5, 2, 4, 1, '2025-01-02', 0.00, ''),
-(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 22, 0, 0, 2, 1, 2, '2025-07-01', 0.00, ''),
-(8, '7703763320127', 'Loratadina 10mg', 1.00, 2.00, 0.20, 0.20, 5, 50, 10, 1, 4, 1, '2028-04-01', 0.00, 'Antihestaminico para control rapido de alergias como rinitis, estornudos, rinorea y prurito, urticaria.\r\n\r\nDosis: Adultos y niños mayores de 12 años una tableta diaria.\r\n\r\nEfectos secundarios: Mas frecuentes son sefalea fatiga y somnolencia, tambien sequedad naucea y gastritis.');
+(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.05, -2, 165, 55, 1, 4, 1, '2030-08-12', 0.00, ''),
+(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 0, 38, 20, 1, 4, 1, '2025-02-02', 0.00, 'antiepileptico'),
+(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 29, 145, 5, 2, 4, 1, '2025-01-02', 0.00, ''),
+(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, '2025-07-01', 0.00, ''),
+(8, '7703763320127', 'Loratadina 10mg', 1.00, 2.00, 0.30, 0.20, 10, 100, 10, 1, 4, 1, '2028-04-01', 0.00, 'Antihestaminico para control rapido de alergias como rinitis, estornudos, rinorea y prurito, urticaria.\r\n\r\nDosis: Adultos y niños mayores de 12 años una tableta diaria.\r\n\r\nEfectos secundarios: Mas frecuentes son sefalea fatiga y somnolencia, tambien sequedad naucea y gastritis.');
 
 -- --------------------------------------------------------
 
@@ -355,28 +373,62 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
-(67, 6, 0.72, 1, '2024-12-01 04:09:12'),
-(68, 6, 3.00, 1, '2024-12-01 04:51:29'),
-(69, 4, 6.00, 1, '2024-12-01 04:56:57'),
-(70, 4, 2.52, 1, '2024-12-01 20:13:56'),
-(71, 4, 2.52, 1, '2024-12-01 20:15:20'),
-(72, 4, 2.52, 1, '2024-12-01 20:18:27'),
-(73, 4, 2.52, 1, '2024-12-01 20:24:43'),
-(74, 4, 1.26, 1, '2024-12-01 20:29:24'),
-(75, 4, 2.10, 1, '2024-12-01 20:37:48'),
-(76, 4, 2.10, 1, '2024-12-01 20:37:49'),
-(77, 4, 2.10, 1, '2024-12-01 20:37:55'),
-(78, 4, 2.10, 1, '2024-12-01 20:37:56'),
-(79, 4, 2.10, 1, '2024-12-01 20:37:57'),
-(80, 4, 2.10, 1, '2024-12-01 20:37:57'),
-(81, 4, 1.26, 1, '2024-12-01 20:43:07'),
-(82, 4, 1.68, 1, '2024-12-01 20:58:24'),
-(83, 4, 5.04, 1, '2024-12-01 21:01:07'),
-(84, 6, 0.84, 1, '2024-12-01 21:06:19'),
-(85, 4, 0.45, 1, '2024-12-01 21:33:38'),
-(86, 8, 25.00, 1, '2024-12-01 22:32:00'),
-(87, 4, 18.75, 1, '2024-12-01 22:36:26'),
-(88, 4, 5.00, 1, '2024-12-03 02:33:31');
+(106, 4, 0.30, 1, '2024-12-07 00:39:16'),
+(107, 4, 3.00, 1, '2024-12-07 00:40:54'),
+(108, 4, 2.00, 1, '2024-12-07 00:44:24'),
+(109, 4, 2.00, 1, '2024-12-07 00:45:06'),
+(110, 4, 3.00, 1, '2024-12-07 00:46:23'),
+(111, 4, 2.00, 1, '2024-12-07 00:47:01'),
+(112, 4, 2.00, 1, '2024-12-07 00:59:19'),
+(113, 4, 3.00, 1, '2024-12-07 01:00:35'),
+(114, 4, 3.00, 1, '2024-12-07 01:01:45'),
+(115, 4, 2.00, 1, '2024-12-07 01:27:23'),
+(116, 4, 0.60, 1, '2024-12-07 01:28:00'),
+(117, 4, 2.00, 1, '2024-12-07 01:32:36'),
+(118, 4, 2.00, 1, '2024-12-07 01:39:44'),
+(119, 4, 0.00, 1, '2024-12-07 01:39:46'),
+(120, 4, 0.00, 1, '2024-12-07 01:39:47'),
+(121, 4, 0.00, 1, '2024-12-07 01:39:54'),
+(122, 4, 2.00, 1, '2024-12-07 01:43:48'),
+(123, 4, 2.00, 1, '2024-12-07 01:45:30'),
+(124, 4, 2.00, 1, '2024-12-07 01:46:24'),
+(125, 4, 3.00, 1, '2024-12-07 01:47:04'),
+(126, 4, 3.00, 1, '2024-12-07 01:48:01'),
+(127, 4, 2.00, 1, '2024-12-07 01:54:48'),
+(128, 4, 0.60, 1, '2024-12-07 01:56:56'),
+(129, 4, 0.60, 1, '2024-12-07 01:58:08'),
+(130, 4, 0.60, 1, '2024-12-07 02:00:18'),
+(131, 4, 0.60, 1, '2024-12-07 02:11:50'),
+(132, 4, 0.60, 1, '2024-12-07 02:15:08'),
+(133, 4, 4.00, 1, '2024-12-07 02:17:45'),
+(134, 4, 0.60, 1, '2024-12-07 02:20:55'),
+(135, 4, 0.60, 1, '2024-12-07 02:24:02'),
+(136, 4, 0.60, 1, '2024-12-07 02:24:03'),
+(137, 4, 0.60, 1, '2024-12-07 02:24:04'),
+(138, 4, 0.60, 1, '2024-12-07 02:24:04'),
+(139, 4, 0.60, 1, '2024-12-07 02:24:10'),
+(140, 4, 0.60, 1, '2024-12-07 02:30:26'),
+(141, 4, 0.60, 1, '2024-12-07 02:33:39'),
+(142, 4, 0.60, 1, '2024-12-07 02:33:39'),
+(143, 4, 0.60, 1, '2024-12-07 02:33:50'),
+(144, 4, 0.60, 1, '2024-12-07 02:33:51'),
+(145, 4, 2.00, 1, '2024-12-07 04:51:11'),
+(146, 4, 2.00, 1, '2024-12-07 04:51:12'),
+(147, 4, 2.00, 1, '2024-12-07 04:51:18'),
+(148, 4, 2.00, 1, '2024-12-07 04:52:00'),
+(149, 4, 12.00, 1, '2024-12-07 04:53:39'),
+(150, 4, 0.30, 1, '2024-12-07 04:55:37'),
+(151, 4, 0.30, 1, '2024-12-07 05:10:51'),
+(152, 4, 2.00, 1, '2024-12-07 05:16:56'),
+(153, 4, 0.60, 1, '2024-12-08 22:55:37'),
+(154, 4, 0.60, 1, '2024-12-08 23:02:21'),
+(155, 4, 0.30, 1, '2024-12-08 23:03:39'),
+(156, 4, 0.30, 1, '2024-12-08 23:32:47'),
+(157, 4, 2.00, 1, '2024-12-08 23:35:23'),
+(158, 4, 3.00, 1, '2024-12-08 23:36:28'),
+(159, 4, 6.00, 1, '2024-12-08 23:37:10'),
+(160, 4, 30.00, 1, '2024-12-09 00:33:27'),
+(161, 4, 15.00, 1, '2024-12-09 00:38:28');
 
 -- --------------------------------------------------------
 
@@ -387,6 +439,7 @@ INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
 CREATE TABLE `vipermisos` (
 `id` int(11)
 ,`nombre` varchar(30)
+,`nombre_op` varchar(200)
 ,`archivo` varchar(100)
 ,`logo_opcion` varchar(100)
 ,`id_detalle_per` int(11)
@@ -401,7 +454,7 @@ CREATE TABLE `vipermisos` (
 --
 DROP TABLE IF EXISTS `vipermisos`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vipermisos`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`archivo` AS `archivo`, `p`.`logo_opcion` AS `logo_opcion`, `d`.`id` AS `id_detalle_per`, `d`.`id_permiso` AS `id_permiso`, `d`.`id_usuario` AS `id_usuario` FROM (`permisos` `p` join `detalle_permisos` `d` on(`p`.`id` = `d`.`id_permiso`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vipermisos`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`nombre_op` AS `nombre_op`, `p`.`archivo` AS `archivo`, `p`.`logo_opcion` AS `logo_opcion`, `d`.`id` AS `id_detalle_per`, `d`.`id_permiso` AS `id_permiso`, `d`.`id_usuario` AS `id_usuario` FROM (`permisos` `p` join `detalle_permisos` `d` on(`p`.`id` = `d`.`id_permiso`)) ;
 
 --
 -- Índices para tablas volcadas
@@ -507,19 +560,19 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -561,7 +614,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- Restricciones para tablas volcadas
