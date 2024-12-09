@@ -4,3 +4,34 @@ margin-top:12em;
 
 
 }
+
+
+
+.sidebar::before {
+
+   background-color: #9c27b0;
+  
+
+}
+
+
+.sidebar {
+
+  /*  background-color: aliceblue; */
+
+  background-color: #9c27b0;
+  
+ }
+
+
+ .sidebar .nav li a{
+    color: white;
+ }
+
+ .sidebar .nav li a:hover{
+    color: white;
+ }
+
+ .sidebar .logo .simple-text{ 
+    color: white;
+ }

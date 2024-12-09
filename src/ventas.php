@@ -127,7 +127,7 @@ if (empty($existe) && $id_user != 1) {
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label for="sub_total" class=" text-dark font-weight-bold">Sub Total</label>
-                            <input id="sub_total" class="form-control text-center" type="number" step="0,01" name="sub_total" style="background-color:#a8f45b" placeholder="Sub Total" disabled>
+                            <input id="sub_total" class="form-control text-center" type="number" step="0,01" name="sub_total" style="background-color:#a8f45b"  disabled>
                         </div>
                     </div>
                 </div>

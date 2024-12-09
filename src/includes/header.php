@@ -27,12 +27,13 @@ $id_user = $_SESSION['idUser'];
     <link href="../assets/css/material-dashboard.css" rel="stylesheet" />
     <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="../assets/js/jquery-ui/jquery-ui.min.css">
+    <link href="../assets/css/style.css" rel="stylesheet" />
     <script src="../assets/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="wrapper ">
-        <div class="sidebar" data-color="white"  >
+        <div class="sidebar" data-color="blue"  >
             <div class="logo "><a href="./" class="simple-text logo-normal">
                     Pharma W
                 </a></div>
@@ -64,7 +65,7 @@ $id_user = $_SESSION['idUser'];
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
                         <a class="navbar-brand" href="javascript:;"></a>
-                        <span><?php echo "Usuario: ".$_SESSION['user']?></span>
+                        <b style="font-weight:bold; margin-right:10px;">Usuario:</b> <span style="font-size:25px;"><?php echo "".$_SESSION['user']?></span>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="sr-only">Toggle navigation</span>
