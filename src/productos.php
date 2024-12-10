@@ -65,18 +65,27 @@ if (!empty($_POST)) {
             $precioFr="0";
         }
 
+        $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
+        $result = mysqli_fetch_array($query);
 
+        $existencia_fr_actual=$result["existencia_fr"];
+        
         if (empty($id)) {
-            $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
-            $result = mysqli_fetch_array($query);
+            
+
             if ($result > 0) {
               
                     $alert = mostrarMensaje('El codigo ya existe','w');
             } else {
                
 
+                if ($existencia_fr_actual > 0){ 
+                 
+                    $existencia_fr=$existencia_fr_actual;
                 
-                $existencia_fr= $fraccion*$cantidad;   
+                }else{
+                    $existencia_fr= $fraccion*$cantidad;
+                }
 
                  $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
@@ -100,7 +109,14 @@ if (!empty($_POST)) {
         } else {
 
 
-            $existencia_fr= $fraccion*$cantidad;  
+            if ($existencia_fr_actual > 0){ 
+                 
+                $existencia_fr=$existencia_fr_actual;
+            
+            }else{
+                $existencia_fr= $fraccion*$cantidad;
+            } 
+
 
             $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 

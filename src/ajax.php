@@ -108,21 +108,22 @@ if (isset($_GET['q'])) {
                                                                 
                                                             
 
-                                                                $obtener_residuo = (int)( $cantidad % $fraccion_por_unidad  );
+                                                                $obtener_residuo = (int)(  ($existencia_fraccion - $cantidad)  %   $fraccion_por_unidad  );
 
 
                                                                 if($obtener_residuo == 0)
                                                                 { 
 
 
-                                                                               $obtener_unidades= (int)( $cantidad / $fraccion_por_unidad);
+                                                                                  $obtener_unidades= (int)( ($existencia_fraccion - $cantidad)  /  $fraccion_por_unidad );
 
                                                                             
                                                                                   $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
                                                                             
 
                                                                             
-                                                                                    $stockTotal = $stockNuevo['existencia'] - $obtener_unidades;
+                                                                                   // $stockTotal = $stockNuevo['existencia'] - $obtener_unidades;
+                                                                                   $stockTotal = $obtener_unidades;
                                                                                     $stockTotalFr= $existencia_fraccion - $cantidad;
 
 
