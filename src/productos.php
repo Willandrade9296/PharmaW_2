@@ -68,7 +68,9 @@ if (!empty($_POST)) {
         $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
         $result = mysqli_fetch_array($query);
 
+        $cantidad_actual=$result["existencia"];
         $existencia_fr_actual=$result["existencia_fr"];
+
         
         if (empty($id)) {
             
@@ -79,13 +81,14 @@ if (!empty($_POST)) {
             } else {
                
 
-                if ($existencia_fr_actual > 0){ 
-                 
-                    $existencia_fr=$existencia_fr_actual;
-                
-                }else{
-                    $existencia_fr= $fraccion*$cantidad;
-                }
+                           /* if ($existencia_fr_actual > 0){ 
+                            
+                                        $existencia_fr=$existencia_fr_actual;
+                                       
+ 
+                            }else{
+                                $existencia_fr= $fraccion*$cantidad;
+                            }  */
 
                  $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
@@ -109,13 +112,33 @@ if (!empty($_POST)) {
         } else {
 
 
-            if ($existencia_fr_actual > 0){ 
-                 
-                $existencia_fr=$existencia_fr_actual;
-            
-            }else{
-                $existencia_fr= $fraccion*$cantidad;
-            } 
+                            if ($existencia_fr_actual > 0){ 
+                                
+
+                                     if ( ($fraccion * $cantidad) >= $existencia_fr_actual)
+                                     {
+
+                                         $cantidad_temp= $cantidad - $cantidad_actual;
+
+                                         $existencia_fr=$existencia_fr_actual + ($fraccion * $cantidad_temp) ;
+                                         
+                                     }
+                                     else{
+                                         
+     
+
+                                          $existencia_fr=$existencia_fr_actual - ($existencia_fr_actual - ($fraccion * $cantidad));
+
+
+                                     } 
+
+
+
+
+
+                            }else{
+                                $existencia_fr= $fraccion*$cantidad;
+                            } 
 
 
             $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
