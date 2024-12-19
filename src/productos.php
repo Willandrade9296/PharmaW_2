@@ -52,9 +52,10 @@ if (!empty($_POST)) {
     $vencimiento = '';
     $iva=$_POST['iva'];
     $infor=$_POST['inform'];
-    if (!empty($_POST['accion'])) {
+   /* if (!empty($_POST['accion'])) {  */
         $vencimiento = $_POST['vencimiento'];
-    }
+   //   }
+
     if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio)  || empty($precio) || $precio <  0  || empty($precioPVP) || $precioPVP <  0 || empty($cantidad) || $cantidad <  0 || empty($iva) ||
     $tipo=="*" || $presentacion=="*" || $laboratorio=="*") {
      
@@ -273,7 +274,7 @@ if (!empty($_POST)) {
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <input id="accion" class="form-check-input text-dark font-weight-bold" type="checkbox" name="accion" value="si" checked>
+                                       
                                         <label for="vencimiento">Vencimiento</label>
                                         <input id="vencimiento" class="form-control" type="date" name="vencimiento" required>
                                     </div>
@@ -341,62 +342,68 @@ if (!empty($_POST)) {
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="table-responsive">
-                <table class="table table-sm  table-bordered table-hover" id="tbl">
-                    <thead class="thead-light">
-                        <tr>
-                            <th><b>#</b></th>
-                            <th><b>Código</b></th>
-                            <th><b>Producto</b></th>
-                            <th><b>Tipo</b></th>
-                            <th><b>Presentacion</b></th>
-                            <th><b>Precio Costo</b></th>
-                            <th><b>Precio PVP</b></th>
-                            <th><b>Unidades</b></th>
-                            <th><b>Frac./Unid.</b></th>
-                            <th><b>Prec./Frac.</b></th>
-                            <th><b>IVA</b></th>
-                            <th><b>Acciones</b></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                      //  include "../conexion.php";
+                                            </div>
+                                            </div>
+  <div class="card shadow-lg">
+        <div class="card-body">
+                 <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-sm  table-bordered table-hover" id="tbl">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th><b>#</b></th>
+                                            <th><b>Código</b></th>
+                                            <th><b>Producto</b></th>
+                                            <th><b>Tipo</b></th>
+                                            <th><b>Presentacion</b></th>
+                                            <th><b>Precio Costo</b></th>
+                                            <th><b>Precio PVP</b></th>
+                                            <th><b>Unidades</b></th>
+                                            <th><b>Frac./Unid.</b></th>
+                                            <th><b>Prec./Frac.</b></th>
+                                            <th><b>IVA</b></th>
+                                            <th><b>Acciones</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                    //  include "../conexion.php";
 
-                        $query = mysqli_query($conexion, "SELECT p.*, t.id, t.tipo, pr.id, pr.nombre FROM producto p INNER JOIN tipos t ON p.id_tipo = t.id INNER JOIN presentacion pr ON p.id_presentacion = pr.id");
-                        $result = mysqli_num_rows($query);
-                        if ($result > 0) {
-                            while ($data = mysqli_fetch_assoc($query)) { 
-                              
-                                ?>
-                                <tr>
-                                    <td><?php echo $data['codproducto']; ?></td>
-                                    <td><?php echo $data['codigo']; ?></td>
-                                    <td><?php echo $data['descripcion']; ?></td>
-                                    <td><?php echo $data['tipo']; ?></td>
-                                    <td><?php echo $data['nombre']; ?></td>
-                                    <td><?php echo $data['precio']; ?></td>
-                                    <td><?php echo $data['precioPVP']; ?></td>
-                                    <td><?php echo $data['existencia']; ?></td>
-                                    <td><?php echo $data['fraccion']; ?></td>
-                                    <td><?php echo $data['precioFr']; ?></td>
-                                    <td><?php echo $data['iva']; ?></td>
-                                    <td>
-                                        <a href="#" onclick="editarProducto(event,<?php echo $data['codproducto']; ?>)" class="btn btn-primary"><i class='fas fa-edit'></i></a>
+                                        $query = mysqli_query($conexion, "SELECT p.*, t.id, t.tipo, pr.id, pr.nombre FROM producto p INNER JOIN tipos t ON p.id_tipo = t.id INNER JOIN presentacion pr ON p.id_presentacion = pr.id");
+                                        $result = mysqli_num_rows($query);
+                                        if ($result > 0) {
+                                            while ($data = mysqli_fetch_assoc($query)) { 
+                                            
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $data['codproducto']; ?></td>
+                                                    <td><?php echo $data['codigo']; ?></td>
+                                                    <td><?php echo $data['descripcion']; ?></td>
+                                                    <td><?php echo $data['tipo']; ?></td>
+                                                    <td><?php echo $data['nombre']; ?></td>
+                                                    <td><?php echo $data['precio']; ?></td>
+                                                    <td><?php echo $data['precioPVP']; ?></td>
+                                                    <td><?php echo $data['existencia']; ?></td>
+                                                    <td><?php echo $data['fraccion']; ?></td>
+                                                    <td><?php echo $data['precioFr']; ?></td>
+                                                    <td><?php echo $data['iva']; ?></td>
+                                                    <td>
+                                                        <a href="#" onclick="editarProducto(event,<?php echo $data['codproducto']; ?>)" class="btn btn-primary"><i class='fas fa-edit'></i></a>
 
-                                        <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
-                                            <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                        <?php }
-                        } ?>
-                    </tbody>
+                                                        <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
+                                                            <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                        <?php }
+                                        } ?>
+                                    </tbody>
 
-                </table>
-            </div>
-        </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
     </div>
 </div>
 <?php  } 
