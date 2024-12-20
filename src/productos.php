@@ -355,6 +355,7 @@ if (!empty($_POST)) {
                                             <th><b>#</b></th>
                                             <th><b>Código</b></th>
                                             <th><b>Producto</b></th>
+                                            <th><b>F. Vencimiento</b></th>
                                             <th><b>Tipo</b></th>
                                             <th><b>Presentacion</b></th>
                                             <th><b>Precio Costo</b></th>
@@ -380,6 +381,7 @@ if (!empty($_POST)) {
                                                     <td><?php echo $data['codproducto']; ?></td>
                                                     <td><?php echo $data['codigo']; ?></td>
                                                     <td><?php echo $data['descripcion']; ?></td>
+                                                    <td><?php echo $data['vencimiento']; ?></td>
                                                     <td><?php echo $data['tipo']; ?></td>
                                                     <td><?php echo $data['nombre']; ?></td>
                                                     <td><?php echo $data['precio']; ?></td>
