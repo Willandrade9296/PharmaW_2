@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2024 a las 02:44:42
+-- Tiempo de generación: 22-12-2024 a las 21:58:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,7 +64,7 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id`, `nombre`, `telefono`, `email`, `direccion`) VALUES
-(1, 'Administrador', '999999999', 'willianandrademj43@gmail.com', 'San Gabriel');
+(1, 'Farmacias Reina del Quinche', '999999999', 'willianandrademj43@gmail.com', 'San Gabriel');
 
 -- --------------------------------------------------------
 
@@ -83,18 +83,19 @@ CREATE TABLE `detalle_permisos` (
 --
 
 INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
-(30, 1, 1),
-(31, 2, 1),
-(32, 3, 1),
-(33, 4, 1),
-(34, 5, 1),
-(35, 6, 1),
-(36, 7, 1),
-(37, 8, 1),
-(38, 9, 1),
 (59, 3, 9),
 (60, 5, 9),
-(61, 6, 9);
+(61, 6, 9),
+(72, 1, 1),
+(73, 2, 1),
+(74, 3, 1),
+(75, 4, 1),
+(76, 5, 1),
+(77, 6, 1),
+(78, 7, 1),
+(79, 8, 1),
+(80, 9, 1),
+(81, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +178,33 @@ INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `tipo_prod`, `cant
 (91, 8, 158, 'F', 10, 0.00, 0.20, 0.30, 3.00),
 (92, 8, 159, 'F', 20, 0.00, 0.20, 0.30, 6.00),
 (93, 8, 160, 'F', 100, 0.00, 0.20, 0.30, 30.00),
-(94, 7, 161, 'U', 3, 0.00, 3.00, 5.00, 15.00);
+(94, 7, 161, 'U', 3, 0.00, 3.00, 5.00, 15.00),
+(95, 8, 162, 'F', 7, 0.00, 0.20, 0.30, 2.10),
+(96, 8, 163, 'F', 3, 0.00, 0.20, 0.30, 0.90),
+(97, 8, 164, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(98, 8, 165, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(99, 8, 166, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(100, 8, 167, 'F', 3, 0.00, 0.20, 0.30, 0.90),
+(101, 8, 168, 'F', 7, 0.00, 0.20, 0.30, 2.10),
+(102, 8, 169, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(103, 8, 170, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(104, 8, 171, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(105, 8, 172, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(106, 8, 173, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(107, 8, 174, 'F', 20, 0.00, 0.20, 0.30, 6.00),
+(108, 8, 175, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(109, 8, 176, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(110, 8, 177, 'U', 2, 0.00, 1.00, 2.00, 4.00),
+(111, 8, 178, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(112, 8, 179, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(113, 8, 180, 'F', 3, 0.00, 0.20, 0.30, 0.90),
+(114, 8, 181, 'F', 117, 0.00, 0.20, 0.30, 35.10),
+(115, 8, 182, 'F', 8, 0.00, 0.20, 0.30, 2.40),
+(116, 8, 183, 'U', 11, 0.00, 1.00, 2.00, 22.00),
+(117, 8, 184, 'F', 4, 0.00, 0.20, 0.30, 1.20),
+(118, 8, 185, 'F', 132, 0.00, 0.20, 0.30, 39.60),
+(119, 8, 186, 'F', 3, 0.00, 0.20, 0.30, 0.90),
+(120, 6, 187, 'U', 1, 0.00, 5.00, 6.00, 6.00);
 
 -- --------------------------------------------------------
 
@@ -227,7 +254,8 @@ INSERT INTO `permisos` (`id`, `nombre`, `nombre_op`, `archivo`, `logo_opcion`) V
 (6, 'nueva_venta', 'Nueva Venta', 'ventas', 'fas fa-cash-register mr-2 fa-2x'),
 (7, 'tipos', 'Tipos', 'tipo', 'fas fa-tags mr-2 fa-2x'),
 (8, 'presentacion', 'Presentaciones', 'presentacion', 'fas fa-list mr-2 fa-2x'),
-(9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x');
+(9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x'),
+(10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x');
 
 -- --------------------------------------------------------
 
@@ -288,11 +316,11 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `existencia`, `existencia_fr`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `vencimiento`, `iva`, `info_prod`) VALUES
-(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.05, -2, 165, 55, 1, 4, 1, '2030-08-12', 0.00, ''),
-(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 0, 38, 20, 1, 4, 1, '2025-02-02', 0.00, 'antiepileptico'),
-(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 29, 145, 5, 2, 4, 1, '2025-01-02', 0.00, ''),
-(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, '2025-07-01', 0.00, ''),
-(8, '7703763320127', 'Loratadina 10mg', 1.00, 2.00, 0.30, 0.20, 10, 100, 10, 1, 4, 1, '2028-04-01', 0.00, 'Antihestaminico para control rapido de alergias como rinitis, estornudos, rinorea y prurito, urticaria.\r\n\r\nDosis: Adultos y niños mayores de 12 años una tableta diaria.\r\n\r\nEfectos secundarios: Mas frecuentes son sefalea fatiga y somnolencia, tambien sequedad naucea y gastritis.');
+(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.60, 10, 50, 5, 1, 4, 1, '2028-02-02', 0.00, ''),
+(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 2, 40, 20, 1, 4, 1, '2025-02-02', 0.00, 'antiepileptico'),
+(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 29, 145, 5, 2, 4, 1, '2028-04-13', 0.00, ''),
+(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, '2026-02-23', 0.00, ''),
+(8, '7703763320127', 'Loratadina 10mg', 1.00, 2.00, 0.30, 0.20, 8, 80, 10, 1, 4, 1, '2025-06-02', 0.00, 'Antihestaminico para control rapido de alergias como rinitis, estornudos, rinorea y prurito, urticaria.\r\n\r\nDosis: Adultos y niños mayores de 12 años una tableta diaria.\r\n\r\nEfectos secundarios: Mas frecuentes son sefalea fatiga y somnolencia, tambien sequedad naucea y gastritis.');
 
 -- --------------------------------------------------------
 
@@ -428,7 +456,33 @@ INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
 (158, 4, 3.00, 1, '2024-12-08 23:36:28'),
 (159, 4, 6.00, 1, '2024-12-08 23:37:10'),
 (160, 4, 30.00, 1, '2024-12-09 00:33:27'),
-(161, 4, 15.00, 1, '2024-12-09 00:38:28');
+(161, 4, 15.00, 1, '2024-12-09 00:38:28'),
+(162, 4, 2.10, 1, '2024-12-09 02:02:56'),
+(163, 6, 0.90, 1, '2024-12-09 02:03:40'),
+(164, 4, 2.40, 1, '2024-12-10 00:15:41'),
+(165, 4, 0.60, 1, '2024-12-10 00:16:59'),
+(166, 4, 2.40, 1, '2024-12-10 00:17:34'),
+(167, 4, 0.90, 1, '2024-12-10 00:21:52'),
+(168, 4, 2.10, 1, '2024-12-10 00:22:40'),
+(169, 4, 2.40, 1, '2024-12-10 00:53:55'),
+(170, 4, 2.40, 1, '2024-12-10 00:56:05'),
+(171, 4, 0.60, 1, '2024-12-10 00:56:38'),
+(172, 4, 2.40, 1, '2024-12-10 01:05:28'),
+(173, 4, 0.60, 1, '2024-12-10 01:06:02'),
+(174, 4, 6.00, 1, '2024-12-10 01:07:25'),
+(175, 4, 0.60, 1, '2024-12-10 01:07:59'),
+(176, 6, 2.40, 1, '2024-12-10 01:08:31'),
+(177, 6, 4.00, 1, '2024-12-10 01:11:39'),
+(178, 4, 0.60, 1, '2024-12-10 01:40:05'),
+(179, 6, 0.60, 1, '2024-12-14 02:06:07'),
+(180, 4, 0.90, 1, '2024-12-14 02:33:57'),
+(181, 4, 35.10, 1, '2024-12-14 02:44:54'),
+(182, 4, 2.40, 1, '2024-12-14 02:46:23'),
+(183, 4, 22.00, 1, '2024-12-14 03:00:22'),
+(184, 4, 1.20, 1, '2024-12-14 03:02:31'),
+(185, 4, 39.60, 1, '2024-12-14 03:04:57'),
+(186, 6, 0.90, 1, '2024-12-14 03:06:05'),
+(187, 4, 6.00, 1, '2024-12-19 01:39:31');
 
 -- --------------------------------------------------------
 
@@ -560,19 +614,19 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -584,7 +638,7 @@ ALTER TABLE `laboratorios`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `presentacion`
@@ -614,7 +668,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- Restricciones para tablas volcadas
