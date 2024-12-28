@@ -75,7 +75,7 @@ if (isset($_GET['q'])) {
 
     if (comprobar_cliente($conexion,$id_cliente))
     { 
-                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user");
+                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user GROUP BY id_usuario,total");
                     $result = mysqli_fetch_assoc($consulta);
                     $total = $result['total_pagar'];
                     $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total', $id_user)");
