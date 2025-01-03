@@ -183,46 +183,53 @@ if (!empty($_POST)) {
                         <form action="" method="post" autocomplete="off" id="formulario">
                             <?php echo isset($alert) ? $alert : ''; ?>
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="codigo" class=" text-dark font-weight-bold"><i class="fas fa-barcode"></i> Código de Barras</label>
-                                        <input type="text" placeholder="Ingrese código de barras" name="codigo" id="codigo" class="form-control" autofocus required>
-                                        <input type="hidden" id="id" name="id">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="form-group">
+                                                            <label for="codigo" class=" text-dark font-weight-bold"><i class="fas fa-barcode"></i> Código de Barras</label>
+                                                            <input type="text" placeholder="Ingrese código de barras" name="codigo" id="codigo" class="form-control" autofocus required>
+                                                            <input type="hidden" id="id" name="id">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="form-group">
+                                                            <label for="producto" class=" text-dark font-weight-bold">Producto</label>
+                                                            <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                             </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="producto" class=" text-dark font-weight-bold">Producto</label>
-                                        <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="precio" class=" text-dark font-weight-bold" style="font-size:12px;">Precio Costo</label>
-                                        <input type="number" placeholder="Costo" class="form-control" name="precio" id="precio" min="0" step="0.01" onkeyup="calcularIVA()" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="iva" class=" text-dark font-weight-bold">IVA:</label>
-                                        <input type="number" placeholder="IVA" class="form-control" name="iva" id="iva" min="0" max="1" step="0.01" value="0.00" onkeyup="calcularIVA()"  required>
-                                    </div>
-                                </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-3 col-sm-3 col-xs-3">
+                                                <div class="form-group">
+                                                    <label for="precio" class=" text-dark font-weight-bold" style="font-size:12px;">Precio Costo</label>
+                                                    <input type="number" placeholder="Costo" class="form-control" name="precio" id="precio" min="0" step="0.01" onkeyup="calcularIVA()" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-md-3 col-sm-3 col-xs-3">
+                                                <div class="form-group">
+                                                    <label for="iva" class=" text-dark font-weight-bold" style="font-size:12px;">IVA:</label>
+                                                    <input type="number" placeholder="IVA" class="form-control" name="iva" id="iva" min="0" max="1" step="0.01" value="0.00" onkeyup="calcularIVA()"  required>
+                                                </div>
+                                            </div>
 
-                                <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="precioIva" class=" text-dark font-weight-bold">Precio IVA:</label>
-                                        <input type="number" placeholder="Ingrese IVA" class="form-control" name="precioIva" id="precioIva" min="0"  step="0.01" value="0.00" disabled  required>
-                                    </div>
-                                </div>
+                                            <div class="col-md-3 col-md-3 col-sm-3 col-xs-3">
+                                                <div class="form-group">
+                                                    <label for="precioIva" class=" text-dark font-weight-bold" style="font-size:12px;">Precio IVA:</label>
+                                                    <input type="number" placeholder="Ingrese IVA" class="form-control" name="precioIva" id="precioIva" min="0"  step="0.01" value="0.00" disabled  required>
+                                                </div>
+                                            </div>
 
-                                <div class="col-md-1">
-                                    <div class="form-group">
-                                        <label for="precioPVP" class=" text-dark font-weight-bold" style="font-size:12px;">Precio PVP</label>
-                                        <input type="number" placeholder="PVP" class="form-control" name="precioPVP" id="precioPVP" min="0" step="0.01" required>
+                                            <div class="col-md-3  col-md-3 col-sm-3 col-xs-3">
+                                                <div class="form-group">
+                                                    <label for="precioPVP" class=" text-dark font-weight-bold" style="font-size:12px;">Precio PVP</label>
+                                                    <input type="number" placeholder="PVP" class="form-control" name="precioPVP" id="precioPVP" min="0" step="0.01" required>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-
                                 
 
                                 

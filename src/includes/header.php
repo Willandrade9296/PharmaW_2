@@ -27,6 +27,7 @@ $id_user = $_SESSION['idUser'];
     <meta name="author" content="" />
     <title>Pharma W</title>
     <link href="../assets/css/material-dashboard.css" rel="stylesheet" />
+   
     <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="../assets/js/jquery-ui/jquery-ui.min.css">
     <link href="../assets/css/style.css" rel="stylesheet" />
