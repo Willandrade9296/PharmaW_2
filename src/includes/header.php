@@ -36,6 +36,8 @@ $id_user = $_SESSION['idUser'];
     <script src="../assets/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 </head>
 
+
+
 <body>
     <div class="wrapper ">
         <div class="sidebar" data-color="blue"  >

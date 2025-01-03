@@ -18,14 +18,7 @@ if (empty($existe) && $id_user != 1) {
 
 ?>
 
-<script>
 
-$('#myModal').on('shown.bs.modal', function () {
-  $('#myForm')[0].reset();
-});
-
-
-</script>
 <div class="row">
     <div class="col-lg-12">
         
@@ -177,7 +170,7 @@ $('#myModal').on('shown.bs.modal', function () {
                     </div>
                     <div class="row">
                                 <div class="col-lg-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#infoProducto">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalInfo">
                                         Ver Info
                                     </button>
                                    
@@ -237,7 +230,7 @@ $('#myModal').on('shown.bs.modal', function () {
 
 
 
-<div class="modal fade" id="infoProducto" role="dialog" tabindex="-1"  aria-hidden="true">
+<div class="modal fade" id="ModalInfo" role="dialog" tabindex="-1"  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
