@@ -230,12 +230,13 @@ if (empty($existe) && $id_user != 1) {
 
 
 
-<div class="modal fade" id="ModalInfo" role="dialog" tabindex="-1"  aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h4 class="modal-title" id="exampleModalLabel">Información Producto</h4>
+        
       </div>
       <div class="modal-body">
         ...
@@ -247,6 +248,9 @@ if (empty($existe) && $id_user != 1) {
     </div>
   </div>
 </div>
+
+
+
 
 
 <?php 
