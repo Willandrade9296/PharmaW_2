@@ -47,7 +47,9 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->Cell(70, 5, "Detalle de Producto", 1, 1, 'C', 1);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->Cell(30, 5, utf8_decode('Descripción'), 0, 0, 'L');
+$pdf->Cell(22,5, utf8_decode('Descripción'), 0, 0, 'L');
+
+$pdf->Cell(7, 5, 'Tipo', 0, 0, 'L');
 $pdf->Cell(10, 5, 'Cant.', 0, 0, 'L');
 $pdf->Cell(15, 5, 'Precio', 0, 0, 'L');
 $pdf->Cell(15, 5, 'Sub Total.', 0, 1, 'L');
@@ -55,7 +57,9 @@ $pdf->SetFont('Arial', '', 7);
 $total = 0.00;
 $desc = 0.00;
 while ($row = mysqli_fetch_assoc($ventas)) {
-    $pdf->Cell(30, 5, $row['descripcion'], 0, 0, 'L');
+ //   $pdf->Multicell(120, 5, utf8_decode('Descripción'), 0, 'l', false);
+    $pdf->Cell(22, 5, $row['descripcion'], 0, 0, 'L');
+    $pdf->Cell(7, 5, $row['tipo_prod'], 0, 0, 'L');
     $pdf->Cell(10, 5, $row['cantidad'], 0, 0, 'L');
     $pdf->Cell(15, 5, $row['precioPVP'], 0, 0, 'L');
     $sub_total = $row['total'];

@@ -38,6 +38,8 @@ if (isset($_GET['q'])) {
      //   $data['stockFr']= $row['existencia'] * $row['fraccion'];
         $data['stockFr'] = $row['existencia_fr'];
         $data['iva'] = $row['iva'];
+        $data['info_prod'] = $row['info_prod'];
+        
         array_push($datos, $data);
     }
     echo json_encode($datos);
@@ -49,6 +51,7 @@ if (isset($_GET['q'])) {
     while ($row = mysqli_fetch_assoc($detalle)) {
         $data['id'] = $row['id'];
         $data['descripcion'] = $row['descripcion'];
+        $data['tipo_prod'] = $row['tipo_prod'];
         $data['cantidad'] = $row['cantidad'];
         $data['descuento'] = $row['descuento'];
         $data['precio_venta'] = $row['precio_venta'];

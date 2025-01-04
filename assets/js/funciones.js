@@ -67,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#id").val(ui.item.id);
             $("#id_presentacion").val(ui.item.id_presentacion);
             $("#producto").val(ui.item.value);
+           
+            /* Titulo para visualización en modal de información */
+            $("#LabelTituloI").text(ui.item.value);
+
             $('#stock').val(ui.item.cantidad);
             $('#stockFr').val(ui.item.stockFr);
             $("#precioC").val(ui.item.precioC);
@@ -77,19 +81,26 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#precioPVPfr_o").val(ui.item.precioFr_o);
 
             $("#iva").val(ui.item.iva);
+            $("#info_producto_v").val(ui.item.info_prod);
+           
+            $("#info_caja_fr").val(ui.item.fraccion);
             $("#cantidad").focus();
 
            var presentac= $("#id_presentacion").val();
 
            if(presentac === '4'){
             $('#panelFraccion').css('display','initial');
+            $('#divShowCaja').css('display','initial');
 
             $('#tipoUnidad').prop('required',true);
           
             unidad_o_fraccion(event);
 
+            
+
            }else{
             $('#panelFraccion').css('display','none');
+            $('#divShowCaja').css('display','none');
 
             $('#tipoUnidad').removeAttr("required");
             $('#tipoUnidad').val('U');
@@ -373,6 +384,7 @@ function listar() {
                 html += `<tr>
                 <td>${row['id']}</td>
                 <td>${row['descripcion']}</td>
+                <td>${row['tipo_prod']}</td>
                 <td>${row['cantidad']}</td>
                 <td width="100">
                 <input class="form-control" placeholder="Desc" type="number" min="0" max="1" step="0.01" onkeyup="calcularDescuento(event, ${row['id']})">
@@ -559,7 +571,7 @@ function calcular() {
         var columnas = e.querySelectorAll("td");
 
         // obtenemos los valores de la cantidad y importe
-        var importe = parseFloat(columnas[6].textContent);
+        var importe = parseFloat(columnas[7].textContent);
 
         total += importe;
     });

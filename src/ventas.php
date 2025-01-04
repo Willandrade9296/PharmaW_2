@@ -169,7 +169,7 @@ if (empty($existe) && $id_user != 1) {
                         </div>
                     </div>
                     <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                
                             <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -180,13 +180,18 @@ if (empty($existe) && $id_user != 1) {
                                         </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalInfo">
-                                                Ver Info
+                                                Información
                                             </button>
                                         
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+                                           <button type="button" class="btn btn-warning btn-sm" >
+                                                Alternativas
+                                            </button>
                                         </div>
                                 </div>
                             </div>
@@ -204,6 +209,7 @@ if (empty($existe) && $id_user != 1) {
                     <tr >
                         <th>Id</th>
                         <th>Descripción</th>
+                        <th>Tipo</th>
                         <th>Unidades</th>
                         <th>Aplicar Desc.(%)</th>
                         <th>Desc.</th>
@@ -254,11 +260,33 @@ if (empty($existe) && $id_user != 1) {
         
       </div>
       <div class="modal-body">
-      <label for="info_producto_v" class=" text-dark font-weight-bold">Información:</label>
-      <textarea placeholder="" class="form-control" name="info_producto_v" id="info_producto_v" rows="6"  disabled></textarea>
-        
-      
+        <div class="container">
+     <div class="row">
+      <h3 id="LabelTituloI" name="LabelTituloI">Titulo Información</h3>
+     </div>
+      <hr>
+      <div class="row">
+      <label for="info_producto_v" class=" text-dark font-weight-bold"><b>Información:</b></label>
+      <textarea placeholder="" class="form-control" name="info_producto_v" id="info_producto_v" rows="16"  disabled></textarea>
       </div>
+      <div class="row">
+      <div id="divShowCaja" style="margin-top:1em;">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+         <div class="row">
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+         <label for="info_caja_fr" class=" text-dark font-weight-bold"><b>Caja contiene:</b></label>
+         </div>
+          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                
+                <input id="info_caja_fr" style="width:6em; text-align:center;" name="info_caja_fr" disabled /> fracciones.
+            </div>
+      </div>
+</div>
+        </div>
+       </div>
+      </div>
+</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cerrar</button>
        
