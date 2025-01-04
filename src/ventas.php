@@ -169,12 +169,27 @@ if (empty($existe) && $id_user != 1) {
                         </div>
                     </div>
                     <div class="row">
-                                <div class="col-lg-3">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalInfo">
-                                        Ver Info
-                                    </button>
-                                   
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                               
+                            <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                            <button type="button" class="btn btn-success btn-sm" name="BtnAgregar" id="BtnAgregar" data-type="boton" onclick="agregarCompra(event)">
+                                                Agregar a Compra
+                                            </button>
+                                        
+                                        </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalInfo">
+                                                Ver Info
+                                            </button>
+                                        
+                                        </div>
+                                </div>
+                            </div>
 
                     </div>
 
@@ -231,19 +246,22 @@ if (empty($existe) && $id_user != 1) {
 
 
 <!-- Modal -->
-<div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ModalInfo" tabindex="-1" role="dialog" aria-labelledby="Label1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalLabel">Información Producto</h4>
+        <h4 class="modal-title" id="Label1">Información Producto</h4>
         
       </div>
       <div class="modal-body">
-        ...
+      <label for="info_producto_v" class=" text-dark font-weight-bold">Información:</label>
+      <textarea placeholder="" class="form-control" name="info_producto_v" id="info_producto_v" rows="6"  disabled></textarea>
+        
+      
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+       
       </div>
     </div>
   </div>

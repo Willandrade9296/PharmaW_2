@@ -176,25 +176,28 @@ if (cant != '')
     if (Number(stock) >= Number(cant))
     { 
 
-
-    
     const precioC=$("#precioC").val();
     const precio = $('#precioPVP').val();
     const iva= $('#iva').val();
     const total = cant * (parseFloat(precio) + parseFloat(precio * iva));
 
     $('#sub_total').val(parseFloat(Number(total).toFixed(2)));
-    if (e.which == 13) {
-        if (cant > 0 && cant != '') {
-            const id = $('#id').val();
-            registrarDetalle(e, id,cant,stock,precioC, precio,iva,'U');
-            $('#producto').focus();
-        } else {
-            $('#cantidad').focus();
-            return false;
-        }
-    }
 
+    var {type} = e.target.dataset;
+
+
+            if (e.which == 13 || type === 'boton') {
+                if (cant > 0 && cant != '') {
+                    const id = $('#id').val();
+                    registrarDetalle(e, id,cant,stock,precioC, precio,iva,'U');
+                    $('#producto').focus();
+                } else {
+                    $('#cantidad').focus();
+                    return false;
+                }
+            }
+          
+            
 
 
 
@@ -237,13 +240,13 @@ if (cant != '')
 
 
 function calcularPrecioFraccion(e) {
-    e.preventDefault();
+     e.preventDefault();
     var cantFr = $("#fraccion").val();
     var stockFr = $("#stockFr").val();
 
     
 
-   if(cantFr != ''){ 
+   if(cantFr != '' ){ 
 
     
     if (Number(stockFr) >= Number(cantFr))
@@ -258,7 +261,9 @@ function calcularPrecioFraccion(e) {
 
     $('#sub_total').val(parseFloat(Number(total).toFixed(2)));
 
-    if (e.which == 13) {
+    var {type} = e.target.dataset;
+
+    if (e.which == 13 || type === 'boton') {
         if (cantFr > 0 && cantFr != '') {
             const id = $('#id').val();
             registrarDetalle(e, id,cantFr,stockFr,precioC, precio,'0','F');
@@ -309,6 +314,20 @@ function calcularPrecioFraccion(e) {
 
 
 }
+
+function agregarCompra(event){
+    
+   var tipo =$("#tipoUnidad").val();
+    if( tipo === 'F'){
+       calcularPrecioFraccion(event);
+    }else{
+
+        
+      calcularPrecio(event);
+    }
+
+}
+
 
 function calcularDescuento(e, id) {
     if (e.which == 13) {

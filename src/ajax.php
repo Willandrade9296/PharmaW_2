@@ -274,13 +274,13 @@ if (isset($_POST['regDetalle'])) {
     $tipo_unidad=$_POST['tipo_unidad'];
     $id_user = $_SESSION['idUser'];
     $total = $precio * $cant;
-    $verificar = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_producto = $id AND id_usuario = $id_user");
+    $verificar = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_producto = $id AND id_usuario = $id_user AND tipo_prod= '$tipo_unidad' ");
     $result = mysqli_num_rows($verificar);
     $datos = mysqli_fetch_assoc($verificar);
     if ($result > 0) {
         $cantidad = $datos['cantidad'] + $cant;
         $total_precio = ($cantidad * $total);
-        $query = mysqli_query($conexion, "UPDATE detalle_temp SET tipo_prod= $tipo_unidad,  cantidad = $cantidad, precio_costo= $precioC, precio_venta=$precio  , total = '$total_precio' WHERE id_producto = $id AND id_usuario = $id_user");
+        $query = mysqli_query($conexion, "UPDATE detalle_temp SET cantidad = $cantidad, precio_costo= '$precioC' , precio_venta='$precio'  , total = '$total_precio' WHERE id_producto = $id AND id_usuario = $id_user AND tipo_prod= '$tipo_unidad' ");
         if ($query) {
             $msg = "actualizado";
         } else {
