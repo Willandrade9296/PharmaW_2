@@ -86,6 +86,10 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#info_caja_fr").val(ui.item.fraccion);
             $("#cantidad").focus();
 
+       /* Habilitando botón para mostrar información sobre producto */
+            $('#btnInfo').prop('disabled',false);
+            
+
            var presentac= $("#id_presentacion").val();
 
            if(presentac === '4'){
@@ -144,7 +148,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             generarPDF(res.id_cliente, res.id_venta);
                             location.reload();
                         }, 300);
-
+                      
+                        /* Deshabilitando botón para mostrar información sobre producto */
+                        $('#btnInfo').prop('disabled',true);
 
                     } else {
                         Swal.fire({
@@ -436,6 +442,9 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva,tipo_unidad) {
                         $("#producto").val('');
                         $("#sub_total").val('');
                         $("#producto").focus();
+
+                        $('#btnInfo').prop('disabled',true);
+                        
                         listar();
                         Swal.fire({
                             position: 'top-end',
@@ -455,6 +464,10 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva,tipo_unidad) {
                         $('#iva').val('');
                         $("#producto").val('');
                         $("#producto").focus();
+                        /* Deshabilitando botón para mostrar información sobre producto */
+                        $('#btnInfo').prop('disabled',true);
+
+                       
                         listar();
                         Swal.fire({
                             position: 'top-end',
@@ -475,6 +488,8 @@ function registrarDetalle(e, id, cant,stock, precioC,precio,iva,tipo_unidad) {
                         $('#iva').val('');
                         $("#producto").val('');
                         $("#producto").focus();
+                        /* Deshabilitando botón para mostrar información sobre producto */
+                        $('#btnInfo').prop('disabled',true);
                         Swal.fire({
                             position: 'top-end',
                             icon: 'error',

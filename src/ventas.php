@@ -183,13 +183,13 @@ if (empty($existe) && $id_user != 1) {
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="row">
                                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ModalInfo">
+                                            <button type="button" class="btn btn-primary btn-sm" id="btnInfo" name="btnInfo" data-bs-toggle="modal" data-bs-target="#ModalInfo" disabled>
                                                 Información
                                             </button>
                                         
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                                           <button type="button" class="btn btn-warning btn-sm" >
+                                           <button type="button" class="btn btn-warning btn-sm" id="btnAlternativas" name="btnAlternativas" disabled>
                                                 Alternativas
                                             </button>
                                         </div>
