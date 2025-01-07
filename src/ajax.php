@@ -254,6 +254,14 @@ if (isset($_GET['q'])) {
     $data = mysqli_fetch_array($sql);
     echo json_encode($data);
     exit;
+
+} else if (isset($_GET['editarGrupoC'])) {
+    $id = $_GET['id'];
+    $sql = mysqli_query($conexion, "SELECT * FROM grupo_cuerpo WHERE id_grupo = $id");
+    $data = mysqli_fetch_array($sql);
+    echo json_encode($data);
+    exit;
+
 } else if (isset($_GET['editarPresent'])) {
     $id = $_GET['id'];
     $sql = mysqli_query($conexion, "SELECT * FROM presentacion WHERE id = $id");

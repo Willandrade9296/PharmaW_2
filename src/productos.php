@@ -49,6 +49,7 @@ if (!empty($_POST)) {
     $tipo = $_POST['tipo'];
     $presentacion = $_POST['presentacion'];
     $laboratorio = $_POST['laboratorio'];
+    $grupoC= $_POST['grupoC'];
     $vencimiento = '';
     $iva=$_POST['iva'];
     $infor=$_POST['inform'];
@@ -56,8 +57,8 @@ if (!empty($_POST)) {
         $vencimiento = $_POST['vencimiento'];
    //   }
 
-    if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio)  || empty($precio) || $precio <  0  || empty($precioPVP) || $precioPVP <  0 || empty($cantidad) || $cantidad <  0 || empty($iva) ||
-    $tipo=="*" || $presentacion=="*" || $laboratorio=="*") {
+    if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio) || empty($grupoC)   || empty($precio) || $precio <  0  || empty($precioPVP) || $precioPVP <  0 || empty($cantidad) || $cantidad <  0 || empty($iva) ||
+    $tipo=="*" || $presentacion=="*" || $laboratorio=="*" || $grupoC=="*") {
      
                     $alert = mostrarMensaje('Todos los campos son obligatorios','w');
     } else {
@@ -98,7 +99,7 @@ if (!empty($_POST)) {
                     $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
                  }
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, '$vencimiento','$iva','$infor')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, $grupoC , '$vencimiento','$iva','$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -151,7 +152,7 @@ if (!empty($_POST)) {
 
 
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo=$grupoC ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -238,13 +239,13 @@ if (!empty($_POST)) {
                             
                             <div class="row">
                                 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="tipo" class="text-dark font-weight-bold">Tipo</label>
                                         <select id="tipo" class="form-control" name="tipo" required>
                                             <option value="*">Seleccionar</option>
                                             <?php
-                                            $query_tipo = mysqli_query($conexion, "SELECT * FROM tipos");
+                                            $query_tipo = mysqli_query($conexion, "SELECT * FROM tipos order by tipo");
                                             while ($datos = mysqli_fetch_assoc($query_tipo)) { ?>
                                                 <option value="<?php echo $datos['id'] ?>"><?php echo $datos['tipo'] ?></option>
                                             <?php } ?>
@@ -257,7 +258,7 @@ if (!empty($_POST)) {
                                         <select id="presentacion" class="form-control" name="presentacion" onchange="presentacion_caja(event)" required>
                                         <option value="*">Seleccionar</option>
                                             <?php
-                                            $query_pre = mysqli_query($conexion, "SELECT * FROM presentacion");
+                                            $query_pre = mysqli_query($conexion, "SELECT * FROM presentacion order by nombre");
                                             while ($datos = mysqli_fetch_assoc($query_pre)) { ?>
                                                 <option value="<?php echo $datos['id'] ?>"><?php echo $datos['nombre'] ?></option>
                                             <?php } ?>
@@ -266,15 +267,28 @@ if (!empty($_POST)) {
                                         
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="laboratorio" class="text-dark font-weight-bold">Laboratorio</label>
                                         <select id="laboratorio" class="form-control" name="laboratorio" required>
                                         <option value="*">Seleccionar</option>
                                             <?php
-                                            $query_lab = mysqli_query($conexion, "SELECT * FROM laboratorios");
+                                            $query_lab = mysqli_query($conexion, "SELECT * FROM laboratorios order by laboratorio");
                                             while ($datos = mysqli_fetch_assoc($query_lab)) { ?>
                                                 <option value="<?php echo $datos['id'] ?>"><?php echo $datos['laboratorio'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="grupoC" class="text-dark font-weight-bold">Grupo Corporal</label>
+                                        <select id="grupoC" class="form-control" name="grupoC" required>
+                                        <option value="*">Seleccionar</option>
+                                            <?php
+                                            $query_lab = mysqli_query($conexion, "SELECT * FROM grupo_cuerpo order by nombre");
+                                            while ($datos = mysqli_fetch_assoc($query_lab)) { ?>
+                                                <option value="<?php echo $datos['id_grupo'] ?>"><?php echo $datos['nombre'] ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

@@ -854,6 +854,31 @@ function editarTipo(id) {
         }
     });
 }
+
+
+function editarGrupoC(id) {
+    const action = "editarGrupoC";
+    $.ajax({
+        url: 'ajax.php',
+        type: 'GET',
+        async: true,
+        data: {
+            editarGrupoC: action,
+            id: id
+        },
+        success: function (response) {
+            const datos = JSON.parse(response);
+            $('#nombre').val(datos.nombre);
+            $('#detalle').val(datos.detalle);
+            $('#id').val(datos.id);
+            $('#btnAccion').val('Modificar');
+        },
+        error: function (error) {
+            console.log(error);
+
+        }
+    });
+}
 function editarPresent(id) {
     const action = "editarPresent";
     $.ajax({
