@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-12-2024 a las 21:58:36
+-- Tiempo de generación: 07-01-2025 a las 05:36:07
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -86,16 +86,17 @@ INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
 (59, 3, 9),
 (60, 5, 9),
 (61, 6, 9),
-(72, 1, 1),
-(73, 2, 1),
-(74, 3, 1),
-(75, 4, 1),
-(76, 5, 1),
-(77, 6, 1),
-(78, 7, 1),
-(79, 8, 1),
-(80, 9, 1),
-(81, 10, 1);
+(104, 1, 1),
+(105, 2, 1),
+(106, 3, 1),
+(107, 4, 1),
+(108, 5, 1),
+(109, 6, 1),
+(110, 7, 1),
+(111, 8, 1),
+(112, 9, 1),
+(113, 10, 1),
+(114, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,35 @@ INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `tipo_prod`, `cant
 (117, 8, 184, 'F', 4, 0.00, 0.20, 0.30, 1.20),
 (118, 8, 185, 'F', 132, 0.00, 0.20, 0.30, 39.60),
 (119, 8, 186, 'F', 3, 0.00, 0.20, 0.30, 0.90),
-(120, 6, 187, 'U', 1, 0.00, 5.00, 6.00, 6.00);
+(120, 6, 187, 'U', 1, 0.00, 5.00, 6.00, 6.00),
+(121, 8, 188, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(122, 5, 188, 'F', 2, 0.00, 1.25, 1.25, 2.50),
+(123, 8, 189, 'U', 1, 0.00, 1.00, 2.00, 2.00),
+(124, 5, 189, 'F', 2, 0.00, 1.25, 1.25, 2.50),
+(125, 8, 190, 'U', 3, 0.00, 1.00, 2.00, 12.00),
+(126, 8, 190, 'F', 2, 0.00, 0.20, 0.30, 0.60),
+(127, 5, 191, 'F', 2, 0.00, 1.25, 1.25, 2.50),
+(128, 8, 191, 'F', 1, 0.00, 0.20, 0.30, 0.30);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupo_cuerpo`
+--
+
+CREATE TABLE `grupo_cuerpo` (
+  `id_grupo` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `detalle` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `grupo_cuerpo`
+--
+
+INSERT INTO `grupo_cuerpo` (`id_grupo`, `nombre`, `detalle`) VALUES
+(4, 'Cabeza', 'Todos los dolores que tenga que ver con cabeza'),
+(5, 'Pulmones', 'Para tratar dolencias o inconvenientes en los pulmones');
 
 -- --------------------------------------------------------
 
@@ -255,7 +284,8 @@ INSERT INTO `permisos` (`id`, `nombre`, `nombre_op`, `archivo`, `logo_opcion`) V
 (7, 'tipos', 'Tipos', 'tipo', 'fas fa-tags mr-2 fa-2x'),
 (8, 'presentacion', 'Presentaciones', 'presentacion', 'fas fa-list mr-2 fa-2x'),
 (9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x'),
-(10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x');
+(10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x'),
+(11, 'Grupo Corporal', 'Grupo Corporal', 'grupo_c', 'fas fa-male mr-2 fa-2x');
 
 -- --------------------------------------------------------
 
@@ -306,6 +336,7 @@ CREATE TABLE `producto` (
   `id_lab` int(11) NOT NULL,
   `id_presentacion` int(11) NOT NULL,
   `id_tipo` int(11) NOT NULL,
+  `id_grupo` int(11) NOT NULL,
   `vencimiento` varchar(20) NOT NULL,
   `iva` decimal(10,2) NOT NULL,
   `info_prod` mediumtext NOT NULL
@@ -315,12 +346,12 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `existencia`, `existencia_fr`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `vencimiento`, `iva`, `info_prod`) VALUES
-(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.60, 10, 50, 5, 1, 4, 1, '2028-02-02', 0.00, ''),
-(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 2, 40, 20, 1, 4, 1, '2025-02-02', 0.00, 'antiepileptico'),
-(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 29, 145, 5, 2, 4, 1, '2028-04-13', 0.00, ''),
-(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, '2026-02-23', 0.00, ''),
-(8, '7703763320127', 'Loratadina 10mg', 1.00, 2.00, 0.30, 0.20, 8, 80, 10, 1, 4, 1, '2025-06-02', 0.00, 'Antihestaminico para control rapido de alergias como rinitis, estornudos, rinorea y prurito, urticaria.\r\n\r\nDosis: Adultos y niños mayores de 12 años una tableta diaria.\r\n\r\nEfectos secundarios: Mas frecuentes son sefalea fatiga y somnolencia, tambien sequedad naucea y gastritis.');
+INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `existencia`, `existencia_fr`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `id_grupo`, `vencimiento`, `iva`, `info_prod`) VALUES
+(1, '45454545', 'Cataflan', 3.00, 3.00, 0.12, 0.60, 10, 50, 5, 1, 4, 1, 0, '2028-02-02', 0.00, ''),
+(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 2, 34, 20, 1, 4, 1, 0, '2025-02-02', 0.00, 'antiepileptico'),
+(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 29, 145, 5, 2, 4, 1, 0, '2028-04-13', 0.00, ''),
+(7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, 0, '2026-02-23', 0.00, ''),
+(8, '7703763320127', 'Loratadina 10mg', 1.00, 2.00, 0.30, 0.20, 3, 27, 10, 1, 4, 1, 0, '2025-06-02', 0.00, 'Antihestaminico para control rapido de alergias como rinitis, estornudos, rinorea y prurito, urticaria.\r\n\r\nDosis: Adultos y niños mayores de 12 años una tableta diaria.\r\n\r\nEfectos secundarios: Mas frecuentes son sefalea fatiga y somnolencia, tambien sequedad naucea y gastritis.');
 
 -- --------------------------------------------------------
 
@@ -482,7 +513,11 @@ INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
 (184, 4, 1.20, 1, '2024-12-14 03:02:31'),
 (185, 4, 39.60, 1, '2024-12-14 03:04:57'),
 (186, 6, 0.90, 1, '2024-12-14 03:06:05'),
-(187, 4, 6.00, 1, '2024-12-19 01:39:31');
+(187, 4, 6.00, 1, '2024-12-19 01:39:31'),
+(188, 4, 4.50, 1, '2024-12-23 02:03:46'),
+(189, 4, 2.00, 1, '2025-01-04 01:34:01'),
+(190, 4, 0.60, 1, '2025-01-04 01:48:44'),
+(191, 6, 0.30, 1, '2025-01-04 02:03:08');
 
 -- --------------------------------------------------------
 
@@ -551,6 +586,12 @@ ALTER TABLE `detalle_venta`
   ADD KEY `id_venta` (`id_venta`);
 
 --
+-- Indices de la tabla `grupo_cuerpo`
+--
+ALTER TABLE `grupo_cuerpo`
+  ADD PRIMARY KEY (`id_grupo`);
+
+--
 -- Indices de la tabla `laboratorios`
 --
 ALTER TABLE `laboratorios`
@@ -614,19 +655,25 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+
+--
+-- AUTO_INCREMENT de la tabla `grupo_cuerpo`
+--
+ALTER TABLE `grupo_cuerpo`
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -638,7 +685,7 @@ ALTER TABLE `laboratorios`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `presentacion`
@@ -668,7 +715,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 
 --
 -- Restricciones para tablas volcadas
