@@ -57,8 +57,8 @@ if (!empty($_POST)) {
         $vencimiento = $_POST['vencimiento'];
    //   }
 
-    if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio) || empty($grupoC)   || empty($precio) || $precio <  0  || empty($precioPVP) || $precioPVP <  0 || empty($cantidad) || $cantidad <  0 || empty($iva) ||
-    $tipo=="*" || $presentacion=="*" || $laboratorio=="*" || $grupoC=="*") {
+    if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio) || empty($grupoC)   || empty($precio) || $precio <  0  || empty($precioPVP) || $precioPVP <  0 || empty($cantidad) || $cantidad <  0 ||
+    $tipo=="*" || $presentacion=="*" || $laboratorio=="*" ) {
      
                     $alert = mostrarMensaje('Todos los campos son obligatorios','w');
     } else {
@@ -67,11 +67,14 @@ if (!empty($_POST)) {
             $precioFr="0";
         }
 
+        if (empty($iva)) {
+            $iva="0";
+        }
+
         $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
         $result = mysqli_fetch_array($query);
 
-        $cantidad_actual=$result["existencia"];
-        $existencia_fr_actual=$result["existencia_fr"];
+        
 
         
         if (empty($id)) {
@@ -82,24 +85,26 @@ if (!empty($_POST)) {
                     $alert = mostrarMensaje('El codigo ya existe','w');
             } else {
                
+                            if($presentacion == '4' ){ 
+                                                   
+                                                        $existencia_fr= $fraccion*$cantidad;
+                                                      
 
-                           /* if ($existencia_fr_actual > 0){ 
-                            
-                                        $existencia_fr=$existencia_fr_actual;
-                                       
- 
+                                        $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+
+                                        if ($precioFr==0){
+
+                                            $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                                        }
                             }else{
-                                $existencia_fr= $fraccion*$cantidad;
-                            }  */
+                                $existencia_fr="0";
+                                $fraccion="0";
+                                $precioFr="0";
+                                $precioCalcFr="0";
 
-                 $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                            }
 
-                 if ($precioFr==0){
-
-                    $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
-                 }
-
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, $grupoC , '$vencimiento','$iva','$infor')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento','$iva','$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -112,6 +117,10 @@ if (!empty($_POST)) {
 
             }
         } else {
+            $cantidad_actual=$result["existencia"];
+            $existencia_fr_actual=$result["existencia_fr"];
+
+            if($presentacion == '4' ){ 
 
 
                             if ($existencia_fr_actual > 0){ 
@@ -143,16 +152,25 @@ if (!empty($_POST)) {
                             } 
 
 
-            $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                            $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
 
-            if ($precioFr==0){
+                            if ($precioFr==0){
 
-                $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
-             }
+                                $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                            }
+
+
+                            
+                        }else{
+                                $existencia_fr="0";
+                                $fraccion="0";
+                                $precioFr="0";
+                                $precioCalcFr="0";
+                        }
 
 
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo=$grupoC ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -350,7 +368,7 @@ if (!empty($_POST)) {
                             <div class="row">   
                                 <div class="col-md-6">
                                     <input type="submit" value="Grabar" class="btn btn-primary" id="btnAccion">
-                                    <input type="button" value="Ingresar Nuevo" onclick="limpiar()" class="btn btn-success" id="btnNuevo">
+                                    <input type="button" value="Limpiar" onclick="limpiar()" class="btn btn-success" id="btnNuevo">
                                 </div>
                             </div>
 
