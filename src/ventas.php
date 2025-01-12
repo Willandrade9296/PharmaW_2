@@ -31,34 +31,49 @@ if (empty($existe) && $id_user != 1) {
             <div class="card-body">
                 <form method="post">
                     <div class="row">
-                        <div class="col-md-3">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <input type="hidden" id="idcliente" value="0" name="idcliente" required>
-                                <label class=" text-dark font-weight-bold">Nombre del Cliente</label>
-                                <input type="text" name="nom_cliente" id="nom_cliente" class="form-control" placeholder="Ingrese nombre del cliente" required>
+                                <label class=" text-dark font-weight-bold">Cédula o Nombre del Cliente</label>
+                                <input type="text" name="nom_cliente" id="nom_cliente" class="form-control" placeholder="Ingrese cédula o nombre del cliente" required>
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+
                             <div class="form-group">
                                 
                                 <label class=" text-dark font-weight-bold">Cédula</label>
                                 <input type="text" name="idcedula" id="idcedula" class="form-control" disabled required>
                             </div>
                         </div>
-
-                        <div class="col-md-3">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                             <div class="form-group">
                                 <label class=" text-dark font-weight-bold">Teléfono del Cliente</label>
                                 <input type="number" name="tel_cliente" id="tel_cliente" class="form-control" disabled required>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class=" text-dark font-weight-bold">Dirección del Cliente</label>
-                                <input type="text" name="dir_cliente" id="dir_cliente" class="form-control" disabled required>
-                            </div>
                         </div>
+                       </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                       <div class="row">
+                       
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class=" text-dark font-weight-bold">Dirección del Cliente</label>
+                                            <input type="text" name="dir_cliente" id="dir_cliente" class="form-control" disabled required>
+                                        </div>
+                                   </div>
+                                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class=" text-dark font-weight-bold">E-mail del Cliente</label>
+                                            <input type="text" name="mail_cliente" id="mail_cliente" class="form-control" disabled required>
+                                        </div>
+                                   </div>
+                        </div>
+                    </div>
                     </div>
                 </form>
             </div>

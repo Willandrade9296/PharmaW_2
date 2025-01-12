@@ -8,13 +8,15 @@ session_start();
 if (isset($_GET['q'])) {
     $datos = array();
     $nombre = $_GET['q'];
-    $cliente = mysqli_query($conexion, "SELECT * FROM cliente WHERE nombre LIKE '%$nombre%'");
+    $cliente = mysqli_query($conexion, "SELECT * FROM cliente WHERE cedula LIKE '%".$nombre."%'  OR   nombre LIKE '%$nombre%'");
     while ($row = mysqli_fetch_assoc($cliente)) {
         $data['id'] = $row['idcliente'];
         $data['idcedula'] = $row['cedula'];
-        $data['label'] = $row['nombre'];
+        $data['label'] = $row['cedula'].' - '.$row['nombre'];
+        $data['value'] = $row['nombre'];
         $data['direccion'] = $row['direccion'];
         $data['telefono'] = $row['telefono'];
+        $data['email'] = $row['email'];
         array_push($datos, $data);
     }
     echo json_encode($datos);

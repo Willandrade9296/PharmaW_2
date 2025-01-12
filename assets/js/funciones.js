@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     })
     $("#nom_cliente").autocomplete({
-        minLength: 3,
+        minLength: 2,
         source: function (request, response) {
             $.ajax({
                 url: "ajax.php",
@@ -43,10 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         select: function (event, ui) {
             $("#idcliente").val(ui.item.id);
-            $("#nom_cliente").val(ui.item.label);
+            $("#nom_cliente").val(ui.item.value);
             $("#idcedula").val(ui.item.idcedula);
             $("#tel_cliente").val(ui.item.telefono);
             $("#dir_cliente").val(ui.item.direccion);
+            $("#mail_cliente").val(ui.item.email);
         }
     })
     $("#producto").autocomplete({
@@ -745,6 +746,7 @@ function editarCliente(id) {
             $('#nombre').val(datos.nombre);
             $('#telefono').val(datos.telefono);
             $('#direccion').val(datos.direccion);
+            $('#email').val(datos.email);
             $('#id').val(datos.idcliente);
             $('#btnAccion').val('Modificar');
         },
