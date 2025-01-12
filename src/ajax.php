@@ -80,7 +80,7 @@ if (isset($_GET['q'])) {
 
     if (comprobar_cliente($conexion,$id_cliente))
     { 
-                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user GROUP BY id_usuario,total");
+                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user GROUP BY id_usuario, total");
                     $result = mysqli_fetch_assoc($consulta);
                     $total = $result['total_pagar'];
                     $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total', $id_user)");
@@ -95,6 +95,7 @@ if (isset($_GET['q'])) {
                             $cantidad = $row['cantidad'];
                             $desc = $row['descuento'];
                             $precio = $row['precio_costo'];
+                            $iva= $row['iva'];
                             $precioPVP = $row['precio_venta'];
                             $total = $row['total'];
                          /*   $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId, $cantidad,'$precio', '$precioPVP', '$desc', '$total')");  */
@@ -123,7 +124,7 @@ if (isset($_GET['q'])) {
                                                                                   $obtener_unidades= (int)( ($existencia_fraccion - $cantidad)  /  $fraccion_por_unidad );
 
                                                                             
-                                                                                  $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                                                                                  $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio,iva, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio','$iva', '$precioPVP', '$desc', '$total')");
                                                                             
 
                                                                             
@@ -140,7 +141,7 @@ if (isset($_GET['q'])) {
                                                                 } else{  // Se menora en caso que se venda por unidades
                                                                         
                                                                                                 
-                                                                              $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                                                                              $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad,precio,iva, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'F', $cantidad,'$precio','$iva', '$precioPVP', '$desc', '$total')");
                                                                 
                                                                                 $stockTotalFr= $stockNuevo['existencia_fr'] - $cantidad;
 
@@ -153,7 +154,7 @@ if (isset($_GET['q'])) {
 
                                                         }else {   // Se menora en caso que se venda por unidades por caja
 
-                                                                $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad ,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'U', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                                                                $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad ,precio,iva, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'U', $cantidad,'$precio','$iva', '$precioPVP', '$desc', '$total')");
                               
                                                                 $stockTotal = $stockNuevo['existencia'] - $cantidad;
                                                                 
@@ -175,7 +176,7 @@ if (isset($_GET['q'])) {
                             }else{    // Se menora en caso que se venda por unidades
                               
 
-                                $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad ,precio, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'U', $cantidad,'$precio', '$precioPVP', '$desc', '$total')");
+                                $insertarDet = mysqli_query($conexion, "INSERT INTO detalle_venta (id_producto, id_venta,tipo_prod, cantidad ,precio,iva, precioPVP, descuento, total) VALUES ($id_producto, $ultimoId,'U', $cantidad,'$precio','$iva', '$precioPVP', '$desc', '$total')");
                               
                                 $stockTotal = $stockNuevo['existencia'] - $cantidad;
                                 
