@@ -25,6 +25,8 @@ if (!empty($_POST)) {
         $direccion = $_POST['direccion'];
         $email= $_POST['email'];
         $result = 0;
+
+        if ( strlen($cedula) == 10 ){ 
         if (empty($id)) {
             $query = mysqli_query($conexion, "SELECT * FROM cliente WHERE cedula='$cedula' ");
             $result = mysqli_fetch_array($query);
@@ -62,6 +64,12 @@ if (!empty($_POST)) {
                     $alert = mostrarMensaje('Error al modificar cliente','e');
             }
         }
+        }else{
+            $alert = mostrarMensaje('Cédula ingresada debe tener 10 dígitos','w');
+        }
+
+
+
     }
     mysqli_close($conexion);
 }
@@ -83,7 +91,7 @@ if (!empty($_POST)) {
                         <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <label for="cedula" class="text-dark font-weight-bold">Cédula</label>
-                                    <input type="number" placeholder="Ingrese Cédula" name="cedula" id="cedula" class="form-control" required>
+                                    <input type="text" placeholder="Ingrese Cédula" name="cedula" id="cedula" size="10" pattern="[0-9]{10}" class="form-control" title="Cédula debe tener 10 dígitos" required>
                                     <input type="hidden" name="id" id="id">
                                 </div>
                         </div>
