@@ -4,6 +4,7 @@ setTimeout(function() {
 },3000);
 
 document.addEventListener("DOMContentLoaded", function () {
+
     $('#tbl').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
@@ -12,6 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
             [0, "desc"]
         ]
     });
+
+
+    $('#tbl2').DataTable({
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+        },
+        "order": [
+            [0, "desc"]
+        ]
+    });
+
+
+
     $(".confirmar").submit(function (e) {
         e.preventDefault();
         Swal.fire({
