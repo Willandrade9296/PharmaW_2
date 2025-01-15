@@ -1043,6 +1043,50 @@ function editarLab(id) {
 
 
 
+          // DETALLE UTILIDAD
+
+        function formatoFecha(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate()+1;
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var date = day + "/" + month + "/" + year;
+        
+            return date;
+        };
+
+
+          $('#btnConsultaU').click(function (e) {
+            e.preventDefault();
+            var tipoFecha= $('#tipoFecha').val();
+
+                    if(tipoFecha === 'D'){ 
+                         
+                        fecha_u = document.getElementById("fecha_utilidad").value;
+
+                            if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
+                                            $('#panelDia').css('display','none');  
+
+                            }else{
+
+                                             $('#panelDia').css('display','initial');
+                                        
+                                            $('#fecha_sel').text(formatoFecha(fecha_u));
+                               
+
+                            }
+                    }else{
+
+                        $('#panelDia').css('display','none');
+                    }
+
+          });
 
 
      

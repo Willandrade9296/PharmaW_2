@@ -7,7 +7,7 @@ include_once "includes/header.php"; ?>
                 No tienes Permisos
             </div>
             <div class="card-body text-center">
-                El adminsitrador no te asigno permiso a este módulo
+                El adminsitrador no te asigno permiso a esta opción
                 <br>
                 <a class="btn btn-danger" href="./">Atras</a>
             </div>
