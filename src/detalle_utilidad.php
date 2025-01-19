@@ -34,19 +34,42 @@ if (!empty($_SESSION['idUser'])){
                      <div class="card-body">
                      <form action="" method="post" autocomplete="off" id="formDU">
                                 <div class="row">
-                                   <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                   <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="panelDiaUtilidad">
                                         <div class="form-group">
-                                            <label for="fecha_utilidad" class=" text-dark font-weight-bold">Fecha</label>
+                                            <label for="fecha_utilidad" class=" text-dark font-weight-bold">Fecha:</label>
                                             <input id="fecha_utilidad" class="form-control" type="date" name="fecha_utilidad" >
                                         </div>
                                      </div>
+
+
+                                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" id="panelMesUtilidad" style="display:none">
+                                        <div class="form-group">
+                                            <label for="mes_utilidad" class=" text-dark font-weight-bold">Mes:</label>
+                                            <input id="mes_utilidad" class="form-control" type="number" min="1" max="12" name="mes_utilidad" value="<?php echo date("m") ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mes_a_utilidad" class=" text-dark font-weight-bold">Año:</label>
+                                            <input id="mes_a_utilidad" class="form-control" type="number"  min="2010" max="<?php echo date("Y") ?>" value="<?php echo date("Y") ?>" name="mes_a_utilidad" >
+                                        </div>
+                                     </div>
+
+                                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" id="panelAnoUtilidad" style="display:none">
+                                        <div class="form-group">
+                                            <label for="anio_utilidad" class=" text-dark font-weight-bold">Año:</label>
+                                            <input id="anio_utilidad" class="form-control" type="number" min="2010" max="<?php echo date("Y") ?>" value="<?php echo date("Y") ?>" >
+                                        </div>
+                                     </div>
+
+
+
+
                                      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                        <div class="form-group">
+                                        <div class="form-group" >
                                         <label for="tipoFecha" class="text-dark font-weight-bold" >Tipo fecha</label>
-                                                <select id="tipoFecha" class="form-control" name="tipoFecha" required>
+                                                <select id="tipoFecha" class="form-control" name="tipoFecha" onchange="cambiarTipoFechaUti(event)" required>
                                                          <option value="D">Diario</option>
                                                          <option value="M">Mensual</option>
                                                          <option value="A">Anual</option>

@@ -1087,6 +1087,63 @@ function editarLab(id) {
         };
 
 
+
+
+
+        /* SELECCIONANDO TIPO DE FECHA CONSULTA EN DETALLE DE UTILIDAD */
+
+        function cambiarTipoFechaUti(e){
+            e.preventDefault();
+
+            
+            if ($("#tipoFecha").val() === "D" ){ 
+            $("#panelDiaUtilidad").css('display','initial'); 
+            $("#panelMesUtilidad").css('display','none'); 
+            $("#panelAnoUtilidad").css('display','none');
+            $('#tblUtilidad').DataTable().destroy();
+            document.querySelector("#detalleUtilidad").innerHTML = '';
+
+
+            }else if($("#tipoFecha").val() === "M"){ 
+            $("#panelDiaUtilidad").css('display','none'); 
+            $("#panelMesUtilidad").css('display','initial'); 
+            $("#panelAnoUtilidad").css('display','none');
+            $('#tblUtilidad').DataTable().destroy();
+            document.querySelector("#detalleUtilidad").innerHTML = '';
+
+
+            
+
+            }
+            else if($("#tipoFecha").val() === "A"){ 
+                $("#panelDiaUtilidad").css('display','none'); 
+                $("#panelMesUtilidad").css('display','none'); 
+                $("#panelAnoUtilidad").css('display','initial'); 
+                $('#tblUtilidad').DataTable().destroy();
+                document.querySelector("#detalleUtilidad").innerHTML = '';
+    
+    
+              
+    
+                }else{
+            $("#panelDiaUtilidad").css('display','none'); 
+            $("#panelMesUtilidad").css('display','none'); 
+            $("#panelAnoUtilidad").css('display','none'); 
+            $('#tblUtilidad').DataTable().destroy();
+            document.querySelector("#detalleUtilidad").innerHTML = '';
+
+
+
+
+            }
+
+
+
+        }
+
+
+
+        /* CONSULTA DE DETALLE DE UTILIDAD */
           $('#btnConsultaU').onclick(function (e) {
             e.preventDefault();
             var tipoFecha= $('#tipoFecha').val();
@@ -1106,9 +1163,17 @@ function editarLab(id) {
                                
 
                             }
+
+
+                    }else if(tipoFecha === 'M'){ 
+                       
+
+
                     }else{
 
                         $('#panelDia').css('display','none');
+                        $('#tblUtilidad').DataTable().destroy();
+                        document.querySelector("#detalleUtilidad").innerHTML = '';
                     }
 
           });
@@ -1143,20 +1208,18 @@ function editarLab(id) {
                 
                 dom: 'lBfrtip',
                
-                   
-                    
                     buttons: [
                         {
-                        extend:'print',
-                        text:"Imprimir",
-                        title:'Detalle utilidad '+fecha,
-                        titleAttr:'Imprimir Detalle'
+                            extend:'print',
+                            text:"Imprimir",
+                            title:'Detalle utilidad '+fecha,
+                            titleAttr:'Imprimir Detalle'
                         }, 
                         {
-                        extend:'excelHtml5',
-                        text:"Excel",
-                        title:'Detalle utilidad '+fecha,
-                        titleAttr:'Exportar a Excel'
+                            extend:'excelHtml5',
+                            text:"Excel",
+                            title:'Detalle utilidad '+fecha,
+                            titleAttr:'Exportar a Excel'
                         },
                         {
                             extend:'pdfHtml5',
