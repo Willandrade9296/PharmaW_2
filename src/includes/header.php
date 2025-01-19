@@ -28,18 +28,40 @@ $id_user = $_SESSION['idUser'];
     <title>Pharma W</title>
     <link href="../assets/css/material-dashboard.css" rel="stylesheet" />
     
+
     
-    <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="../assets/js/jquery-ui/jquery-ui.min.css">
     <link href="../assets/css/style.css" rel="stylesheet" />
 
    
-    <script src="../assets/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/js/dataTables.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
    
+
+    
+
+
+
+   
+    <script src="../assets/js/all.min.js" crossorigin="anonymous"></script>
+    
+    
+    
+   
+
+    <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link href="../assets/css/buttons.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />
+    
+    
+
+    
+    
+    
+  
+    
+   
+  
+
+
+
 </head>
 
 

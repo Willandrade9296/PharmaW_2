@@ -46,15 +46,23 @@
 <script src="../assets/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="../assets/js/popper.min.js" crossorigin="anonymous"></script>
 <script src="../assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
 <script src="../assets/js/material-dashboard.js" type="text/javascript"></script>
 <script src="../assets/js/bootstrap-notify.js"></script>
 <script src="../assets/js/arrive.min.js"></script>
 <script src="../assets/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="../assets/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="../assets/js/dataTables.min.js" crossorigin="anonymous"></script>
+<script src="../assets/js/dataTables.bootstrap5.min.js" crossorigin="anonymous"></script>
 <script src="../assets/js/sweetalert2.all.min.js"></script>
 <script src="../assets/js/jquery-ui/jquery-ui.min.js"></script>
 <script src="../assets/js/chart.min.js"></script>
 <script src="../assets/js/funciones.js"></script>
+
+<script src="../assets/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/jszip.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/pdfmake.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/vfs_fonts.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/buttons.html5.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

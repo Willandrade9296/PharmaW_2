@@ -27,6 +27,10 @@ const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
         ]
     });
 
+
+    $('#tblUtilidad').DataTable().destroy();
+            
+           
     
   
 
@@ -1133,16 +1137,18 @@ function editarLab(id) {
            var table = $('#tblUtilidad').DataTable({
               
 
-                language: {
+                "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
                 },
-
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'print', 'excel', 'pdf'
-                ],
-
-               
+                "responsive": "true",
+                "dom":"Bfrtilp",
+                "buttons": [
+                            'pageLength',
+                            'copyHtml5',
+                            'excelHtml5',
+                            'csvHtml5',
+                            'pdfHtml5'
+                  ],
                 "processing": true,
                 "ajax": {
                   "url": 'ajax.php',
@@ -1151,7 +1157,7 @@ function editarLab(id) {
                     fechaUtilidad: fechaU,
                     fecha: fecha
                   },
-                  dataSrc:""
+                      dataSrc:""
                 },
                 
                 "columns": [{
@@ -1194,10 +1200,10 @@ function editarLab(id) {
                   [2, "asc"]
                 ]
               });
-
-              if(table.data().count() > 0){ 
-                table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
-                }
+              table.buttons().container().appendTo('#buttonHolder');
+             // if(table.data().count() > 0){ 
+             //   table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+              //  }
 
             //  return table.outerHTML;
 

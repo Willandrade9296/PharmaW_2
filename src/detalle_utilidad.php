@@ -6,8 +6,7 @@ include_once "includes/header.php";
 
 if (!empty($_SESSION['idUser'])){  
 
-    $fecha_dia=date("Y-m-d");
-    $tipo_fecha="D";
+  
 
     $id_user = $_SESSION['idUser'];
     $permiso = "detalle_utilidad";
@@ -93,14 +92,15 @@ if (!empty($_SESSION['idUser'])){
                                     </div>
 
                                     <div class="card-body">
+    
                                     <div class="row">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                 <div class="table-responsive">
-                                                                        <table class="table table-sm  table-bordered table-hover" id="tblUtilidad">
+                                                                        <table class="table table-sm  table-bordered table-hover" id="tblUtilidad" style="width:100%">
                                                                         <thead class="thead-light">
                                                                             <tr>
                                                                                 <th><b>ID Venta</b></th>
-                                                                                <th><b>Código Producto</b></th>
+                                                                                <th><b>Cod. Prod.</b></th>
                                                                                 <th><b>Nombre Producto</b></th>
                                                                                 <th><b>Cant.</b></th>
                                                                                 <th><b>Precio C./u</b></th>
@@ -120,11 +120,13 @@ if (!empty($_SESSION['idUser'])){
                                                                         </tbody>
 
                                                                         </table>
+                                                                        
                                                                 </div>
 
                                                         </div>
                                             </div>
-                                    </div>
+                                    
+                            </div>
                      </div>
              </div>
     </div>
