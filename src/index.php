@@ -89,7 +89,7 @@ include_once "includes/header.php";
                             <th>Tipo</th>
                             <th>Presentacion</th>
                             <th>Fecha Venc.</th>
-                            <th></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -111,11 +111,7 @@ include_once "includes/header.php";
                                     <td><?php echo $data['nombre']; ?></td>
                                     
                                     <td><?php echo $data['vencimiento']; ?></td>
-                                    <td>
-                                        <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
-                                            <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                        </form>
-                                    </td>
+                                   
                                 </tr>
                         <?php }
                         } ?>
@@ -141,7 +137,7 @@ include_once "includes/header.php";
                             <th>Tipo</th>
                             <th>Presentacion</th>
                             <th>Stock</th>
-                            <th></th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -160,11 +156,7 @@ include_once "includes/header.php";
                                     <td><?php echo $data['nombre']; ?></td>
                                     
                                     <td><?php echo $data['existencia']; ?></td>
-                                    <td>
-                                        <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
-                                            <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                        </form>
-                                    </td>
+                                    
                                 </tr>
                         <?php }
                         } ?>
