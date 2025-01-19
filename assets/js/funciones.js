@@ -1149,7 +1149,8 @@ function editarLab(id) {
             var tipoFecha= $('#tipoFecha').val();
 
                     if(tipoFecha === 'D'){ 
-                         
+                        $('#tblUtilidad').DataTable().destroy();
+                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
                         fecha_u = $("#fecha_utilidad").val();
 
                             if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
@@ -1166,14 +1167,20 @@ function editarLab(id) {
 
 
                     }else if(tipoFecha === 'M'){ 
-                       
+                        $('#tblUtilidad').DataTable().destroy();
+                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
+
+
+
+
+
 
 
                     }else{
 
                         $('#panelDia').css('display','none');
-                        $('#tblUtilidad').DataTable().destroy();
-                        document.querySelector("#detalleUtilidad").innerHTML = '';
+                         $('#tblUtilidad').DataTable().destroy();
+                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
                     }
 
           });
@@ -1189,6 +1196,7 @@ function editarLab(id) {
             e.preventDefault();
             let html = '';
             let fechaU = 'fechaUtilidad';
+            let mesU ='mesUtilidad';
             var tipoFecha= $('#tipoFecha').val();
             let fecha=  formatoFecha($('#fecha_utilidad').val());
 
@@ -1291,11 +1299,112 @@ function editarLab(id) {
                 ]
               });
               
-             // if(table.data().count() > 0){ 
-             //   table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
-              //  }
+            }else if (tipoFecha === 'M'){ 
+                $('#tblUtilidad').DataTable().destroy();
+                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
 
-            //  return table.outerHTML;
+
+                        
+                var mes=$('#mes_utilidad').val();
+                var anio=$('#mes_a_utilidad').val();
+
+                var table = $('#tblUtilidad').DataTable({
+              
+
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                    },
+                    
+                    dom: 'lBfrtip',
+                   
+                        buttons: [
+                            {
+                                extend:'print',
+                                text:"Imprimir",
+                                title:'Detalle utilidad '+fecha,
+                                titleAttr:'Imprimir Detalle'
+                            }, 
+                            {
+                                extend:'excelHtml5',
+                                text:"Excel",
+                                title:'Detalle utilidad '+fecha,
+                                titleAttr:'Exportar a Excel'
+                            },
+                            {
+                                extend:'pdfHtml5',
+                                text:"PDF",
+                                title:'Detalle utilidad '+fecha,
+                                titleAttr:'Exportar en PDF'
+                                }
+                            ]
+                          
+                        ,
+                        initComplete: function () {
+                            var btns = $('.dt-button');
+                            btns.addClass('btn btn-success btn-sm');
+                            btns.removeClass('dt-button');
+    
+                        },
+    
+                    "processing": true,
+    
+    
+                    "ajax": {
+                      "url": 'ajax.php',
+                      
+                      "data": {
+                        mesUtilidad: mesU,
+                        mes: mes,
+                        anio:anio
+                      },
+                          dataSrc:""
+                    },
+                    
+                    "columns": [{
+                        "data": "id_venta"
+                      },
+                      {
+                        "data": "codproducto"
+                      },
+                      {
+                        "data": "descripcion"
+                      },
+                      {
+                        "data": "cantidad"
+                      },
+                      {
+                        "data": "precio"
+                      },
+                      {
+                        "data": "precioPVP"
+                      },
+                      {
+                        "data": "iva"
+                      },
+                      {
+                        "data": "totalCosto"
+                      },
+                      {
+                        "data": "totalPVP"
+                      },
+                      {
+                        "data": "utilidad"
+                      },
+                      {
+                        "data": "fecha_venta"
+                      }
+                    ],
+                    
+                    
+                    "order": [
+                      [1, "asc"]
+                    ]
+                  });
+                  
+
+
+
+
 
                  }else{
 

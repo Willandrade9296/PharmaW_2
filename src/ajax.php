@@ -367,6 +367,35 @@ if (isset($_POST['regDetalle'])) {
     
 
     
+}else if(isset($_GET['mesUtilidad'])){
+
+
+    $mes = $_GET['mes'];
+    $anio_m = $_GET['anio'];
+
+
+    $id = $_SESSION['idUser'];
+    $datos = array();
+    $detalle = mysqli_query($conexion, "SELECT * FROM viutilidad where MONTH(CAST(fecha_venta AS DATE)) ='$mes' AND  YEAR(CAST(fecha_venta AS DATE)) ='$anio_m'  ");
+    while ($row = mysqli_fetch_assoc($detalle)) {
+        $data['id_venta'] = $row['id_venta'];
+        $data['codproducto'] = $row['codproducto'];
+        $data['descripcion'] = $row['descripcion'];
+        $data['cantidad'] = $row['cantidad'];
+        $data['precio'] = $row['precio'];
+        $data['precioPVP'] = $row['precioPVP'];
+        $data['iva'] = $row['iva'];
+        $data['totalCosto'] = $row['totalCosto'];
+        $data['totalPVP'] = $row['totalPVP'];
+        $data['utilidad'] = $row['utilidad'];
+        $data['fecha_venta'] = $row['fecha_venta'];
+
+        
+        array_push($datos, $data);
+    }
+    echo json_encode($datos);
+    die();
+
 }
 
 
