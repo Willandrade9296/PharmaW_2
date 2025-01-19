@@ -6,6 +6,8 @@ include_once "includes/header.php";
 
 if (!empty($_SESSION['idUser'])){  
 
+    $fecha_dia=date("Y-m-d");
+    $tipo_fecha="D";
 
     $id_user = $_SESSION['idUser'];
     $permiso = "detalle_utilidad";
@@ -19,12 +21,9 @@ if (!empty($_SESSION['idUser'])){
     }else{ 
 
 
-        if (!empty($_POST)) {
-            $alert = "";
-            $fecha_dia=$_POST['fecha_utilidad'];
-           
-            
-        }
+        
+
+       
 ?>
 
 <div class="row">
@@ -61,7 +60,7 @@ if (!empty($_SESSION['idUser'])){
                                    
                                 <div class="row">
                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                      <input type="submit" value="Consultar" class="btn btn-primary" id="btnConsultaU" />
+                                      <button  class="btn btn-primary" id="btnConsultaU" onclick="listar_utilidad(event)" >Consultar</button>
                                     </div>
                             </div>
                          </form>
@@ -76,18 +75,55 @@ if (!empty($_SESSION['idUser'])){
             <div class="card">
                     
                                   <div id="panelDia" style="display:none;">
-                                        <?php
-                                         
-                                        ?>
+                                        
                                         <div class="card-body">
+                                            <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                     <label  class="text-dark " style="font-size:23px; font-weight:bold; margin-right:20px;">Fecha Seleccionada: </label>
                                                     <label  class="text-dark font-weight-bold" id="fecha_sel" name="fecha_sel" style="font-size:23px;"></label>
                                                     </div>
+                                             </div>
+
+
+                                           
                                         </div>
-                                        <?php
                                           
-                                        ?>
+
+
+                                    </div>
+
+                                    <div class="card-body">
+                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                <div class="table-responsive">
+                                                                        <table class="table table-sm  table-bordered table-hover" id="tblUtilidad">
+                                                                        <thead class="thead-light">
+                                                                            <tr>
+                                                                                <th><b>ID Venta</b></th>
+                                                                                <th><b>Código Producto</b></th>
+                                                                                <th><b>Nombre Producto</b></th>
+                                                                                <th><b>Cant.</b></th>
+                                                                                <th><b>Precio C./u</b></th>
+                                                                                <th><b>Precio PVP/u</b></th>
+                                                                                <th><b>Precio IVA</b></th>
+                                                                                <th><b>Total Costo</b></th>
+                                                                                <th><b>Total PVP</b></th>
+                                                                                <th><b>Utilidad</b></th>
+                                                                                <th><b>Fecha Venta</b></th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="detalleUtilidad">
+                                                                        
+                                                                          
+
+                                                                        </tbody>
+
+                                                                        </table>
+                                                                </div>
+
+                                                        </div>
+                                            </div>
                                     </div>
                      </div>
              </div>

@@ -334,6 +334,39 @@ if (isset($_POST['regDetalle'])) {
     echo $msg;
     die();
     
+}else if(isset($_GET['fechaUtilidad'])){
+
+   
+   
+   $date = explode('/', $_GET['fecha']);
+   $new_date = $date[2].'-'.$date[1].'-'.$date[0];
+
+    $id = $_SESSION['idUser'];
+    $datos = array();
+    $detalle = mysqli_query($conexion, "SELECT * FROM viutilidad where CAST(fecha_venta AS DATE) ='$new_date'");
+    while ($row = mysqli_fetch_assoc($detalle)) {
+        $data['id_venta'] = $row['id_venta'];
+        $data['codproducto'] = $row['codproducto'];
+        $data['descripcion'] = $row['descripcion'];
+        $data['cantidad'] = $row['cantidad'];
+        $data['precio'] = $row['precio'];
+        $data['precioPVP'] = $row['precioPVP'];
+        $data['iva'] = $row['iva'];
+        $data['totalCosto'] = $row['totalCosto'];
+        $data['totalPVP'] = $row['totalPVP'];
+        $data['utilidad'] = $row['utilidad'];
+        $data['fecha_venta'] = $row['fecha_venta'];
+
+        
+        array_push($datos, $data);
+    }
+    echo json_encode($datos);
+    die();
+
+
+    
+
+    
 }
 
 

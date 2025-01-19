@@ -37,6 +37,8 @@ $id_user = $_SESSION['idUser'];
     <script src="../assets/js/all.min.js" crossorigin="anonymous"></script>
     <script src="../assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="../assets/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/dataTables.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/dataTables.buttons.min.js"></script>
    
 </head>
 

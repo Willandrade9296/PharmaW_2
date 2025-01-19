@@ -5,9 +5,12 @@ setTimeout(function() {
 
 document.addEventListener("DOMContentLoaded", function () {
 
+
+const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
+
     $('#tbl').DataTable({
         language: {
-            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+            "url": urlDataTable
         },
         "order": [
             [0, "desc"]
@@ -17,15 +20,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $('#tbl2').DataTable({
         language: {
-            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+            "url": urlDataTable
         },
         "order": [
             [0, "desc"]
         ]
     });
 
+    
+  
 
 
+ /*   var tableU = $('#tblUtilidad').DataTable( {
+
+        language: {
+            "url": urlDataTable
+        },
+        "order": [
+            [0, "desc"]
+        ],
+       
+        buttons: [
+            'copy', 'print', 'excel', 'pdf'
+        ]
+    } );
+
+    if(tableU.data().count() > 0){ 
+    tableU.buttons().container().appendTo( $('.col-sm-6:eq(0)', tableU.table().container() ) );
+    }
+*/
     $(".confirmar").submit(function (e) {
         e.preventDefault();
         Swal.fire({
@@ -1045,19 +1068,17 @@ function editarLab(id) {
 
           // DETALLE UTILIDAD
 
+
+          function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+          } 
+
         function formatoFecha(dateObject) {
-            var d = new Date(dateObject);
-            var day = d.getDate()+1;
-            var month = d.getMonth() + 1;
-            var year = d.getFullYear();
-            if (day < 10) {
-                day = "0" + day;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            var date = day + "/" + month + "/" + year;
-        
+            var d = new addDays(dateObject,1).toLocaleDateString();
+          
+            let date=d;
             return date;
         };
 
@@ -1068,7 +1089,7 @@ function editarLab(id) {
 
                     if(tipoFecha === 'D'){ 
                          
-                        fecha_u = document.getElementById("fecha_utilidad").value;
+                        fecha_u = $("#fecha_utilidad").val();
 
                             if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
                                             $('#panelDia').css('display','none');  
@@ -1089,5 +1110,103 @@ function editarLab(id) {
           });
 
 
+
+
+          /* LISTAR UTILIDAD DIARIA */
+
+          function listar_utilidad(e) {
+
+            
+            e.preventDefault();
+            let html = '';
+            let fechaU = 'fechaUtilidad';
+            var tipoFecha= $('#tipoFecha').val();
+            let fecha=  formatoFecha($('#fecha_utilidad').val());
+
+            //alert(fecha);
+            if(tipoFecha === 'D'){ 
+             
+                //Reiniciar Datatable
+            $('#tblUtilidad').DataTable().destroy();
+            
+           
+           var table = $('#tblUtilidad').DataTable({
+              
+
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                },
+
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'print', 'excel', 'pdf'
+                ],
+
+               
+                "processing": true,
+                "ajax": {
+                  "url": 'ajax.php',
+                  
+                  "data": {
+                    fechaUtilidad: fechaU,
+                    fecha: fecha
+                  },
+                  dataSrc:""
+                },
+                
+                "columns": [{
+                    "data": "id_venta"
+                  },
+                  {
+                    "data": "codproducto"
+                  },
+                  {
+                    "data": "descripcion"
+                  },
+                  {
+                    "data": "cantidad"
+                  },
+                  {
+                    "data": "precio"
+                  },
+                  {
+                    "data": "precioPVP"
+                  },
+                  {
+                    "data": "iva"
+                  },
+                  {
+                    "data": "totalCosto"
+                  },
+                  {
+                    "data": "totalPVP"
+                  },
+                  {
+                    "data": "utilidad"
+                  },
+                  {
+                    "data": "fecha_venta"
+                  }
+                ],
+                
+                
+                "order": [
+                  [2, "asc"]
+                ]
+              });
+
+              if(table.data().count() > 0){ 
+                table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+                }
+
+            //  return table.outerHTML;
+
+                 }else{
+
+
+                    document.querySelector("#detalleUtilidad").innerHTML = '';
+
+                 }
+        }
      
      
