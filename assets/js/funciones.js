@@ -1140,16 +1140,43 @@ function editarLab(id) {
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
                 },
-                "responsive": "true",
-                "dom":"Bfrtilp",
-                "buttons": [
-                            'pageLength',
-                            'copyHtml5',
-                            'excelHtml5',
-                            'csvHtml5',
-                            'pdfHtml5'
-                  ],
+                
+                dom: 'lBfrtip',
+               
+                   
+                    
+                    buttons: [
+                        {
+                        extend:'print',
+                        text:"Imprimir",
+                        title:'Detalle utilidad '+fecha,
+                        titleAttr:'Imprimir Detalle'
+                        }, 
+                        {
+                        extend:'excelHtml5',
+                        text:"Excel",
+                        title:'Detalle utilidad '+fecha,
+                        titleAttr:'Exportar a Excel'
+                        },
+                        {
+                            extend:'pdfHtml5',
+                            text:"PDF",
+                            title:'Detalle utilidad '+fecha,
+                            titleAttr:'Exportar en PDF'
+                            }
+                        ]
+                      
+                    ,
+                    initComplete: function () {
+                        var btns = $('.dt-button');
+                        btns.addClass('btn btn-success btn-sm');
+                        btns.removeClass('dt-button');
+
+                    },
+
                 "processing": true,
+
+
                 "ajax": {
                   "url": 'ajax.php',
                   
@@ -1197,7 +1224,7 @@ function editarLab(id) {
                 
                 
                 "order": [
-                  [2, "asc"]
+                  [1, "asc"]
                 ]
               });
               table.buttons().container().appendTo('#buttonHolder');

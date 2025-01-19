@@ -63,6 +63,7 @@
     <script src="../assets/js/pdfmake.min.js" crossorigin="anonymous"></script>
     <script src="../assets/js/vfs_fonts.js" crossorigin="anonymous"></script>
     <script src="../assets/js/buttons.html5.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/js/buttons.print.min.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
