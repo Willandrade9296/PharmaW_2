@@ -1087,7 +1087,7 @@ function editarLab(id) {
         };
 
 
-          $('#btnConsultaU').click(function (e) {
+          $('#btnConsultaU').onclick(function (e) {
             e.preventDefault();
             var tipoFecha= $('#tipoFecha').val();
 
@@ -1116,7 +1116,7 @@ function editarLab(id) {
 
 
 
-          /* LISTAR UTILIDAD DIARIA */
+          /* LISTAR UTILIDAD  */
 
           function listar_utilidad(e) {
 
@@ -1227,7 +1227,7 @@ function editarLab(id) {
                   [1, "asc"]
                 ]
               });
-              table.buttons().container().appendTo('#buttonHolder');
+              
              // if(table.data().count() > 0){ 
              //   table.buttons().container().appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
               //  }
@@ -1236,7 +1236,7 @@ function editarLab(id) {
 
                  }else{
 
-
+                    $('#tblUtilidad').DataTable().destroy();
                     document.querySelector("#detalleUtilidad").innerHTML = '';
 
                  }

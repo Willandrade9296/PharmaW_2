@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2025 a las 00:44:58
+-- Tiempo de generación: 19-01-2025 a las 22:51:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -88,23 +88,24 @@ INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
 (59, 3, 9),
 (60, 5, 9),
 (61, 6, 9),
-(72, 1, 1),
-(73, 2, 1),
-(74, 3, 1),
-(75, 4, 1),
-(76, 5, 1),
-(77, 6, 1),
-(78, 7, 1),
-(79, 8, 1),
-(80, 9, 1),
-(81, 10, 1),
 (89, 3, 12),
 (90, 4, 12),
 (91, 5, 12),
 (92, 6, 12),
 (93, 7, 12),
 (94, 8, 12),
-(95, 9, 12);
+(95, 9, 12),
+(118, 1, 1),
+(119, 2, 1),
+(120, 3, 1),
+(121, 4, 1),
+(122, 5, 1),
+(123, 6, 1),
+(124, 7, 1),
+(125, 8, 1),
+(126, 9, 1),
+(127, 10, 1),
+(128, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -307,7 +308,8 @@ INSERT INTO `permisos` (`id`, `nombre`, `nombre_op`, `archivo`, `logo_opcion`) V
 (7, 'tipos', 'Tipos', 'tipo', 'fas fa-tags mr-2 fa-2x'),
 (8, 'presentacion', 'Presentaciones', 'presentacion', 'fas fa-list mr-2 fa-2x'),
 (9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x'),
-(10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x');
+(10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x'),
+(11, 'Detalle Utilidad', 'Detalle Utilidad', 'detalle_utilidad', 'fas fa-dollar-sign mr-2 fa-2x');
 
 -- --------------------------------------------------------
 
@@ -380,8 +382,7 @@ INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `preci
 (17, '7501033959790', 'Creo 10000', 10.00, 12.60, 0.63, 0.63, 2, 30, 20, 20, 4, 10, '* ', '2025-12-01', 0.00, 'Pancreatina. Enzimas pancreaticas que facilitan la digestión y faborecen la absorción de alimentos. \r\nTomar 15 minutos antes, durante o inmediatamwnte después de las comidas.'),
 (18, '7861002400174', 'Topident', 3.00, 5.44, 0.00, 0.00, 1, 0, 0, 5, 7, 22, '* ', '2023-08-01', 0.00, 'Antinflamatorio. anestesico local. antiséptico. Aplicar en ensias.'),
 (19, '7862103554018', 'Bismutol', 7.00, 8.50, 0.00, 0.00, 1, 0, 0, 15, 9, 17, '*', '2027-08-01', 0.00, 'Antidiarreico. desinflamatorio intestinal. Antiacido. a\r\nGases, NAUSEA'),
-(20, '7500435131803', 'VapoRub', 1.00, 2.00, 0.00, 0.00, 1, 0, 0, 21, 7, 5, '* ', '2024-08-01', 0.00, 'Alivia la congestión nasal de los resfriados. Dolor y molestias musculares.'),
-(21, '34343432ew', 'raton', 12.00, 13.80, 0.00, 0.00, 12, 0, 0, 9, 12, 10, '*', '2050-01-01', 0.15, '');
+(20, '7500435131803', 'VapoRub', 1.00, 2.00, 0.00, 0.00, 1, 0, 0, 21, 7, 5, '* ', '2024-08-01', 0.00, 'Alivia la congestión nasal de los resfriados. Dolor y molestias musculares.');
 
 -- --------------------------------------------------------
 
@@ -592,11 +593,40 @@ CREATE TABLE `vipermisos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `viutilidad`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `viutilidad` (
+`id_venta` int(11)
+,`codproducto` int(11)
+,`descripcion` varchar(200)
+,`cantidad` int(11)
+,`precio` decimal(10,2)
+,`precioPVP` decimal(10,2)
+,`iva` decimal(10,2)
+,`totalCosto` decimal(20,2)
+,`totalPVP` decimal(20,2)
+,`utilidad` decimal(21,2)
+,`fecha_venta` timestamp
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura para la vista `vipermisos`
 --
 DROP TABLE IF EXISTS `vipermisos`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vipermisos`  AS SELECT `p`.`id` AS `id`, `p`.`nombre` AS `nombre`, `p`.`nombre_op` AS `nombre_op`, `p`.`archivo` AS `archivo`, `p`.`logo_opcion` AS `logo_opcion`, `d`.`id` AS `id_detalle_per`, `d`.`id_permiso` AS `id_permiso`, `d`.`id_usuario` AS `id_usuario` FROM (`permisos` `p` join `detalle_permisos` `d` on(`p`.`id` = `d`.`id_permiso`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `viutilidad`
+--
+DROP TABLE IF EXISTS `viutilidad`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`cantidad`* `d`.`precioPVP` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta` FROM ((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) ;
 
 --
 -- Índices para tablas volcadas
@@ -708,13 +738,13 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
@@ -738,7 +768,7 @@ ALTER TABLE `laboratorios`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `presentacion`
