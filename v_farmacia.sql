@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2025 a las 22:51:11
+-- Tiempo de generación: 22-01-2025 a las 03:35:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -95,17 +95,18 @@ INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
 (93, 7, 12),
 (94, 8, 12),
 (95, 9, 12),
-(118, 1, 1),
-(119, 2, 1),
-(120, 3, 1),
-(121, 4, 1),
-(122, 5, 1),
-(123, 6, 1),
-(124, 7, 1),
-(125, 8, 1),
-(126, 9, 1),
-(127, 10, 1),
-(128, 11, 1);
+(153, 1, 1),
+(154, 2, 1),
+(155, 3, 1),
+(156, 4, 1),
+(157, 5, 1),
+(158, 6, 1),
+(159, 7, 1),
+(160, 8, 1),
+(161, 9, 1),
+(162, 10, 1),
+(163, 11, 1),
+(164, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -309,7 +310,8 @@ INSERT INTO `permisos` (`id`, `nombre`, `nombre_op`, `archivo`, `logo_opcion`) V
 (8, 'presentacion', 'Presentaciones', 'presentacion', 'fas fa-list mr-2 fa-2x'),
 (9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x'),
 (10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x'),
-(11, 'Detalle Utilidad', 'Detalle Utilidad', 'detalle_utilidad', 'fas fa-dollar-sign mr-2 fa-2x');
+(11, 'Detalle Utilidad', 'Detalle Utilidad', 'detalle_utilidad', 'fas fa-dollar-sign mr-2 fa-2x'),
+(12, 'Grupo Corporal', 'Grupo Corporal', 'grupo_c', 'fas fa-dice-d6 mr-2 fa-2x');
 
 -- --------------------------------------------------------
 
@@ -378,11 +380,11 @@ INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `preci
 (13, '7861141105725', 'Acido valproico 500mg', 4.00, 8.00, 0.20, 0.20, 3, 118, 40, 8, 4, 1, '*', '2025-03-01', 0.00, 'Anticonvulsivo. Tomar 1 tableta cada día.'),
 (14, '764600241736', 'Dolo-medox', 2.00, 4.50, 0.00, 0.00, 0, 0, 0, 6, 12, 14, '* ', '2026-11-01', 0.00, 'Alivio del dolor e inflamaciín de músculos, articulaciones, tendones y fifras nerviosas del cuerpo- Dolores provocados por golprs, torceduras, caídas, espalda baja, cuello o mala postura.\r\nDosis: Mayores de 12 años y adultos 1 dosis por vía intramuscular profunda una vez al día. Nota: al mezclsr el contenido de las 2 ampollas esta presenta una coloración lechosa que desaparece inmediatamente al agitar la jeringa.\r\n'),
 (15, '7705959881825', 'Tramadol Clorhidrato', 1.00, 2.00, 0.00, 0.00, 1, 0, 0, 11, 5, 9, '* ', '2024-05-01', 0.00, 'Se usa para tratar el dolor moderado a grave. Con receta médica.'),
-(16, '7861148011678', 'Gentamax', 1.00, 1.60, 0.00, 0.00, 1, 0, 0, 9, 13, 19, '* ', '2025-09-01', 0.00, 'Para tratamiento tópico de infecciones primarias.'),
+(16, '7861148011675', 'Gentamax', 1.00, 1.60, 0.00, 0.00, 1, 0, 0, 9, 13, 19, '*', '2025-09-01', 0.00, 'Para tratamiento tópico de infecciones primarias.'),
 (17, '7501033959790', 'Creo 10000', 10.00, 12.60, 0.63, 0.63, 2, 30, 20, 20, 4, 10, '* ', '2025-12-01', 0.00, 'Pancreatina. Enzimas pancreaticas que facilitan la digestión y faborecen la absorción de alimentos. \r\nTomar 15 minutos antes, durante o inmediatamwnte después de las comidas.'),
 (18, '7861002400174', 'Topident', 3.00, 5.44, 0.00, 0.00, 1, 0, 0, 5, 7, 22, '* ', '2023-08-01', 0.00, 'Antinflamatorio. anestesico local. antiséptico. Aplicar en ensias.'),
 (19, '7862103554018', 'Bismutol', 7.00, 8.50, 0.00, 0.00, 1, 0, 0, 15, 9, 17, '*', '2027-08-01', 0.00, 'Antidiarreico. desinflamatorio intestinal. Antiacido. a\r\nGases, NAUSEA'),
-(20, '7500435131803', 'VapoRub', 1.00, 2.00, 0.00, 0.00, 1, 0, 0, 21, 7, 5, '* ', '2024-08-01', 0.00, 'Alivia la congestión nasal de los resfriados. Dolor y molestias musculares.');
+(20, '7500435131803', 'VapoRub', 1.00, 2.00, 0.00, 0.00, 1, 0, 0, 21, 7, 5, '*', '2024-08-01', 0.00, 'Alivia la congestión nasal de los resfriados. Dolor y molestias musculares.');
 
 -- --------------------------------------------------------
 
@@ -738,7 +740,7 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
@@ -756,7 +758,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `grupo_cuerpo`
 --
 ALTER TABLE `grupo_cuerpo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -768,7 +770,7 @@ ALTER TABLE `laboratorios`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `presentacion`
