@@ -8,14 +8,95 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
 
-    $('#tbl').DataTable({
-        language: {
-            "url": urlDataTable
-        },
-        "order": [
-            [0, "desc"]
-        ]
-    });
+
+
+        $('#tblfechav').DataTable({
+            language: {
+                "url": urlDataTable
+            },
+
+            dom: 'lBfrtip',
+                   
+                        buttons: [
+                            {
+                                extend:'print',
+                                text:"Imprimir",
+                                title:'Productos por vencer',
+                                titleAttr:'Imprimir Detalle'
+                            }, 
+                            {
+                                extend:'excelHtml5',
+                                text:"Excel",
+                                title:'Productos por vencer',
+                                titleAttr:'Exportar a Excel'
+                            },
+                            {
+                                extend:'pdfHtml5',
+                                text:"PDF",
+                                title:'Productos por vencer',
+                                titleAttr:'Exportar en PDF'
+                                }
+                            ]
+                          
+                        ,
+                        initComplete: function () {
+                            var btns = $('.dt-button');
+                            btns.addClass('btn btn-success btn-sm');
+                            btns.removeClass('dt-button');
+    
+                        },
+    
+
+            "order": [
+                [0, "desc"]
+            ]
+        });
+
+
+
+
+
+            $('#tblstockmin').DataTable({
+                language: {
+                    "url": urlDataTable
+                },
+
+                dom: 'lBfrtip',
+                   
+                        buttons: [
+                            {
+                                extend:'print',
+                                text:"Imprimir",
+                                title:'Productos stock mínimo',
+                                titleAttr:'Imprimir Detalle'
+                            }, 
+                            {
+                                extend:'excelHtml5',
+                                text:"Excel",
+                                title:'Productos stock mínimo',
+                                titleAttr:'Exportar a Excel'
+                            },
+                            {
+                                extend:'pdfHtml5',
+                                text:"PDF",
+                                title:'Productos stock mínimo',
+                                titleAttr:'Exportar en PDF'
+                                }
+                            ]
+                          
+                        ,
+                        initComplete: function () {
+                            var btns = $('.dt-button');
+                            btns.addClass('btn btn-success btn-sm');
+                            btns.removeClass('dt-button');
+    
+                        },
+    
+
+                "order": [
+                    [0, "desc"]
+                ]
+            });
 
 
     $('#tbl2').DataTable({
@@ -1144,7 +1225,7 @@ function editarLab(id) {
 
 
         /* CONSULTA DE DETALLE DE UTILIDAD */
-          $('#btnConsultaU').onclick(function (e) {
+          $('#btnConsultaU').click(function (e) {
             e.preventDefault();
             var tipoFecha= $('#tipoFecha').val();
 

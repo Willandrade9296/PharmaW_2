@@ -119,7 +119,7 @@ if (!empty($_SESSION['idUser'])){
                                     <div class="row">
                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                                 <div class="table-responsive">
-                                                                        <table class="table table-sm  table-bordered table-hover" id="tblUtilidad" style="width:100%">
+                                                                        <table class="table table-sm  table-bordered table-hover" id="tblUtilidad" style="width:100%;">
                                                                         <thead class="thead-light">
                                                                             <tr>
                                                                                 <th><b>ID Venta</b></th>
@@ -137,9 +137,6 @@ if (!empty($_SESSION['idUser'])){
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="detalleUtilidad">
-                                                                        
-                                                                          
-
                                                                         </tbody>
 
                                                                         </table>

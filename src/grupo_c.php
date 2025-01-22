@@ -58,6 +58,10 @@ if (!empty($_POST)) {
 }
 
 ?>
+
+
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="card">
     
                             <div class="card-header card-header-primary ">
@@ -66,8 +70,7 @@ if (!empty($_POST)) {
 								</div>
 
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
+       
                 <?php echo (isset($alert)) ? $alert : ''; ?>
                 <form action="" method="post" autocomplete="off" id="formulario">
                     <div class="row">
@@ -96,9 +99,25 @@ if (!empty($_POST)) {
                     </div>
                 </form>
             </div>
-            <div class="col-md-12">
+         </div>
+    </div>
+    
+</div>
+
+
+
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+
+           <div class="card-body">
+    
+          
+
                 <div class="table-responsive">
-                    <table class="table table-sm table-bordered table-hover" id="tbl">
+                    <table class="table table-sm  table-bordered table-hover" id="tbl" style="width:100%;">
                         <thead class="thead-light">
                             <tr>
                                 <th>#</th>
@@ -117,7 +136,7 @@ if (!empty($_POST)) {
                                     <tr>
                                         <td><?php echo $data['id_grupo']; ?></td>
                                         <td><?php echo $data['nombre']; ?></td>
-                                        <td style="width: 200px;">
+                                        <td >
                                             <a href="#" onclick="editarGrupoC(<?php echo $data['id_grupo']; ?>)" class="btn btn-primary"><i class='fas fa-edit'></i></a>
                                             <form action="eliminar_grupoC.php?id=<?php echo $data['id_grupo']; ?>" method="post" class="confirmar d-inline">
                                                 <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
@@ -130,10 +149,20 @@ if (!empty($_POST)) {
 
                     </table>
                 </div>
-            </div>
-        </div>
+                 
+             </div>
+         </div>
+            
+
+
+
+        
     </div>
+
+
 </div>
+                      
+
 <?php }
 }else{
     header("Location:../index.php");

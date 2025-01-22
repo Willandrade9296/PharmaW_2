@@ -80,7 +80,7 @@ include_once "includes/header.php";
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-sm table-bordered table-hover" id="tbl">
+                <table class="table table-sm table-bordered table-hover" id="tblfechav">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
@@ -128,7 +128,7 @@ include_once "includes/header.php";
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-sm table-bordered table-hover" id="tbl2">
+                <table class="table table-sm table-bordered table-hover" id="tblstockmin">
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
