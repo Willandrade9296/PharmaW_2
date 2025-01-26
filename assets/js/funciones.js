@@ -99,6 +99,15 @@ const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
             });
 
 
+            $('#tbl').DataTable({
+                language: {
+                    "url": urlDataTable
+                },
+                "order": [
+                    [0, "desc"]
+                ]
+            });
+
     $('#tbl2').DataTable({
         language: {
             "url": urlDataTable
@@ -201,7 +210,7 @@ const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
             /*Precio PVP unidad almacena el precio PVP mientras que preciofr almacena el precio de unidad fracción */
             $("#precioPVPu").val(ui.item.precioPVP);
             $("#precioPVPfr").val(ui.item.precioFr);
-            $("#precioPVPfr_o").val(ui.item.precioFr_o);
+            $("#precioPVPfr_c").val(ui.item.precioFr_c);
 
             $("#iva").val(ui.item.iva);
             $("#info_producto_v").val(ui.item.info_prod);
@@ -394,7 +403,7 @@ function calcularPrecioFraccion(e) {
 
 
 
-    const precioC=$("#precioPVPfr_o").val();
+    const precioC=$("#precioPVPfr_c").val();
     const precio = $('#precioPVP').val();
     
     const total = cantFr * precio;

@@ -36,7 +36,7 @@ if (isset($_GET['q'])) {
         $data['cantidad'] = $row['existencia'];
         $data['fraccion'] = $row['fraccion'];
         $data['precioFr'] = $row['precioFr'];
-        $data['precioFr_o'] = $row['precioFr_o'];
+        $data['precioFr_c'] = $row['precioFr_c'];
      //   $data['stockFr']= $row['existencia'] * $row['fraccion'];
         $data['stockFr'] = $row['existencia_fr'];
         $data['iva'] = $row['iva'];
@@ -80,10 +80,10 @@ if (isset($_GET['q'])) {
 
     if (comprobar_cliente($conexion,$id_cliente))
     { 
-                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar FROM detalle_temp WHERE id_usuario = $id_user GROUP BY id_usuario, total");
+                    $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar , id_usuario FROM detalle_temp WHERE id_usuario = $id_user GROUP BY id_usuario");
                     $result = mysqli_fetch_assoc($consulta);
-                    $total = $result['total_pagar'];
-                    $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total', $id_user)");
+                    $total_venta = $result['total_pagar'];
+                    $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total_venta', $id_user)");
                     if ($insertar) {
                         $id_maximo = mysqli_query($conexion, "SELECT MAX(id) AS id_total FROM ventas");
                         $resultId = mysqli_fetch_assoc($id_maximo);
