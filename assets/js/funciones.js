@@ -1239,26 +1239,36 @@ function editarLab(id) {
             var tipoFecha= $('#tipoFecha').val();
 
                     if(tipoFecha === 'D'){ 
+                        
+                        
+                        if($('#tblUtilidad').DataTable().data().any()){ 
+
                         $('#tblUtilidad').DataTable().destroy();
-                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
+
+                        }
+                       
                         fecha_u = $("#fecha_utilidad").val();
 
-                            if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
-                                            $('#panelDia').css('display','none');  
+                           // if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
+                            //                $('#panelDia').css('display','none');  
 
-                            }else{
+                           // }else{
 
-                                             $('#panelDia').css('display','initial');
+                            //                 $('#panelDia').css('display','initial');
                                         
-                                            $('#fecha_sel').text(formatoFecha(fecha_u));
+                                           // $('#fecha_sel').text(formatoFecha(fecha_u));
                                
 
-                            }
+                           // }
 
 
                     }else if(tipoFecha === 'M'){ 
+                        
+                        if($('#tblUtilidad').DataTable().data().any()){ 
                         $('#tblUtilidad').DataTable().destroy();
-                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
+
+                        }
+                        
 
 
 
@@ -1268,9 +1278,12 @@ function editarLab(id) {
 
                     }else{
 
-                        $('#panelDia').css('display','none');
+                     //   $('#panelDia').css('display','none');
+                        if($('#tblUtilidad').DataTable().data().any()){ 
                          $('#tblUtilidad').DataTable().destroy();
-                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
+
+                        }
+                       
                     }
 
           });
@@ -1289,10 +1302,10 @@ function editarLab(id) {
             let mesU ='mesUtilidad';
             var tipoFecha= $('#tipoFecha').val();
             let fecha=  formatoFecha($('#fecha_utilidad').val());
-
+         
             //alert(fecha);
             if(tipoFecha === 'D'){ 
-             
+             var nombreArchivo='Detalle utilidad dia '+fecha;
                 //Reiniciar Datatable
             $('#tblUtilidad').DataTable().destroy();
             
@@ -1310,19 +1323,19 @@ function editarLab(id) {
                         {
                             extend:'print',
                             text:"Imprimir",
-                            title:'Detalle utilidad '+fecha,
+                            title:nombreArchivo,
                             titleAttr:'Imprimir Detalle'
                         }, 
                         {
                             extend:'excelHtml5',
                             text:"Excel",
-                            title:'Detalle utilidad '+fecha,
+                            title:nombreArchivo,
                             titleAttr:'Exportar a Excel'
                         },
                         {
                             extend:'pdfHtml5',
                             text:"PDF",
-                            title:'Detalle utilidad '+fecha,
+                            title:nombreArchivo,
                             titleAttr:'Exportar en PDF'
                             }
                         ]
@@ -1388,10 +1401,73 @@ function editarLab(id) {
                     "data": "nombre_cliente"
                   }
                 ],
+                footerCallback: function (row, data, start, end, display) {
+        let api = this.api();
+ 
+        // Remove the formatting to get integer data for summation
+        let intVal = function (i) {
+            return typeof i === 'string'
+                ? i.replace(/[\$,]/g, '') * 1
+                : typeof i === 'number'
+                ? i
+                : 0;
+        };
+ 
+       
+        /******************* TOTAL Costo */
+        // Total over all pages
+        total = api
+            .column(7)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(7, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(7).footer().innerHTML = '$' + pageTotal + ' <span style="color:red">( Total: $' + total + ')</span>';
+
+
+        /******************* TOTAL PVP */
+        // Total over all pages
+        total = api
+            .column(8)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(8, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(8).footer().innerHTML = '$' + pageTotal + ' <span style="color:red">( Total: $' + total + ')</span>';
+
+
+        /******************* TOTAL UTILIDAD */
+        // Total over all pages
+        total = api
+            .column(9)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(9, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(9).footer().innerHTML = '$' + pageTotal + ' <span style="color:red">( Total: $' + total + ')</span>';
+    },
                 
                 
                 "order": [
-                  [1, "asc"]
+                  [0, "asc"]
                 ]
               });
               
@@ -1403,6 +1479,8 @@ function editarLab(id) {
                         
                 var mes=$('#mes_utilidad').val();
                 var anio=$('#mes_a_utilidad').val();
+
+                var nombreArchivo='Detalle utilidad mes '+mes+' '+anio;
 
                 var table = $('#tblUtilidad').DataTable({
               
@@ -1417,19 +1495,19 @@ function editarLab(id) {
                             {
                                 extend:'print',
                                 text:"Imprimir",
-                                title:'Detalle utilidad '+fecha,
+                                title:nombreArchivo,
                                 titleAttr:'Imprimir Detalle'
                             }, 
                             {
                                 extend:'excelHtml5',
                                 text:"Excel",
-                                title:'Detalle utilidad '+fecha,
+                                title:nombreArchivo,
                                 titleAttr:'Exportar a Excel'
                             },
                             {
                                 extend:'pdfHtml5',
                                 text:"PDF",
-                                title:'Detalle utilidad '+fecha,
+                                title:nombreArchivo,
                                 titleAttr:'Exportar en PDF'
                                 }
                             ]
@@ -1496,10 +1574,74 @@ function editarLab(id) {
                         "data": "nombre_cliente"
                       }
                     ],
+
+                    footerCallback: function (row, data, start, end, display) {
+                        let api = this.api();
+                 
+                        // Remove the formatting to get integer data for summation
+                        let intVal = function (i) {
+                            return typeof i === 'string'
+                                ? i.replace(/[\$,]/g, '') * 1
+                                : typeof i === 'number'
+                                ? i
+                                : 0;
+                        };
+                 
+                       
+                        /******************* TOTAL Costo */
+                        // Total over all pages
+                        total = api
+                            .column(7)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(7, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(7).footer().innerHTML = '$' + pageTotal + ' <span style="color:red">( Total: $' + total + ')</span>';
+                
+                
+                        /******************* TOTAL PVP */
+                        // Total over all pages
+                        total = api
+                            .column(8)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(8, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(8).footer().innerHTML = '$' + pageTotal + ' <span style="color:red">( Total: $' + total + ')</span>';
+                
+                
+                        /******************* TOTAL UTILIDAD */
+                        // Total over all pages
+                        total = api
+                            .column(9)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(9, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(9).footer().innerHTML = '$' + pageTotal + ' <span style="color:red">( Total: $' + total + ')</span>';
+                    },
                     
                     
                     "order": [
-                      [1, "asc"]
+                      [0, "asc"]
                     ]
                   });
                   

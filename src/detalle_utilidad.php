@@ -140,6 +140,17 @@ if (!empty($_SESSION['idUser'])){
                                                                         </thead>
                                                                         <tbody id="detalleUtilidad">
                                                                         </tbody>
+                                                                        <tfoot>
+                                                                                <tr>
+                                                                                    <th colspan="7" style="text-align:right">Totales:</th>
+                                                                                    <th></th>
+                                                                                    <th></th>
+                                                                                    
+                                                                                    <th></th>
+                                                                                    <th colspan="3"></th>
+                                                                                   
+                                                                                </tr>
+                                                                            </tfoot>
 
                                                                         </table>
                                                                         

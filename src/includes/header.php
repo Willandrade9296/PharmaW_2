@@ -31,36 +31,16 @@ $id_user = $_SESSION['idUser'];
 
     
     <link rel="stylesheet" href="../assets/js/jquery-ui/jquery-ui.min.css">
-    <link href="../assets/css/style.css" rel="stylesheet" />
-
-   
-   
-
     
 
-
-
-   
-    <script src="../assets/js/all.min.js" crossorigin="anonymous"></script>
-    
-    
-    
    
 
     <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link href="../assets/css/buttons.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />
-    
-    
 
+    <link href="../assets/css/style.css" rel="stylesheet" />
     
     
-    
-  
-    
-   
-  
-
-
 
 </head>
 
