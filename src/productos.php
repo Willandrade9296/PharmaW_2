@@ -4,7 +4,7 @@ include_once "includes/header.php";
 
 
 
-function  precioFraccion($PprecioPVP,$numeroFracciones,$precioFraccion){
+function  precioFraccion($PprecioPVP,$numeroFracciones){
      
    
             if($numeroFracciones > 0){
@@ -90,21 +90,24 @@ if (!empty($_POST)) {
                                                         $existencia_fr= $fraccion*$cantidad;
                                                       
 
-                                        $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
-
+                                        $precioCalcFr= precioFraccion($precioPVP,$fraccion);
+                                        $precioCalcFr_C=precioFraccion($precio,$fraccion);
                                         if ($precioFr==0){
 
-                                            $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                                            $precioFr= precioFraccion($precioPVP,$fraccion);
+                                            $precioFr_C=precioFraccion($precio,$fraccion);
                                         }
                             }else{
                                 $existencia_fr="0";
                                 $fraccion="0";
                                 $precioFr="0";
+                                $precioFr_C="0";
                                 $precioCalcFr="0";
+                                $precioCalcFr_C="0";
 
                             }
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento','$iva','$infor')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr,$precioFr_C, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento','$iva','$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -153,10 +156,12 @@ if (!empty($_POST)) {
 
 
                             $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                            $precioCalcFr_C=precioFraccion($precio,$fraccion);
 
                             if ($precioFr==0){
 
                                 $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
+                                $precioFr_C=precioFraccion($precio,$fraccion);
                             }
 
 
@@ -165,12 +170,14 @@ if (!empty($_POST)) {
                                 $existencia_fr="0";
                                 $fraccion="0";
                                 $precioFr="0";
+                                $precioFr_C="0";
                                 $precioCalcFr="0";
+                                $precioCalcFr_C="0";
                         }
 
 
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
