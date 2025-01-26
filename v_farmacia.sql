@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2025 a las 03:09:00
+-- Tiempo de generación: 26-01-2025 a las 04:06:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -151,8 +151,8 @@ CREATE TABLE `detalle_venta` (
 --
 
 INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `tipo_prod`, `cantidad`, `descuento`, `precio`, `iva`, `precioPVP`, `total`) VALUES
-(137, 1, 210, 'F', 2, 0.00, 1.00, 0.00, 1.20, 2.40),
-(138, 6, 210, 'F', 4, 0.00, 1.20, 0.00, 1.20, 4.80);
+(145, 5, 214, 'F', 3, 0.00, 1.15, 0.00, 1.25, 3.75),
+(146, 1, 214, 'F', 3, 0.00, 0.50, 0.00, 0.83, 2.49);
 
 -- --------------------------------------------------------
 
@@ -295,17 +295,17 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `precioFr_c`, `existencia`, `existencia_fr`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `id_grupo`, `vencimiento`, `iva`, `info_prod`) VALUES
-(1, '45454545', 'Cataflan', 3.00, 5.00, 0.83, 0.83, 0.50, 8, 34, 6, 1, 4, 1, '*', '2028-02-02', 0.00, ''),
-(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 0.00, 2, 34, 20, 1, 4, 1, '0', '2025-02-02', 0.00, 'antiepileptico'),
-(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 0.00, 29, 141, 5, 2, 4, 1, '0', '2028-04-13', 0.00, ''),
+(1, '45454545', 'Cataflan', 3.00, 5.00, 0.83, 0.83, 0.50, 8, 28, 6, 1, 4, 1, '*', '2028-02-02', 0.00, ''),
+(5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 1.15, 2, 26, 20, 1, 4, 1, '*', '2025-02-02', 0.00, 'antiepileptico'),
+(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 1.00, 29, 141, 5, 2, 4, 1, '*', '2028-04-13', 0.00, ''),
 (7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, '0', '2026-02-23', 0.00, ''),
-(11, '8903726290835', 'Tiquepin 25', 3.00, 6.00, 0.20, 0.20, 0.00, 1, 20, 30, 4, 4, 1, '* ', '2026-11-01', 0.00, 'Antisicótico también usado en dosis bajas para dormir. tomar en la noche 1 tab antes de dormir.'),
-(12, '7861141105251', 'Carbam 200mg', 2.50, 2.20, 0.07, 0.07, 0.00, 2, 55, 30, 8, 4, 1, '* ', '2026-12-01', 0.00, 'Anticonvulsivo. Tomar 1 tableta cada 12 horas.'),
-(13, '7861141105725', 'Acido valproico 500mg', 4.00, 8.00, 0.20, 0.20, 0.00, 3, 118, 40, 8, 4, 1, '*', '2025-03-01', 0.00, 'Anticonvulsivo. Tomar 1 tableta cada día.'),
+(11, '8903726290835', 'Tiquepin 25', 3.00, 6.00, 0.20, 0.20, 0.10, 1, 20, 30, 4, 4, 1, '*', '2026-11-01', 0.00, 'Antisicótico también usado en dosis bajas para dormir. tomar en la noche 1 tab antes de dormir.'),
+(12, '7861141105251', 'Carbam 200mg', 2.50, 2.20, 0.07, 0.07, 0.08, 2, 50, 30, 8, 4, 1, '*', '2026-12-01', 0.00, 'Anticonvulsivo. Tomar 1 tableta cada 12 horas.'),
+(13, '7861141105725', 'Acido valproico 500mg', 4.00, 8.00, 0.20, 0.20, 0.10, 3, 118, 40, 8, 4, 1, '*', '2025-03-01', 0.00, 'Anticonvulsivo. Tomar 1 tableta cada día.'),
 (14, '764600241736', 'Dolo-medox', 2.00, 4.50, 0.00, 0.00, 0.00, 0, 0, 0, 6, 12, 14, '* ', '2026-11-01', 0.00, 'Alivio del dolor e inflamaciín de músculos, articulaciones, tendones y fifras nerviosas del cuerpo- Dolores provocados por golprs, torceduras, caídas, espalda baja, cuello o mala postura.\r\nDosis: Mayores de 12 años y adultos 1 dosis por vía intramuscular profunda una vez al día. Nota: al mezclsr el contenido de las 2 ampollas esta presenta una coloración lechosa que desaparece inmediatamente al agitar la jeringa.\r\n'),
 (15, '7705959881825', 'Tramadol Clorhidrato', 1.00, 2.00, 0.00, 0.00, 0.00, 1, 0, 0, 11, 5, 9, '* ', '2024-05-01', 0.00, 'Se usa para tratar el dolor moderado a grave. Con receta médica.'),
 (16, '7861148011675', 'Gentamax', 1.00, 1.60, 0.00, 0.00, 0.00, 1, 0, 0, 9, 13, 19, '*', '2025-09-01', 0.00, 'Para tratamiento tópico de infecciones primarias.'),
-(17, '7501033959790', 'Creo 10000', 10.00, 12.60, 0.63, 0.63, 0.00, 2, 30, 20, 20, 4, 10, '* ', '2025-12-01', 0.00, 'Pancreatina. Enzimas pancreaticas que facilitan la digestión y faborecen la absorción de alimentos. \r\nTomar 15 minutos antes, durante o inmediatamwnte después de las comidas.'),
+(17, '7501033959790', 'Creo 10000', 10.00, 12.60, 0.63, 0.63, 0.50, 2, 30, 20, 20, 4, 10, '*', '2025-12-01', 0.00, 'Pancreatina. Enzimas pancreaticas que facilitan la digestión y faborecen la absorción de alimentos. \r\nTomar 15 minutos antes, durante o inmediatamwnte después de las comidas.'),
 (18, '7861002400174', 'Topident', 3.00, 5.44, 0.00, 0.00, 0.00, 1, 0, 0, 5, 7, 22, '* ', '2023-08-01', 0.00, 'Antinflamatorio. anestesico local. antiséptico. Aplicar en ensias.'),
 (19, '7862103554018', 'Bismutol', 7.00, 8.50, 0.00, 0.00, 0.00, 1, 0, 0, 15, 9, 17, '*', '2027-08-01', 0.00, 'Antidiarreico. desinflamatorio intestinal. Antiacido. a\r\nGases, NAUSEA'),
 (20, '7500435131803', 'VapoRub', 1.00, 2.00, 0.00, 0.00, 0.00, 1, 0, 0, 21, 7, 5, '*', '2024-08-01', 0.00, 'Alivia la congestión nasal de los resfriados. Dolor y molestias musculares.');
@@ -395,7 +395,7 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
-(210, 6, 2.40, 1, '2025-01-26 01:34:32');
+(214, 7, 6.24, 1, '2025-01-26 02:36:50');
 
 -- --------------------------------------------------------
 
@@ -432,6 +432,8 @@ CREATE TABLE `viutilidad` (
 ,`totalPVP` decimal(20,2)
 ,`utilidad` decimal(21,2)
 ,`fecha_venta` timestamp
+,`nombre_usuario` varchar(100)
+,`nombre_cliente` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -450,7 +452,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `viutilidad`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`cantidad`* `d`.`precioPVP` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta` FROM ((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`cantidad`* `d`.`precioPVP` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta`, `u`.`nombre` AS `nombre_usuario`, `c`.`nombre` AS `nombre_cliente` FROM ((((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) join `usuario` `u` on(`u`.`idusuario` = `v`.`id_usuario`)) join `cliente` `c` on(`c`.`idcliente` = `v`.`id_cliente`))WITH LOCAL CHECK OPTION  ;
 
 --
 -- Índices para tablas volcadas
@@ -568,13 +570,13 @@ ALTER TABLE `detalle_permisos`
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo_cuerpo`
@@ -622,7 +624,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

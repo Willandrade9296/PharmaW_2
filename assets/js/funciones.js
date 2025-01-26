@@ -1380,6 +1380,12 @@ function editarLab(id) {
                   },
                   {
                     "data": "fecha_venta"
+                  },
+                  {
+                    "data": "nombre_usuario"
+                  },
+                  {
+                    "data": "nombre_cliente"
                   }
                 ],
                 
@@ -1482,6 +1488,12 @@ function editarLab(id) {
                       },
                       {
                         "data": "fecha_venta"
+                      },
+                      {
+                        "data": "nombre_usuario"
+                      },
+                      {
+                        "data": "nombre_cliente"
                       }
                     ],
                     

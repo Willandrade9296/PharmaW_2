@@ -133,6 +133,8 @@ if (!empty($_SESSION['idUser'])){
                                                                                 <th><b>Total PVP</b></th>
                                                                                 <th><b>Utilidad</b></th>
                                                                                 <th><b>Fecha Venta</b></th>
+                                                                                <th><b>Usuario</b></th>
+                                                                                <th><b>Cliente</b></th>
 
                                                                             </tr>
                                                                         </thead>

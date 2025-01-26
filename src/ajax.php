@@ -357,6 +357,8 @@ if (isset($_POST['regDetalle'])) {
         $data['totalPVP'] = $row['totalPVP'];
         $data['utilidad'] = $row['utilidad'];
         $data['fecha_venta'] = $row['fecha_venta'];
+        $data['nombre_usuario'] = $row['nombre_usuario'];
+        $data['nombre_cliente'] = $row['nombre_cliente'];
 
         
         array_push($datos, $data);
@@ -390,6 +392,8 @@ if (isset($_POST['regDetalle'])) {
         $data['totalPVP'] = $row['totalPVP'];
         $data['utilidad'] = $row['utilidad'];
         $data['fecha_venta'] = $row['fecha_venta'];
+        $data['nombre_usuario'] = $row['nombre_usuario'];
+        $data['nombre_cliente'] = $row['nombre_cliente'];
 
         
         array_push($datos, $data);
