@@ -85,9 +85,10 @@ if (isset($_GET['q'])) {
                     $total = $result['total_pagar'];
                     $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total', $id_user)");
                     if ($insertar) {
-                        $id_maximo = mysqli_query($conexion, "SELECT MAX(id) AS total FROM ventas");
+                        $id_maximo = mysqli_query($conexion, "SELECT MAX(id) AS id_total FROM ventas");
                         $resultId = mysqli_fetch_assoc($id_maximo);
-                        $ultimoId = $resultId['total'];
+                    
+                        $ultimoId = $resultId['id_total'];
                         $consultaDetalle = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_usuario = $id_user");
                         while ($row = mysqli_fetch_assoc($consultaDetalle)) {
                             $id_producto = $row['id_producto'];

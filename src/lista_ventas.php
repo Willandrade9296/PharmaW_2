@@ -11,7 +11,7 @@ if (empty($existe) && $id_user != 1) {
     //header('Location: permisos.php');
     include "permisos.php";
 }else{ 
-$query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas v INNER JOIN cliente c ON v.id_cliente = c.idcliente");
+$query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas v INNER JOIN cliente c ON v.id_cliente = c.idcliente ORDER BY id desc");
 
 ?>
 <div class="card">
@@ -38,7 +38,7 @@ $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas 
                             <td><?php echo $row['total']; ?></td>
                             <td><?php echo $row['fecha']; ?></td>
                             <td>
-                                <a href="pdf/generar.php?cl=<?php echo $row['id_cliente'] ?>&v=<?php echo $row['id'] ?>" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf"></i></a>
+                                <a href="pdf/generar.php?cl=<?php echo $row['idcliente'] ?>&v=<?php echo $row['id'] ?>" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf"></i></a>
                             </td>
                         </tr>
                     <?php } ?>
