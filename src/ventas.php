@@ -17,7 +17,19 @@ if (empty($existe) && $id_user != 1) {
 }else{ 
 
 ?>
+<script>
 
+
+   function onlyOne(checkbox) {
+        var checkboxes = document.getElementsByName('active');
+        checkboxes.forEach((item) => {
+            if (item !== checkbox) 
+            item.checked = false;
+        })
+    }
+
+
+</script>
 
 <div class="row">
     <div class="col-lg-12">
@@ -79,9 +91,7 @@ if (empty($existe) && $id_user != 1) {
             </div>
         </div>
         <div class="card">
-            <div class="card-header bg-primary text-white text-center">
-                Buscar Productos
-            </div>
+           
             <div class="card-body">
                 <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -256,11 +266,37 @@ if (empty($existe) && $id_user != 1) {
    </div>
 </div>
 
+<div class="row">
+                    <div class="col-lg-6 col-md-6" id="panelTransaccion">
+                                        <div class="card">
+                                                    <div class="card-body">
+                                                       <b> Tipo Transacción:</b>
+                                                    </div>   
+                                                    <div class="card-body">
+                                                            <input type="checkbox" name="active"  id="checkEfec" value="EF" onclick="onlyOne(this)" checked />
+                                                            <label for="checkEfec" style="font-weight:bold">Efectivo</label>
+
+                                                            <input type="checkbox"  name="active" id="checkTrans" value="TR" onclick="onlyOne(this)"/>
+                                                            <label for="checkTrans" style="font-weight:bold">Transferencia</label>
+
+                                                            <input type="checkbox" name="active"  id="checkTarj" value="TJ" onclick="onlyOne(this)"/>
+                                                            <label for="checkTarj" style="font-weight:bold">Tarjeta</label>
+
+                                                            <input type="checkbox" name="active" id="checkDeUna" value="DU" onclick="onlyOne(this)" />
+                                                            <label for="checkDeUna" style="font-weight:bold">De una</label>
+                                                    </div>
+
+                                        </div>
+                        </div>
+</div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-6 col-md-6">
+    
         <a href="#" class="btn btn-primary" id="btn_generar"><i class="fas fa-save"></i> Generar Venta</a>
+    
     </div>
+    
 
 </div>
 
@@ -303,7 +339,9 @@ if (empty($existe) && $id_user != 1) {
       </div>
 </div>
       <div class="modal-footer">
+      <div class="row">
         <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+       </div>
        
       </div>
     </div>

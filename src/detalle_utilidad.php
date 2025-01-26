@@ -135,6 +135,7 @@ if (!empty($_SESSION['idUser'])){
                                                                                 <th><b>Fecha Venta</b></th>
                                                                                 <th><b>Usuario</b></th>
                                                                                 <th><b>Cliente</b></th>
+                                                                                <th><b>Transacción</b></th>
 
                                                                             </tr>
                                                                         </thead>
@@ -147,7 +148,7 @@ if (!empty($_SESSION['idUser'])){
                                                                                     <th></th>
                                                                                     
                                                                                     <th></th>
-                                                                                    <th colspan="3"></th>
+                                                                                    <th colspan="4"></th>
                                                                                    
                                                                                 </tr>
                                                                             </tfoot>

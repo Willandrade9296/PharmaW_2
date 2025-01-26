@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2025 a las 04:06:16
+-- Tiempo de generación: 26-01-2025 a las 19:30:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -152,7 +152,10 @@ CREATE TABLE `detalle_venta` (
 
 INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `tipo_prod`, `cantidad`, `descuento`, `precio`, `iva`, `precioPVP`, `total`) VALUES
 (145, 5, 214, 'F', 3, 0.00, 1.15, 0.00, 1.25, 3.75),
-(146, 1, 214, 'F', 3, 0.00, 0.50, 0.00, 0.83, 2.49);
+(146, 1, 214, 'F', 3, 0.00, 0.50, 0.00, 0.83, 2.49),
+(147, 1, 215, 'F', 1, 0.00, 0.50, 0.00, 0.83, 0.83),
+(148, 6, 216, 'F', 2, 0.00, 1.00, 0.00, 1.20, 2.40),
+(149, 6, 217, 'F', 1, 0.00, 1.00, 0.00, 1.20, 1.20);
 
 -- --------------------------------------------------------
 
@@ -295,9 +298,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `precioPVP`, `precioFr`, `precioFr_o`, `precioFr_c`, `existencia`, `existencia_fr`, `fraccion`, `id_lab`, `id_presentacion`, `id_tipo`, `id_grupo`, `vencimiento`, `iva`, `info_prod`) VALUES
-(1, '45454545', 'Cataflan', 3.00, 5.00, 0.83, 0.83, 0.50, 8, 28, 6, 1, 4, 1, '*', '2028-02-02', 0.00, ''),
+(1, '45454545', 'Cataflan', 3.00, 5.00, 0.83, 0.83, 0.50, 8, 27, 6, 1, 4, 1, '*', '2028-02-02', 0.00, ''),
 (5, '7800063810065', 'Carbamazepina 200mg', 23.00, 25.00, 1.25, 1.25, 1.15, 2, 26, 20, 1, 4, 1, '*', '2025-02-02', 0.00, 'antiepileptico'),
-(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 1.00, 29, 141, 5, 2, 4, 1, '*', '2028-04-13', 0.00, ''),
+(6, '8902305015494', 'Betametasona', 5.00, 6.00, 1.20, 1.20, 1.00, 29, 138, 5, 2, 4, 1, '*', '2028-04-13', 0.00, ''),
 (7, '7861132425306', 'Otodine 13 ml', 3.00, 5.00, 0.00, 0.00, 0.00, 19, 0, 0, 2, 5, 2, '0', '2026-02-23', 0.00, ''),
 (11, '8903726290835', 'Tiquepin 25', 3.00, 6.00, 0.20, 0.20, 0.10, 1, 20, 30, 4, 4, 1, '*', '2026-11-01', 0.00, 'Antisicótico también usado en dosis bajas para dormir. tomar en la noche 1 tab antes de dormir.'),
 (12, '7861141105251', 'Carbam 200mg', 2.50, 2.20, 0.07, 0.07, 0.08, 2, 50, 30, 8, 4, 1, '*', '2026-12-01', 0.00, 'Anticonvulsivo. Tomar 1 tableta cada 12 horas.'),
@@ -356,6 +359,27 @@ INSERT INTO `tipos` (`id`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `transaccion`
+--
+
+CREATE TABLE `transaccion` (
+  `id_transaccion` varchar(20) NOT NULL,
+  `nombre_transaccion` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `transaccion`
+--
+
+INSERT INTO `transaccion` (`id_transaccion`, `nombre_transaccion`) VALUES
+('DU', 'De Una Pichincha'),
+('EF', 'Efectivo'),
+('TJ', 'Tarjeta'),
+('TR', 'Transferencia');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -387,15 +411,19 @@ CREATE TABLE `ventas` (
   `id_cliente` int(11) NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tipo_trans` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ventas`
 --
 
-INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`) VALUES
-(214, 7, 6.24, 1, '2025-01-26 02:36:50');
+INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`, `tipo_trans`) VALUES
+(214, 7, 6.24, 1, '2025-01-26 02:36:50', ''),
+(215, 6, 0.83, 1, '2025-01-26 16:55:55', 'EF'),
+(216, 6, 2.40, 1, '2025-01-26 17:46:17', 'EF'),
+(217, 6, 1.20, 1, '2025-01-26 17:49:03', 'EF');
 
 -- --------------------------------------------------------
 
@@ -434,6 +462,7 @@ CREATE TABLE `viutilidad` (
 ,`fecha_venta` timestamp
 ,`nombre_usuario` varchar(100)
 ,`nombre_cliente` varchar(100)
+,`transaccion` varchar(200)
 );
 
 -- --------------------------------------------------------
@@ -452,7 +481,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `viutilidad`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`cantidad`* `d`.`precioPVP` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta`, `u`.`nombre` AS `nombre_usuario`, `c`.`nombre` AS `nombre_cliente` FROM ((((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) join `usuario` `u` on(`u`.`idusuario` = `v`.`id_usuario`)) join `cliente` `c` on(`c`.`idcliente` = `v`.`id_cliente`))WITH LOCAL CHECK OPTION  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`cantidad`* `d`.`precioPVP` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta`, `u`.`nombre` AS `nombre_usuario`, `c`.`nombre` AS `nombre_cliente`, `t`.`nombre_transaccion` AS `transaccion` FROM (((((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) join `usuario` `u` on(`u`.`idusuario` = `v`.`id_usuario`)) join `cliente` `c` on(`c`.`idcliente` = `v`.`id_cliente`)) join `transaccion` `t` on(`t`.`id_transaccion` = `v`.`tipo_trans`))WITH LOCAL CHECK OPTION  ;
 
 --
 -- Índices para tablas volcadas
@@ -531,6 +560,12 @@ ALTER TABLE `tipos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `transaccion`
+--
+ALTER TABLE `transaccion`
+  ADD PRIMARY KEY (`id_transaccion`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -570,13 +605,13 @@ ALTER TABLE `detalle_permisos`
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo_cuerpo`
@@ -624,7 +659,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

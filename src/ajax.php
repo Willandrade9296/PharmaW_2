@@ -75,15 +75,18 @@ if (isset($_GET['q'])) {
 } else if (isset($_GET['procesarVenta'])) {
     $id_cliente = $_GET['id'];
    // $tipo_unidad= $_GET['tipoUnidad'];
+    $tipo_trans= $_GET['active'];
     $id_user = $_SESSION['idUser'];
     
 
     if (comprobar_cliente($conexion,$id_cliente))
     { 
+
+
                     $consulta = mysqli_query($conexion, "SELECT total, SUM(total) AS total_pagar , id_usuario FROM detalle_temp WHERE id_usuario = $id_user GROUP BY id_usuario");
                     $result = mysqli_fetch_assoc($consulta);
                     $total_venta = $result['total_pagar'];
-                    $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario) VALUES ($id_cliente, '$total_venta', $id_user)");
+                    $insertar = mysqli_query($conexion, "INSERT INTO ventas(id_cliente, total, id_usuario,tipo_trans) VALUES ($id_cliente, '$total_venta', $id_user,'$tipo_trans')");
                     if ($insertar) {
                         $id_maximo = mysqli_query($conexion, "SELECT MAX(id) AS id_total FROM ventas");
                         $resultId = mysqli_fetch_assoc($id_maximo);
@@ -359,6 +362,7 @@ if (isset($_POST['regDetalle'])) {
         $data['fecha_venta'] = $row['fecha_venta'];
         $data['nombre_usuario'] = $row['nombre_usuario'];
         $data['nombre_cliente'] = $row['nombre_cliente'];
+        $data['transaccion'] = $row['transaccion'];
 
         
         array_push($datos, $data);
@@ -394,6 +398,38 @@ if (isset($_POST['regDetalle'])) {
         $data['fecha_venta'] = $row['fecha_venta'];
         $data['nombre_usuario'] = $row['nombre_usuario'];
         $data['nombre_cliente'] = $row['nombre_cliente'];
+        $data['transaccion'] = $row['transaccion'];
+
+        
+        array_push($datos, $data);
+    }
+    echo json_encode($datos);
+    die();
+
+}
+else if(isset($_GET['anioUtilidad'])){
+
+
+    $anio = $_GET['anio'];
+    
+    $id = $_SESSION['idUser'];
+    $datos = array();
+    $detalle = mysqli_query($conexion, "SELECT * FROM viutilidad where  YEAR(CAST(fecha_venta AS DATE)) ='$anio'  ");
+    while ($row = mysqli_fetch_assoc($detalle)) {
+        $data['id_venta'] = $row['id_venta'];
+        $data['codproducto'] = $row['codproducto'];
+        $data['descripcion'] = $row['descripcion'];
+        $data['cantidad'] = $row['cantidad'];
+        $data['precio'] = $row['precio'];
+        $data['precioPVP'] = $row['precioPVP'];
+        $data['iva'] = $row['iva'];
+        $data['totalCosto'] = $row['totalCosto'];
+        $data['totalPVP'] = $row['totalPVP'];
+        $data['utilidad'] = $row['utilidad'];
+        $data['fecha_venta'] = $row['fecha_venta'];
+        $data['nombre_usuario'] = $row['nombre_usuario'];
+        $data['nombre_cliente'] = $row['nombre_cliente'];
+        $data['transaccion'] = $row['transaccion'];
 
         
         array_push($datos, $data);
