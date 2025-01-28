@@ -78,24 +78,24 @@ $id_user = $_SESSION['idUser'];
         </div>
         <div class="main-panel">
             <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-absolute fixed-top">
+            <nav class="navbar navbar-expand-lg navbar-absolute fixed-top" role="navigation">
                 <div class="container-fluid">
                     <div class="navbar-wrapper">
                         <a class="navbar-brand" href="javascript:;"></a>
                         <b style="font-weight:bold; margin-right:10px;">Usuario:</b> <span style="font-size:25px;"><?php echo "".$_SESSION['user']?></span>
                     </div>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="navbar-toggler-icon icon-bar"></span>
                         <span class="navbar-toggler-icon icon-bar"></span>
                         <span class="navbar-toggler-icon icon-bar"></span>
                     </button>
                     
-                    <div class="navbar-nav">
+                    <div class="navbar-nav " >
 
 
                         
-                            <div class="nav-item dropdown">
+                            <div class="nav-item dropdown" >
                                
                                     <div class="dropdown">
                                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -108,8 +108,8 @@ $id_user = $_SESSION['idUser'];
                                     
                                         </ul>
                                     
-                               </div>
-                                  </div>
+                                    </div>
+                            </div>
                         
 
                          
