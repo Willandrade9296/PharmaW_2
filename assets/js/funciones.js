@@ -506,6 +506,7 @@ function calcularDescuento(e, id) {
                 id: id,
                 desc: e.target.value,
                 descuento: descuento
+                
             },
             success: function (response) {
 

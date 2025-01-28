@@ -215,14 +215,17 @@ if (isset($_GET['q'])) {
 }else if (isset($_GET['descuento'])) {
     $id = $_GET['id'];
     $desc = $_GET['desc'];
+    
+
     $consulta = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id = $id");
     $result = mysqli_fetch_assoc($consulta);
     $cantidad= $result['cantidad'];
-    
-    if($desc <= 0.50){ 
-    $total_desc = ( $result['precio_venta'] * $desc );
+    $desc_ant= $result['descuento'];
 
-    $total = ($result['precio_venta'] - $total_desc) * $cantidad;
+    if($desc <= 0.50){ 
+    $total_desc = ( $result['precio_venta'] * $desc )* $cantidad;
+
+    $total = (($result['total']+$desc_ant) - $total_desc);
 
 
 
@@ -230,6 +233,10 @@ if (isset($_GET['q'])) {
     
 
     }
+
+
+
+
     if ($insertar) {
         $msg = array('mensaje' => 'descontado');
     }else{

@@ -81,7 +81,7 @@ $pdf->Cell(28,4, utf8_decode('Descripción'), 0, 0, 'L');
 $pdf->Cell(10, 4, 'Tipo', 0, 0, 'L');
 $pdf->Cell(8, 4, 'Cant.', 0, 0, 'L');
 $pdf->Cell(8, 4, 'Precio/u', 0, 0, 'L');
-$pdf->Cell(8, 4, 'Iva', 0, 0, 'L');
+$pdf->Cell(8, 4, 'Iva/u', 0, 0, 'L');
 $pdf->Cell(8, 4, 'Total.', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 4);
 $total = 0.00;
@@ -101,7 +101,7 @@ while ($row = mysqli_fetch_assoc($ventas)) {
     $total_subtotal= $total_subtotal + $sub_total;
     $total = $total +$sub_total;
 
-    $desc = $desc + $row['descuento'];
+    $desc = $desc + ($row['descuento']* $row['cantidad']);
     $pdf->Cell(15, 4, utf8_decode("$".number_format($sub_total, 2, '.', ',')), 0, 1, 'L');
 }
 
