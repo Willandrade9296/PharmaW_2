@@ -51,6 +51,7 @@ if (!empty($_POST)) {
     $laboratorio = $_POST['laboratorio'];
     $grupoC= $_POST['grupoC'];
     $vencimiento = '';
+    $precioIVA= $_POST['precioIva'];
     $iva=$_POST['iva'];
     $infor=$_POST['inform'];
    /* if (!empty($_POST['accion'])) {  */
@@ -107,7 +108,7 @@ if (!empty($_POST)) {
 
                             }
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr,$precioFr_C, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento','$iva','$infor')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioIVA,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', '$precio','$precioIVA','$precioPVP', '$cantidad','$fraccion','$existencia_fr',$precioCalcFr,$precioFr,$precioFr_C, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento','$iva','$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -177,7 +178,7 @@ if (!empty($_POST)) {
 
 
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -237,21 +238,21 @@ if (!empty($_POST)) {
                                             <div class="col-md-3 col-md-3 col-sm-3 col-xs-3">
                                                 <div class="form-group">
                                                     <label for="iva" class=" text-dark font-weight-bold" style="font-size:12px;">IVA:</label>
-                                                    <input type="number" placeholder="IVA" class="form-control" name="iva" id="iva" min="0" max="1" step="0.01" value="0.00" onkeyup="calcularIVA()"  required>
+                                                    <input type="number" placeholder="IVA" class="form-control" name="iva" id="iva" min="0" max="1" step="0.01" value="0.00" onkeyup="calcularIVA(event)"  required>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-3 col-md-3 col-sm-3 col-xs-3">
                                                 <div class="form-group">
                                                     <label for="precioIva" class=" text-dark font-weight-bold" style="font-size:12px;">Precio IVA:</label>
-                                                    <input type="number" placeholder="Ingrese IVA" class="form-control" name="precioIva" id="precioIva" min="0"  step="0.01" value="0.00" disabled  required>
+                                                    <input type="number" placeholder="Ingrese IVA" class="form-control" name="precioIva" id="precioIva" min="0"  step="0.01" value="0.00" readonly  required>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-3  col-md-3 col-sm-3 col-xs-3">
                                                 <div class="form-group">
                                                     <label for="precioPVP" class=" text-dark font-weight-bold" style="font-size:12px;">Precio PVP</label>
-                                                    <input type="number" placeholder="PVP" class="form-control" name="precioPVP" id="precioPVP" min="0" step="0.01" required>
+                                                    <input type="number" placeholder="PVP" class="form-control" name="precioPVP" id="precioPVP" min="0" step="0.01" onkeyup="calcularIVA(event)"  required>
                                                 </div>
                                             </div>
                                         </div>

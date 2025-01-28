@@ -945,6 +945,8 @@ function editarProducto(e,id) {
             $('#codigo').val(datos.codigo);
             $('#producto').val(datos.descripcion);
             $('#precio').val(datos.precio);
+            $('#precioIva').val(datos.precioIVA);
+
             $('#precioPVP').val(datos.precioPVP);
             $('#id').val(datos.codproducto);
             $('#tipo').val(datos.id_tipo);
@@ -1106,9 +1108,28 @@ function editarLab(id) {
           }
 
 
-          function calcularIVA(){
-             
-            var precioCosto = $('#precio').val()
+          function calcularIVA(e){
+             e.preventDefault();
+            var precioPVP = $('#precioPVP').val();
+            var valorIVA= $('#iva').val();
+            
+            if(valorIVA > 0  & valorIVA < 1){ 
+
+                if(precioPVP > 0){ 
+                    var valPorIVA= (parseFloat(precioPVP) * parseFloat(valorIVA)).toFixed(2);
+                    
+                    
+
+                    $('#precioIva').val(valPorIVA);
+                    
+                }
+            }else{
+                        $('#precioIva').val(0.00);
+                        
+            }
+
+
+           /* var precioCosto = $('#precio').val()
             var valorIVA= $('#iva').val()
             
             if(valorIVA > 0  & valorIVA < 1){ 
@@ -1121,7 +1142,7 @@ function editarLab(id) {
             }else{
                         $('#precioIva').val(0.00);
                         
-            }
+            }  */
 
           }
 

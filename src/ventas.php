@@ -214,7 +214,7 @@ if (empty($existe) && $id_user != 1) {
                                         
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
-                                           <button type="button" class="btn btn-warning btn-sm" id="btnAlternativas" name="btnAlternativas" disabled>
+                                           <button type="button" class="btn btn-warning btn-sm" id="btnAlternativas" style="display:none" name="btnAlternativas" disabled>
                                                 Alternativas
                                             </button>
                                         </div>
