@@ -153,7 +153,7 @@ if (empty($existe) && $id_user != 1) {
                                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div class="form-group" class=" text-dark font-weight-bold">
                                             <label for="iva" class=" text-dark font-weight-bold">Valor IVA</label>
-                                            <input id="iva" class="form-control text-center" type="text" name="iva"  disabled>
+                                            <input id="iva" class="form-control text-center" type="text" name="iva"  readonly>
                                         
                                         </div>
 

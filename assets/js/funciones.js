@@ -212,7 +212,7 @@ const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
             $("#precioPVPfr").val(ui.item.precioFr);
             $("#precioPVPfr_c").val(ui.item.precioFr_c);
 
-            $("#iva").val(ui.item.iva);
+            $("#iva").val(ui.item.precioIVA);
             $("#info_producto_v").val(ui.item.info_prod);
            
             $("#info_caja_fr").val(ui.item.fraccion);
@@ -345,7 +345,7 @@ if (cant != '')
     const precioC=$("#precioC").val();
     const precio = $('#precioPVP').val();
     const iva= $('#iva').val();
-    const total = cant * (parseFloat(precio) + parseFloat(precio * iva));
+    const total = cant * (parseFloat(precio) );
 
     $('#sub_total').val(parseFloat(Number(total).toFixed(2)));
 

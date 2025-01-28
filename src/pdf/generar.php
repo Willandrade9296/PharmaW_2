@@ -82,7 +82,7 @@ $pdf->Cell(10, 4, 'Tipo', 0, 0, 'L');
 $pdf->Cell(8, 4, 'Cant.', 0, 0, 'L');
 $pdf->Cell(8, 4, 'Precio/u', 0, 0, 'L');
 $pdf->Cell(8, 4, 'Iva', 0, 0, 'L');
-$pdf->Cell(8, 4, 'Sub Total.', 0, 1, 'L');
+$pdf->Cell(8, 4, 'Total.', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 4);
 $total = 0.00;
 $desc = 0.00;
@@ -95,11 +95,11 @@ while ($row = mysqli_fetch_assoc($ventas)) {
     $pdf->Cell(8, 4, utf8_decode($row['tipo_prod']), 0, 0, 'L');
     $pdf->Cell(8, 4, utf8_decode($row['cantidad']), 0, 0, 'L');
     $pdf->Cell(8, 4, "$".number_format(utf8_decode($row['precioPVP']), 2, '.', ','), 0, 0, 'L');
-    $pdf->Cell(8, 4, "$".number_format(utf8_decode($row['iva']), 2, '.', ','), 0, 0, 'L');
+    $pdf->Cell(8, 4, "$".number_format(utf8_decode($row['iva'] * $row['cantidad']), 2, '.', ','), 0, 0, 'L');
     $sub_total = $row['total'];
-    $total_iva= $total_iva + $row['iva'];
+    $total_iva= $total_iva+$row['iva'] * $row['cantidad'];
     $total_subtotal= $total_subtotal + $sub_total;
-    $total = $total + $row['iva'] +$sub_total;
+    $total = $total +$sub_total;
 
     $desc = $desc + $row['descuento'];
     $pdf->Cell(15, 4, utf8_decode("$".number_format($sub_total, 2, '.', ',')), 0, 1, 'L');
@@ -111,7 +111,7 @@ $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 5);
 $pdf->Cell(55, 4, utf8_decode("Sub Total: "), 0, 0, 'R');
 $pdf->SetFont('Arial', '', 5);
-$pdf->Cell(10, 4, "$".number_format($total_subtotal, 2, '.', ','), 0, 1, 'R');
+$pdf->Cell(10, 4, "$".number_format(($total_subtotal - $total_iva), 2, '.', ','), 0, 1, 'R');
 
 $pdf->SetFont('Arial', 'B', 5);
 $pdf->Cell(55, 4, utf8_decode("IVA: "), 0, 0, 'R');

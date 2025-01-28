@@ -39,7 +39,7 @@ if (isset($_GET['q'])) {
         $data['precioFr_c'] = $row['precioFr_c'];
      //   $data['stockFr']= $row['existencia'] * $row['fraccion'];
         $data['stockFr'] = $row['existencia_fr'];
-        $data['iva'] = $row['iva'];
+        $data['precioIVA'] = $row['precioIVA'];
         $data['info_prod'] = $row['info_prod'];
         
         array_push($datos, $data);
@@ -291,13 +291,14 @@ if (isset($_POST['regDetalle'])) {
     $iva = $_POST['iva'];
     $tipo_unidad=$_POST['tipo_unidad'];
     $id_user = $_SESSION['idUser'];
-    $total = $precio * $cant;
+    $total = $precio * $cant ;
     $verificar = mysqli_query($conexion, "SELECT * FROM detalle_temp WHERE id_producto = $id AND id_usuario = $id_user AND tipo_prod= '$tipo_unidad' ");
     $result = mysqli_num_rows($verificar);
     $datos = mysqli_fetch_assoc($verificar);
     if ($result > 0) {
         $cantidad = $datos['cantidad'] + $cant;
-        $total_precio = ($cantidad * $total);
+        $total_precio = ($cantidad * $precio);
+      
         $query = mysqli_query($conexion, "UPDATE detalle_temp SET cantidad = $cantidad, precio_costo= '$precioC' , precio_venta='$precio'  , total = '$total_precio' WHERE id_producto = $id AND id_usuario = $id_user AND tipo_prod= '$tipo_unidad' ");
         if ($query) {
             $msg = "actualizado";
