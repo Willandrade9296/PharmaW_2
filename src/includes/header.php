@@ -32,10 +32,12 @@ $id_user = $_SESSION['idUser'];
     
     <link rel="stylesheet" href="../assets/js/jquery-ui/jquery-ui.min.css">
     
+    
+<link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
 
    
 
-    <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+   
     <link href="../assets/css/buttons.dataTables.min.css" rel="stylesheet" crossorigin="anonymous" />
 
     <link href="../assets/css/style.css" rel="stylesheet" />
@@ -88,24 +90,33 @@ $id_user = $_SESSION['idUser'];
                         <span class="navbar-toggler-icon icon-bar"></span>
                         <span class="navbar-toggler-icon icon-bar"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-end">
+                    
+                    <div class="navbar-nav">
 
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user"></i>
-                                    <p class="d-lg-none d-md-block">
-                                        Cuenta
-                                    </p>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#nuevo_pass">Perfil</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="salir.php">Cerrar Sesión</a>
-                                </div>
-                            </li>
-                        </ul>
+
+                        
+                            <div class="nav-item dropdown">
+                               
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                        <?php echo "".$_SESSION['user']?> <i class="fas fa-user"></i> 
+                                            
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right text-right">
+                                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#nuevo_pass">Perfil</a></li>
+                                        <li> <a class="dropdown-item" href="salir.php">Cerrar Sesión</a></li>
+                                    
+                                        </ul>
+                                    
+                               </div>
+                                  </div>
+                        
+
+                         
+
+
                     </div>
+                    
                 </div>
             </nav>
             <!-- End Navbar -->

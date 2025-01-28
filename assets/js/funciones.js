@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const urlDataTable= "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json";
 
-
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
 
         $('#tblfechav').DataTable({
             language: {
