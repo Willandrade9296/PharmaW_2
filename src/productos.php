@@ -96,8 +96,10 @@ if (!empty($_POST)) {
                                         if ($precioFr==0){
 
                                             $precioFr= precioFraccion($precioPVP,$fraccion);
-                                            $precioFr_C=precioFraccion($precio,$fraccion);
+                                            
                                         }
+
+                                        $precioFr_C=precioFraccion($precio,$fraccion);
                             }else{
                                 $existencia_fr="0";
                                 $fraccion="0";
@@ -108,7 +110,7 @@ if (!empty($_POST)) {
 
                             }
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioIVA,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', $precio,$precioIVA,$precioPVP, $cantidad,$fraccion,$existencia_fr,$precioCalcFr,$precioFr,$precioFr_C, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento',$iva,'$infor')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioIVA,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', $precio,$precioIVA,$precioPVP, $cantidad,$fraccion,$existencia_fr,$precioFr,$precioCalcFr,$precioFr_C, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento',$iva,'$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -162,8 +164,10 @@ if (!empty($_POST)) {
                             if ($precioFr==0){
 
                                 $precioFr= precioFraccion($precioPVP,$fraccion,$precioFr);
-                                $precioFr_C=precioFraccion($precio,$fraccion);
+                                
                             }
+
+                            $precioFr_C=precioFraccion($precio,$fraccion);
 
 
                             
