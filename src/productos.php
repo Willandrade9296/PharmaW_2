@@ -108,7 +108,7 @@ if (!empty($_POST)) {
 
                             }
 
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioIVA,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', $precio,$precioIVA,$precioPVP, $cantidad,$fraccion,$existencia_fr,$precioCalcFr,$precioFr,$precioFr_C, $laboratorio, $presentacion, $tipo, $grupoC , '$vencimiento',$iva,'$infor')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,precio,precioIVA,precioPVP,existencia,fraccion,existencia_fr,precioFr,precioFr_o,precioFr_c,id_lab,id_presentacion,id_tipo, id_grupo, vencimiento,iva,info_prod) values ('$codigo', '$producto', $precio,$precioIVA,$precioPVP, $cantidad,$fraccion,$existencia_fr,$precioCalcFr,$precioFr,$precioFr_C, $laboratorio, $presentacion, $tipo, '$grupoC' , '$vencimiento',$iva,'$infor')");
                 if ($query_insert) {
                  
                     $alert = mostrarMensaje('Producto registrado','i');
@@ -178,7 +178,7 @@ if (!empty($_POST)) {
 
 
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo=$grupoC ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
             if ($query_update) {
              
                     $alert = mostrarMensaje('Producto Modificado','i');
@@ -215,14 +215,14 @@ if (!empty($_POST)) {
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label for="codigo" class=" text-dark font-weight-bold"><i class="fas fa-barcode"></i> Código de Barras</label>
-                                                            <input type="text" placeholder="Ingrese código de barras" name="codigo" id="codigo" class="form-control" autofocus required>
+                                                            <input type="text" placeholder="Ingrese código de barras" name="codigo" id="codigo" maxlength="20" class="form-control" autofocus required>
                                                             <input type="hidden" id="id" name="id">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                         <div class="form-group">
                                                             <label for="producto" class=" text-dark font-weight-bold">Producto</label>
-                                                            <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" class="form-control" required>
+                                                            <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" maxlength="200" class="form-control" required>
                                                         </div>
                                                     </div>
                                              </div>
