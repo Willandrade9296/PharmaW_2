@@ -37,7 +37,7 @@ if (!empty($_SESSION['idUser'])){
                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="panelDiaUtilidad">
                                         <div class="form-group">
                                             <label for="fecha_utilidad" class=" text-dark font-weight-bold">Fecha:</label>
-                                            <input id="fecha_utilidad" class="form-control" type="date" name="fecha_utilidad" >
+                                            <input id="fecha_utilidad" class="form-control" type="date" name="fecha_utilidad" value="<?php echo date('Y-m-d',strtotime('-1 day')) ?>" />
                                         </div>
                                      </div>
 
