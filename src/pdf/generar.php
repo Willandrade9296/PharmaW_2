@@ -101,7 +101,8 @@ while ($row = mysqli_fetch_assoc($ventas)) {
     $total_subtotal= $total_subtotal + $sub_total;
     $total = $total +$sub_total;
 
-    $desc = $desc + ($row['descuento']* $row['cantidad']);
+ //   $desc = $desc + ($row['descuento']* $row['cantidad']);
+    $desc = $desc + ($row['descuento']);
     $pdf->Cell(15, 4, utf8_decode("$".number_format($sub_total, 2, '.', ',')), 0, 1, 'L');
 }
 
