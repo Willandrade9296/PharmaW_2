@@ -1426,6 +1426,9 @@ function editarLab(id) {
                     "data": "iva"
                   },
                   {
+                    "data": "totalDescuento"
+                  },
+                  {
                     "data": "totalCosto"
                   },
                   {
@@ -1464,23 +1467,6 @@ function editarLab(id) {
         /******************* TOTAL Costo */
         // Total over all pages
         total = api
-            .column(7)
-            .data()
-            .reduce((a, b) => intVal(a) + intVal(b), 0);
- 
-        // Total over this page
-        pageTotal = api
-            .column(7, { page: 'current' })
-            .data()
-            .reduce((a, b) => intVal(a) + intVal(b), 0);
- 
-        // Update footer
-        api.column(7).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
-
-
-        /******************* TOTAL PVP */
-        // Total over all pages
-        total = api
             .column(8)
             .data()
             .reduce((a, b) => intVal(a) + intVal(b), 0);
@@ -1495,7 +1481,7 @@ function editarLab(id) {
         api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
 
 
-        /******************* TOTAL UTILIDAD */
+        /******************* TOTAL PVP */
         // Total over all pages
         total = api
             .column(9)
@@ -1510,6 +1496,23 @@ function editarLab(id) {
  
         // Update footer
         api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+
+
+        /******************* TOTAL UTILIDAD */
+        // Total over all pages
+        total = api
+            .column(10)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(10, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
     },
                 
                 
@@ -1603,6 +1606,9 @@ function editarLab(id) {
                         "data": "iva"
                       },
                       {
+                        "data": "totalDescuento"
+                      },
+                      {
                         "data": "totalCosto"
                       },
                       {
@@ -1641,23 +1647,6 @@ function editarLab(id) {
                         /******************* TOTAL Costo */
                         // Total over all pages
                         total = api
-                            .column(7)
-                            .data()
-                            .reduce((a, b) => intVal(a) + intVal(b), 0);
-                 
-                        // Total over this page
-                        pageTotal = api
-                            .column(7, { page: 'current' })
-                            .data()
-                            .reduce((a, b) => intVal(a) + intVal(b), 0);
-                 
-                        // Update footer
-                        api.column(7).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
-                
-                
-                        /******************* TOTAL PVP */
-                        // Total over all pages
-                        total = api
                             .column(8)
                             .data()
                             .reduce((a, b) => intVal(a) + intVal(b), 0);
@@ -1669,10 +1658,10 @@ function editarLab(id) {
                             .reduce((a, b) => intVal(a) + intVal(b), 0);
                  
                         // Update footer
-                        api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                        api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
                 
                 
-                        /******************* TOTAL UTILIDAD */
+                        /******************* TOTAL PVP */
                         // Total over all pages
                         total = api
                             .column(9)
@@ -1686,7 +1675,24 @@ function editarLab(id) {
                             .reduce((a, b) => intVal(a) + intVal(b), 0);
                  
                         // Update footer
-                        api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                        api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                
+                
+                        /******************* TOTAL UTILIDAD */
+                        // Total over all pages
+                        total = api
+                            .column(10)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(10, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
                     },
                     
                     
@@ -1779,6 +1785,9 @@ function editarLab(id) {
                             "data": "iva"
                           },
                           {
+                            "data": "totalDescuento"
+                          },
+                          {
                             "data": "totalCosto"
                           },
                           {
@@ -1817,23 +1826,6 @@ function editarLab(id) {
                             /******************* TOTAL Costo */
                             // Total over all pages
                             total = api
-                                .column(7)
-                                .data()
-                                .reduce((a, b) => intVal(a) + intVal(b), 0);
-                     
-                            // Total over this page
-                            pageTotal = api
-                                .column(7, { page: 'current' })
-                                .data()
-                                .reduce((a, b) => intVal(a) + intVal(b), 0);
-                     
-                            // Update footer
-                            api.column(7).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
-                    
-                    
-                            /******************* TOTAL PVP */
-                            // Total over all pages
-                            total = api
                                 .column(8)
                                 .data()
                                 .reduce((a, b) => intVal(a) + intVal(b), 0);
@@ -1845,10 +1837,10 @@ function editarLab(id) {
                                 .reduce((a, b) => intVal(a) + intVal(b), 0);
                      
                             // Update footer
-                            api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                            api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
                     
                     
-                            /******************* TOTAL UTILIDAD */
+                            /******************* TOTAL PVP */
                             // Total over all pages
                             total = api
                                 .column(9)
@@ -1862,7 +1854,24 @@ function editarLab(id) {
                                 .reduce((a, b) => intVal(a) + intVal(b), 0);
                      
                             // Update footer
-                            api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                            api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                    
+                    
+                            /******************* TOTAL UTILIDAD */
+                            // Total over all pages
+                            total = api
+                                .column(10)
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Total over this page
+                            pageTotal = api
+                                .column(10, { page: 'current' })
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Update footer
+                            api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
                         },
                         
                         

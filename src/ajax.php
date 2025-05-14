@@ -364,7 +364,9 @@ if (isset($_POST['regDetalle'])) {
         $data['precio'] = $row['precio'];
         $data['precioPVP'] = $row['precioPVP'];
         $data['iva'] = $row['iva'];
+        $data['totalDescuento'] = $row['totalDescuento'];
         $data['totalCosto'] = $row['totalCosto'];
+        
         $data['totalPVP'] = $row['totalPVP'];
         $data['utilidad'] = $row['utilidad'];
         $data['fecha_venta'] = $row['fecha_venta'];
@@ -400,6 +402,7 @@ if (isset($_POST['regDetalle'])) {
         $data['precio'] = $row['precio'];
         $data['precioPVP'] = $row['precioPVP'];
         $data['iva'] = $row['iva'];
+        $data['totalDescuento'] = $row['totalDescuento'];
         $data['totalCosto'] = $row['totalCosto'];
         $data['totalPVP'] = $row['totalPVP'];
         $data['utilidad'] = $row['utilidad'];
@@ -431,6 +434,7 @@ else if(isset($_GET['anioUtilidad'])){
         $data['precio'] = $row['precio'];
         $data['precioPVP'] = $row['precioPVP'];
         $data['iva'] = $row['iva'];
+        $data['totalDescuento'] = $row['totalDescuento'];
         $data['totalCosto'] = $row['totalCosto'];
         $data['totalPVP'] = $row['totalPVP'];
         $data['utilidad'] = $row['utilidad'];

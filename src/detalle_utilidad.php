@@ -129,6 +129,7 @@ if (!empty($_SESSION['idUser'])){
                                                                                 <th><b>Precio C./u</b></th>
                                                                                 <th><b>Precio PVP/u</b></th>
                                                                                 <th><b>Precio IVA</b></th>
+                                                                                <th><b>Descuento</b></th>
                                                                                 <th><b>Total Costo</b></th>
                                                                                 <th><b>Total PVP</b></th>
                                                                                 <th><b>Utilidad</b></th>
@@ -143,7 +144,7 @@ if (!empty($_SESSION['idUser'])){
                                                                         </tbody>
                                                                         <tfoot>
                                                                                 <tr>
-                                                                                    <th colspan="7" style="text-align:right">Totales:</th>
+                                                                                    <th colspan="8" style="text-align:right">Totales:</th>
                                                                                     <th></th>
                                                                                     <th></th>
                                                                                     
