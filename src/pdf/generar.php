@@ -34,9 +34,9 @@ $pdf->Cell(15, 5, utf8_decode($datos['email']), 0, 1, 'L');
 */
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->SetFillColor(251, 4, 225);
+$pdf->SetFillColor(15, 59, 197);
 
-//$pdf->SetTextColor(255, 255, 255);
+$pdf->SetTextColor(255, 255, 255);
 $pdf->Cell(70, 4, "Datos del cliente", 1, 1, 'C', 1);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->Ln(1);
@@ -70,7 +70,7 @@ $pdf->Cell(15, 4, utf8_decode($datosC['email']), 0, 1, 'L');
 
 $pdf->Ln(3);
 $pdf->SetFont('Arial', 'B', 8);
-//$pdf->SetTextColor(255, 255, 255);
+$pdf->SetTextColor(255, 255, 255);
 $pdf->Cell(70, 4, "Detalle de Producto", 1, 1, 'C', 1);
 $pdf->SetTextColor(0, 0, 0);
 
@@ -133,7 +133,7 @@ $pdf->Cell(11, 4, "$".number_format($total, 2, '.', ','), 0, 1, 'R');
 $pdf->Ln();
 
 $pdf->SetFont('Arial', 'B', 5);
-$pdf->Cell(46, 4, utf8_decode('Gracias por su compra'), 0, 0, 'R');
+$pdf->Cell(46, 4, utf8_decode('***Gracias por su compra***'), 0, 0, 'R');
 
 
 $pdf->Output("ventas.pdf", "I");
