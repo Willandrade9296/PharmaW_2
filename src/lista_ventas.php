@@ -26,7 +26,7 @@ $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas 
                         <th>#</th>
                         <th>Cliente</th>
                         <th>Total</th>
-                        <th>Fecha</th>
+                        
                         <th></th>
                     </tr>
                 </thead>
@@ -35,7 +35,7 @@ $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas 
                         <tr>
                             <td><?php echo $row['id']; ?></td>
                             <td><?php echo $row['nombre']; ?></td>
-                            <td><?php echo $row['total']; ?></td>
+                            
                             <td><?php echo $row['fecha']; ?></td>
                             <td>
                                 <a href="pdf/generar.php?cl=<?php echo $row['idcliente'] ?>&v=<?php echo $row['id'] ?>" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf"></i></a>

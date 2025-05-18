@@ -39,12 +39,12 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
 
 
                                 if($result1 > 1){ 
-                                $ventas = mysqli_query($conexion, "UPDATE ventas SET total= total - $total  WHERE id=$id");
+                               // $ventas = mysqli_query($conexion, "UPDATE ventas SET total= total - $total  WHERE id=$id");
                                 devolucion_productos($conexion,$id_prod,$id_tipo_prod,$cantidad);
                                 $detalle_eliminadi=  mysqli_query($conexion, "DELETE FROM detalle_venta  WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
 
                                 }else{
-                                $ventas = mysqli_query($conexion, "DELETE FROM ventas  WHERE id=$id");
+                                 //$ventas = mysqli_query($conexion, "DELETE FROM ventas  WHERE id=$id");
                                 devolucion_productos($conexion,$id_prod,$id_tipo_prod,$cantidad);
                                  $detalle_eliminadi=  mysqli_query($conexion, "DELETE FROM detalle_venta  WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
 
