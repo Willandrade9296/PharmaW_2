@@ -550,7 +550,7 @@ function listar() {
                 <td>${row['descuento']}</td>
                 <td>${row['precio_venta']}</td>
                 <td>${row['sub_total']}</td>
-                <td><button class="btn btn-danger" type="button" onclick="deleteDetalle(${row['id']})">
+                <td><button class="btn btn-danger btn-sm" type="button" onclick="deleteDetalle(${row['id']})">
                 <i class="fas fa-trash-alt"></i></button></td>
                 </tr>`;
             });

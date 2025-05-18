@@ -442,10 +442,10 @@ if (!empty($_POST)) {
                                                     <td><?php echo $data['precioFr']; ?></td>
                                                     <td><?php echo $data['iva']; ?></td>
                                                     <td>
-                                                        <a href="#" onclick="editarProducto(event,<?php echo $data['codproducto']; ?>)" class="btn btn-primary"><i class='fas fa-edit'></i></a>
+                                                        <a href="#" onclick="editarProducto(event,<?php echo $data['codproducto']; ?>)" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
 
                                                         <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
-                                                            <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
+                                                            <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button>
                                                         </form>
                                                     </td>
                                                 </tr>
