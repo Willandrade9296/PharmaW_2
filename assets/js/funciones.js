@@ -1888,5 +1888,13 @@ function editarLab(id) {
 
                  }
         }
+
+
+
+
+/** Función para abrir un collapse y ocultar los demás */
+ $('.collapse').on('show.bs.collapse', function () {
+  $('.collapse').not(this).collapse('hide');
+});
      
      
