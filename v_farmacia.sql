@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-02-2025 a las 03:40:58
+-- Tiempo de generación: 18-05-2025 a las 21:34:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -66,7 +66,7 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id`, `nombre`, `telefono`, `email`, `direccion`) VALUES
-(1, 'Farmacias Reina del Quinche', '999999999', 'willianandrademj43@gmail.com', 'San Gabriel');
+(1, 'Farma Total', '999999999', 'willianandrademj43@gmail.com', 'San Gabriel');
 
 -- --------------------------------------------------------
 
@@ -88,18 +88,6 @@ INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
 (59, 3, 9),
 (60, 5, 9),
 (61, 6, 9),
-(153, 1, 1),
-(154, 2, 1),
-(155, 3, 1),
-(156, 4, 1),
-(157, 5, 1),
-(158, 6, 1),
-(159, 7, 1),
-(160, 8, 1),
-(161, 9, 1),
-(162, 10, 1),
-(163, 11, 1),
-(164, 12, 1),
 (183, 3, 12),
 (184, 4, 12),
 (185, 5, 12),
@@ -108,7 +96,20 @@ INSERT INTO `detalle_permisos` (`id`, `id_permiso`, `id_usuario`) VALUES
 (188, 8, 12),
 (189, 9, 12),
 (190, 11, 12),
-(191, 12, 12);
+(191, 12, 12),
+(218, 1, 1),
+(219, 2, 1),
+(220, 3, 1),
+(221, 4, 1),
+(222, 5, 1),
+(223, 6, 1),
+(224, 7, 1),
+(225, 8, 1),
+(226, 9, 1),
+(227, 10, 1),
+(228, 11, 1),
+(229, 12, 1),
+(230, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -160,7 +161,10 @@ INSERT INTO `detalle_venta` (`id`, `id_producto`, `id_venta`, `tipo_prod`, `cant
 (149, 6, 217, 'F', 1, 0.00, 1.00, 0.00, 1.20, 1.20),
 (150, 27, 218, 'U', 1, 0.00, 1.86, 0.00, 2.50, 2.50),
 (151, 27, 219, 'U', 1, 0.00, 1.86, 0.15, 2.50, 2.50),
-(152, 40, 220, 'U', 1, 0.00, 1.63, 0.00, 2.00, 2.00);
+(153, 70, 221, 'F', 3, 0.15, 0.23, 0.00, 0.25, 0.60),
+(154, 70, 222, 'F', 3, 0.11, 0.23, 0.00, 0.25, 0.65),
+(155, 82, 223, 'F', 3, 0.12, 0.20, 0.00, 0.41, 1.11),
+(158, 74, 224, 'F', 1, 0.00, 2.00, 0.00, 0.85, 0.85);
 
 -- --------------------------------------------------------
 
@@ -242,7 +246,8 @@ INSERT INTO `permisos` (`id`, `nombre`, `nombre_op`, `archivo`, `logo_opcion`) V
 (9, 'laboratorios', 'Laboratorios', 'laboratorio', 'fas fa-hospital mr-2 fa-2x'),
 (10, 'Reportes', 'Reportes', 'report', 'fas fa-file-archive mr-2 fa-2x'),
 (11, 'detalle_utilidad', 'Detalle Utilidad', 'detalle_utilidad', 'fas fa-dollar-sign mr-2 fa-2x'),
-(12, 'grupo_c', 'Grupo Corporal', 'grupo_c', 'fas fa-dice-d6 mr-2 fa-2x');
+(12, 'grupo_c', 'Grupo Corporal', 'grupo_c', 'fas fa-dice-d6 mr-2 fa-2x'),
+(13, 'uti_ventas', 'Utilitario Ventas', 'u_ventas', 'fas fa-cash-register mr-2 fa-2x');
 
 -- --------------------------------------------------------
 
@@ -324,7 +329,7 @@ INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `preci
 (37, '7509546076461', 'Desodorante Speed Stick Extreme Ultra azul 150ml', 4.15, 0.75, 5.00, 0.00, 0.00, 0.00, 3, 0, 0, 21, 15, 5, '*', '2025-09-01', 0.15, ''),
 (38, '7509546078045', 'Desodorante Lady Speed Stick Extreme Pro5  rosa 150ml', 4.15, 0.75, 5.00, 0.00, 0.00, 0.00, 3, 0, 0, 21, 15, 26, '*', '2026-01-01', 0.15, ''),
 (39, '7861223813012', 'Enjuage bucal Menta sin alcohol Gama 250ml', 0.80, 0.23, 1.50, 0.00, 0.00, 0.00, 3, 0, 0, 21, 9, 22, '*', '2026-12-05', 0.15, ''),
-(40, '7861001301496', 'Gel for men Ego control caída 190ml', 1.63, 0.30, 2.00, 0.00, 0.00, 0.00, 2, 0, 0, 21, 15, 5, '*', '2026-01-01', 0.15, ''),
+(40, '7861001301496', 'Gel for men Ego control caída 190ml', 1.63, 0.30, 2.00, 0.00, 0.00, 0.00, 3, 0, 0, 21, 15, 5, '*', '2026-01-01', 0.15, ''),
 (41, '7861076260049', 'Gel for men Forza 90gr', 0.74, 0.15, 1.00, 0.00, 0.00, 0.00, 3, 0, 0, 21, 15, 5, '*', '2026-01-01', 0.15, ''),
 (42, '7891024183083', 'Hilo dental Colgate Menta 25mt', 2.58, 0.45, 3.00, 0.00, 0.00, 0.00, 6, 0, 0, 21, 15, 5, '*', '2026-01-01', 0.15, ''),
 (43, '7702027436987', 'Jabón íntimo Nosotras Herbal Sachet 18ml', 0.37, 0.08, 0.50, 0.00, 0.00, 0.00, 6, 0, 0, 21, 15, 5, '*', '2025-05-01', 0.15, ''),
@@ -354,11 +359,11 @@ INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `preci
 (67, '7861009811898', 'Hidrocortif 500 Amp.iny', 4.00, 0.00, 4.26, 0.00, 0.00, 0.00, 4, 0, 0, 21, 12, 14, '*', '2025-05-01', 0.00, ''),
 (68, '8901790705576', 'Omeprazol 20mg x100 caps.', 38.00, 0.00, 44.00, 0.44, 0.44, 0.38, 1, 100, 100, 21, 4, 10, '*', '2025-07-01', 0.00, ''),
 (69, '8901790716831', 'Omeprazol 40mg x 30caps.', 17.00, 0.00, 19.20, 0.64, 0.64, 0.57, 1, 30, 30, 21, 4, 10, '*', '2025-07-01', 0.00, ''),
-(70, '7702123828631', 'CardioAspirina 100mg x30', 6.80, 0.00, 7.50, 0.25, 0.25, 0.23, 2, 60, 30, 21, 4, 1, '*', '2026-08-01', 0.00, ''),
+(70, '7702123828631', 'CardioAspirina 100mg x30', 6.80, 0.00, 7.50, 0.25, 0.25, 0.23, 2, 54, 30, 21, 4, 1, '*', '2026-08-01', 0.00, ''),
 (71, '8901790712918', 'Metronidazol 500mg', 8.00, 0.00, 10.00, 0.10, 0.10, 0.08, 1, 100, 100, 21, 4, 1, '*', '2027-04-01', 0.00, ''),
 (72, '8901790702414', 'Vitamina C sabor Naranja x100', 12.50, 0.00, 15.00, 0.15, 0.15, 0.13, 1, 100, 100, 21, 4, 1, '*', '2027-04-01', 0.00, ''),
 (73, '7702057072063', 'Complejo B, Tabs', 10.00, 0.00, 11.25, 0.00, 0.00, 0.00, 1, 0, 0, 21, 4, 1, '*', '2026-05-01', 0.00, ''),
-(74, '7862121730586', 'Complejo B', 10.00, 0.00, 4.25, 0.85, 0.85, 2.00, 1, 5, 5, 21, 4, 14, '*', '2027-02-01', 0.00, ''),
+(74, '7862121730586', 'Complejo B', 10.00, 0.00, 4.25, 0.85, 0.85, 2.00, 1, 4, 5, 21, 4, 14, '*', '2027-02-01', 0.00, ''),
 (75, '7862105833135', 'Hepalive Forte x40', 18.00, 0.00, 17.13, 0.43, 0.43, 0.45, 2, 80, 40, 21, 4, 10, '*', '2025-07-01', 0.00, ''),
 (76, '7861155904369', 'Glicolax 17gr sobres', 8.00, 0.00, 12.00, 1.20, 1.20, 0.80, 1, 10, 10, 21, 4, 7, '*', '2026-02-01', 0.00, ''),
 (77, '7750215020432', 'Nitoxadin 500mg', 5.80, 0.00, 8.40, 1.40, 1.40, 0.97, 3, 18, 6, 21, 4, 1, '*', '2026-08-01', 0.00, ''),
@@ -366,7 +371,7 @@ INSERT INTO `producto` (`codproducto`, `codigo`, `descripcion`, `precio`, `preci
 (79, '7702057065478', 'Nitazoxanida 500mg.Tbs', 5.10, 0.00, 6.25, 1.04, 1.04, 0.85, 3, 18, 6, 21, 4, 1, '*', '2026-04-01', 0.00, ''),
 (80, '7703202220322', 'Dulcolax', 5.00, 0.00, 7.00, 0.70, 0.70, 0.50, 3, 30, 10, 21, 4, 8, '*', '2027-02-01', 0.00, ''),
 (81, '7750215009628', 'Ibuprofeno 800mg', 13.70, 0.00, 15.50, 0.16, 0.16, 0.14, 1, 100, 100, 21, 4, 1, '*', '2027-11-01', 0.00, ''),
-(82, '7861100401493', 'AlkaSeltzer Boost x10', 1.95, 0.00, 4.06, 0.41, 0.41, 0.20, 5, 50, 10, 21, 4, 1, '*', '2026-04-01', 0.00, ''),
+(82, '7861100401493', 'AlkaSeltzer Boost x10', 1.95, 0.00, 4.06, 0.41, 0.41, 0.20, 5, 27, 10, 21, 4, 1, '*', '2026-04-01', 0.00, ''),
 (83, '7862103555428', 'Pancreol Forte', 22.00, 0.00, 24.90, 0.83, 0.83, 0.73, 2, 60, 30, 21, 4, 10, '*', '2026-07-01', 0.00, ''),
 (84, '7862102713645', 'Tusolvina Forte Fit 120ml', 6.80, 0.00, 8.00, 0.00, 0.00, 0.00, 3, 0, 0, 21, 7, 2, '*', '2027-01-01', 0.00, ''),
 (85, '7862102710224', 'Tussolvina 120ml', 6.80, 0.00, 6.00, 0.00, 0.00, 0.00, 3, 0, 0, 21, 7, 2, '*', '2027-02-01', 0.00, ''),
@@ -680,7 +685,47 @@ INSERT INTO `ventas` (`id`, `id_cliente`, `total`, `id_usuario`, `fecha`, `tipo_
 (217, 6, 1.20, 1, '2025-01-26 17:49:03', 'EF'),
 (218, 6, 2.50, 12, '2025-01-27 02:19:14', 'EF'),
 (219, 6, 2.50, 12, '2025-01-27 02:21:48', 'EF'),
-(220, 4, 2.00, 1, '2025-01-29 02:22:59', 'EF');
+(221, 4, 0.60, 1, '2025-05-13 23:50:05', 'EF'),
+(222, 4, 0.65, 1, '2025-05-14 00:02:18', 'EF'),
+(225, 4, 1.25, 1, '2025-05-18 00:33:09', 'EF');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas_eliminadas`
+--
+
+CREATE TABLE `ventas_eliminadas` (
+  `id_elim` int(11) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `id_detalle` int(11) DEFAULT NULL,
+  `id_producto` int(11) DEFAULT NULL,
+  `id_venta` int(11) DEFAULT NULL,
+  `tipo_prod` varchar(10) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `descuento` decimal(10,2) DEFAULT NULL,
+  `precio` decimal(10,2) DEFAULT NULL,
+  `iva` decimal(10,2) DEFAULT NULL,
+  `precioPVP` decimal(10,2) DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `tipo_trans` varchar(20) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `usuario` varchar(200) DEFAULT NULL,
+  `usuario_mod` varchar(200) NOT NULL,
+  `fecha_mod` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_eliminadas`
+--
+
+INSERT INTO `ventas_eliminadas` (`id_elim`, `descripcion`, `id_detalle`, `id_producto`, `id_venta`, `tipo_prod`, `cantidad`, `descuento`, `precio`, `iva`, `precioPVP`, `total`, `fecha`, `tipo_trans`, `id_usuario`, `usuario`, `usuario_mod`, `fecha_mod`) VALUES
+(6, 'Ibuwin 400mg. Caps', 156, 78, 223, 'F', 2, 0.24, 0.16, 0.00, 0.40, 0.56, '2025-05-13 19:07:59', 'EF', 1, 'Administrador', '', '2025-05-17 23:40:56'),
+(7, 'Gel for men Ego control caída 190ml', 152, 40, 220, 'U', 1, 0.00, 1.63, 0.00, 2.00, 2.00, '2025-01-28 21:22:59', 'EF', 1, 'Administrador', '', '2025-05-17 23:40:56'),
+(8, 'Ibuprofeno 800mg', 157, 81, 224, 'F', 39, 0.00, 0.14, 0.00, 0.16, 6.24, '2025-05-17 19:10:33', 'EF', 1, 'Administrador', '', '2025-05-17 23:40:56'),
+(9, 'AlkaSeltzer Boost x10', 160, 82, 225, 'U', 2, 0.00, 1.95, 0.00, 4.06, 8.12, '2025-05-17 19:33:09', 'EF', 1, 'Administrador', '', '2025-05-17 23:40:56'),
+(10, 'Crema dental Colgate Triple Acción', 159, 32, 225, 'U', 1, 0.00, 1.02, 0.19, 1.25, 1.25, '2025-05-17 19:33:09', 'EF', 1, 'Administrador', '1', '2025-05-17 23:54:59');
 
 -- --------------------------------------------------------
 
@@ -714,12 +759,37 @@ CREATE TABLE `viutilidad` (
 ,`precioPVP` decimal(10,2)
 ,`iva` decimal(10,2)
 ,`totalCosto` decimal(20,2)
-,`totalPVP` decimal(20,2)
-,`utilidad` decimal(21,2)
+,`totalDescuento` decimal(10,2)
+,`totalPVP` decimal(21,2)
+,`utilidad` decimal(22,2)
 ,`fecha_venta` timestamp
 ,`nombre_usuario` varchar(100)
 ,`nombre_cliente` varchar(100)
 ,`transaccion` varchar(200)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `viventas_uti`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `viventas_uti` (
+`descripcion` varchar(200)
+,`id` int(11)
+,`id_producto` int(11)
+,`id_venta` int(11)
+,`tipo_prod` varchar(10)
+,`cantidad` int(11)
+,`descuento` decimal(10,2)
+,`precio` decimal(10,2)
+,`iva` decimal(10,2)
+,`precioPVP` decimal(10,2)
+,`total` decimal(10,2)
+,`fecha` timestamp
+,`tipo_trans` varchar(20)
+,`id_usuario` int(11)
+,`nombre` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -738,7 +808,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `viutilidad`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`cantidad`* `d`.`precioPVP` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta`, `u`.`nombre` AS `nombre_usuario`, `c`.`nombre` AS `nombre_cliente`, `t`.`nombre_transaccion` AS `transaccion` FROM (((((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) join `usuario` `u` on(`u`.`idusuario` = `v`.`id_usuario`)) join `cliente` `c` on(`c`.`idcliente` = `v`.`id_cliente`)) join `transaccion` `t` on(`t`.`id_transaccion` = `v`.`tipo_trans`))WITH LOCAL CHECK OPTION  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viutilidad`  AS SELECT `d`.`id_venta` AS `id_venta`, `p`.`codproducto` AS `codproducto`, `p`.`descripcion` AS `descripcion`, `d`.`cantidad` AS `cantidad`, `d`.`precio` AS `precio`, `d`.`precioPVP` AS `precioPVP`, `d`.`iva` AS `iva`, `d`.`cantidad`* `d`.`precio` AS `totalCosto`, `d`.`descuento` AS `totalDescuento`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`descuento` AS `totalPVP`, `d`.`cantidad`* `d`.`precioPVP` - `d`.`descuento` - `d`.`cantidad` * `d`.`precio` AS `utilidad`, `v`.`fecha` AS `fecha_venta`, `u`.`nombre` AS `nombre_usuario`, `c`.`nombre` AS `nombre_cliente`, `t`.`nombre_transaccion` AS `transaccion` FROM (((((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) join `usuario` `u` on(`u`.`idusuario` = `v`.`id_usuario`)) join `cliente` `c` on(`c`.`idcliente` = `v`.`id_cliente`)) join `transaccion` `t` on(`t`.`id_transaccion` = `v`.`tipo_trans`))WITH LOCAL CHECK OPTION  ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `viventas_uti`
+--
+DROP TABLE IF EXISTS `viventas_uti`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viventas_uti`  AS   (select `p`.`descripcion` AS `descripcion`,`d`.`id` AS `id`,`d`.`id_producto` AS `id_producto`,`d`.`id_venta` AS `id_venta`,`d`.`tipo_prod` AS `tipo_prod`,`d`.`cantidad` AS `cantidad`,`d`.`descuento` AS `descuento`,`d`.`precio` AS `precio`,`d`.`iva` AS `iva`,`d`.`precioPVP` AS `precioPVP`,`d`.`total` AS `total`,`v`.`fecha` AS `fecha`,`v`.`tipo_trans` AS `tipo_trans`,`v`.`id_usuario` AS `id_usuario`,`u`.`nombre` AS `nombre` from (((`detalle_venta` `d` join `producto` `p` on(`d`.`id_producto` = `p`.`codproducto`)) join `ventas` `v` on(`v`.`id` = `d`.`id_venta`)) join `usuario` `u` on(`u`.`idusuario` = `v`.`id_usuario`)))  ;
 
 --
 -- Índices para tablas volcadas
@@ -837,6 +916,12 @@ ALTER TABLE `ventas`
   ADD KEY `id_cliente` (`id_cliente`);
 
 --
+-- Indices de la tabla `ventas_eliminadas`
+--
+ALTER TABLE `ventas_eliminadas`
+  ADD PRIMARY KEY (`id_elim`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -856,25 +941,25 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `detalle_permisos`
 --
 ALTER TABLE `detalle_permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_temp`
 --
 ALTER TABLE `detalle_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=220;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `grupo_cuerpo`
 --
 ALTER TABLE `grupo_cuerpo`
-  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -886,7 +971,7 @@ ALTER TABLE `laboratorios`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `presentacion`
@@ -916,7 +1001,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
+
+--
+-- AUTO_INCREMENT de la tabla `ventas_eliminadas`
+--
+ALTER TABLE `ventas_eliminadas`
+  MODIFY `id_elim` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
