@@ -166,7 +166,687 @@ if (!empty($_SESSION['idUser'])){
              </div>
     </div>
 </div>
+<script>
 
+
+ // DETALLE UTILIDAD
+
+
+          function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+          } 
+
+        function formatoFecha(dateObject) {
+            var d = new addDays(dateObject,1).toLocaleDateString();
+          
+            let date=d;
+            return date;
+        };
+
+ /* SELECCIONANDO TIPO DE FECHA CONSULTA EN DETALLE DE UTILIDAD */
+
+        function cambiarTipoFechaUti(e){
+            e.preventDefault();
+
+            
+            if ($("#tipoFecha").val() === "D" ){ 
+            $("#panelDiaUtilidad").css('display','initial'); 
+            $("#panelMesUtilidad").css('display','none'); 
+            $("#panelAnoUtilidad").css('display','none');
+            $('#tblUtilidad').DataTable().destroy();
+            document.querySelector("#detalleUtilidad").innerHTML = '';
+
+
+            }else if($("#tipoFecha").val() === "M"){ 
+            $("#panelDiaUtilidad").css('display','none'); 
+            $("#panelMesUtilidad").css('display','initial'); 
+            $("#panelAnoUtilidad").css('display','none');
+            $('#tblUtilidad').DataTable().destroy();
+            document.querySelector("#detalleUtilidad").innerHTML = '';
+
+
+            
+
+            }
+            else if($("#tipoFecha").val() === "A"){ 
+                $("#panelDiaUtilidad").css('display','none'); 
+                $("#panelMesUtilidad").css('display','none'); 
+                $("#panelAnoUtilidad").css('display','initial'); 
+                $('#tblUtilidad').DataTable().destroy();
+                document.querySelector("#detalleUtilidad").innerHTML = '';
+    
+    
+              
+    
+                }else{
+            $("#panelDiaUtilidad").css('display','none'); 
+            $("#panelMesUtilidad").css('display','none'); 
+            $("#panelAnoUtilidad").css('display','none'); 
+            $('#tblUtilidad').DataTable().destroy();
+            document.querySelector("#detalleUtilidad").innerHTML = '';
+
+
+
+
+            }
+
+
+
+        }
+
+    /* CONSULTA DE DETALLE DE UTILIDAD */
+          $('#btnConsultaU').click(function (e) {
+            e.preventDefault();
+            var tipoFecha= $('#tipoFecha').val();
+
+                    if(tipoFecha === 'D'){ 
+                        
+                        
+                        if($('#tblUtilidad').DataTable().data().any()){ 
+
+                        $('#tblUtilidad').DataTable().destroy();
+
+                        }
+                       
+                        fecha_u = $("#fecha_utilidad").val();
+
+                           // if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
+                            //                $('#panelDia').css('display','none');  
+
+                           // }else{
+
+                            //                 $('#panelDia').css('display','initial');
+                                        
+                                           // $('#fecha_sel').text(formatoFecha(fecha_u));
+                               
+
+                           // }
+
+
+                    }else if(tipoFecha === 'M'){ 
+                        
+                        if($('#tblUtilidad').DataTable().data().any()){ 
+                        $('#tblUtilidad').DataTable().destroy();
+
+                        }
+                       
+                    }else{
+
+                     //   $('#panelDia').css('display','none');
+                        if($('#tblUtilidad').DataTable().data().any()){ 
+                         $('#tblUtilidad').DataTable().destroy();
+
+                        }
+                       
+                    }
+
+          });
+
+
+
+
+ /* LISTAR UTILIDAD  */
+
+          function listar_utilidad(e) {
+
+            
+            e.preventDefault();
+            let html = '';
+            let fechaU = 'fechaUtilidad';
+            let mesU ='mesUtilidad';
+            let anioU ='anioUtilidad';
+
+            var tipoFecha= $('#tipoFecha').val();
+            let fecha=  formatoFecha($('#fecha_utilidad').val());
+         
+            //alert(fecha);
+            if(tipoFecha === 'D'){ 
+             var nombreArchivo='Detalle utilidad dia '+fecha;
+                //Reiniciar Datatable
+            $('#tblUtilidad').DataTable().destroy();
+            
+           
+           var table = $('#tblUtilidad').DataTable({
+              
+
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                },
+                
+                dom: 'lBfrtip',
+               
+                    buttons: [
+                        {
+                            extend:'print',
+                            text:"Imprimir",
+                            title:nombreArchivo,
+                            titleAttr:'Imprimir Detalle'
+                        }, 
+                        {
+                            extend:'excelHtml5',
+                            text:"Excel",
+                            title:nombreArchivo,
+                            titleAttr:'Exportar a Excel'
+                        },
+                        {
+                            extend:'pdfHtml5',
+                            text:"PDF",
+                            title:nombreArchivo,
+                            titleAttr:'Exportar en PDF'
+                            }
+                        ]
+                      
+                    ,
+                    initComplete: function () {
+                        var btns = $('.dt-button');
+                        btns.addClass('btn btn-success btn-sm');
+                        btns.removeClass('dt-button');
+
+                    },
+
+                "processing": true,
+
+
+                "ajax": {
+                  "url": 'ajax.php',
+                  
+                  "data": {
+                    fechaUtilidad: fechaU,
+                    fecha: fecha
+                  },
+                      dataSrc:""
+                },
+                
+                "columns": [{
+                    "data": "id_venta"
+                  },
+                  {
+                    "data": "codproducto"
+                  },
+                  {
+                    "data": "descripcion"
+                  },
+                  {
+                    "data": "cantidad"
+                  },
+                  {
+                    "data": "precio"
+                  },
+                  {
+                    "data": "precioPVP"
+                  },
+                  {
+                    "data": "iva"
+                  },
+                  {
+                    "data": "totalDescuento"
+                  },
+                  {
+                    "data": "totalCosto"
+                  },
+                  {
+                    "data": "totalPVP"
+                  },
+                  {
+                    "data": "utilidad"
+                  },
+                  {
+                    "data": "fecha_venta"
+                  },
+                  {
+                    "data": "nombre_usuario"
+                  },
+                  {
+                    "data": "nombre_cliente"
+                  }
+                  ,
+                  {
+                    "data": "transaccion"
+                  }
+                ],
+                footerCallback: function (row, data, start, end, display) {
+        let api = this.api();
+ 
+        // Remove the formatting to get integer data for summation
+        let intVal = function (i) {
+            return typeof i === 'string'
+                ? i.replace(/[\$,]/g, '') * 1
+                : typeof i === 'number'
+                ? i
+                : 0;
+        };
+ 
+       
+        /******************* TOTAL Costo */
+        // Total over all pages
+        total = api
+            .column(8)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(8, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+
+
+        /******************* TOTAL PVP */
+        // Total over all pages
+        total = api
+            .column(9)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(9, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+
+
+        /******************* TOTAL UTILIDAD */
+        // Total over all pages
+        total = api
+            .column(10)
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Total over this page
+        pageTotal = api
+            .column(10, { page: 'current' })
+            .data()
+            .reduce((a, b) => intVal(a) + intVal(b), 0);
+ 
+        // Update footer
+        api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+    },
+                
+                
+                "order": [
+                  [0, "asc"]
+                ]
+              });
+              
+            }else if (tipoFecha === 'M'){ 
+                $('#tblUtilidad').DataTable().destroy();
+                        document.querySelector("#detalleUtilidad").innerHTML = ''; 
+
+
+                        
+                var mes=$('#mes_utilidad').val();
+                var anio=$('#mes_a_utilidad').val();
+
+                var nombreArchivo='Detalle utilidad mes '+mes+' '+anio;
+
+                var table = $('#tblUtilidad').DataTable({
+              
+
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                    },
+                    
+                    dom: 'lBfrtip',
+                   
+                        buttons: [
+                            {
+                                extend:'print',
+                                text:"Imprimir",
+                                title:nombreArchivo,
+                                titleAttr:'Imprimir Detalle'
+                            }, 
+                            {
+                                extend:'excelHtml5',
+                                text:"Excel",
+                                title:nombreArchivo,
+                                titleAttr:'Exportar a Excel'
+                            },
+                            {
+                                extend:'pdfHtml5',
+                                text:"PDF",
+                                title:nombreArchivo,
+                                titleAttr:'Exportar en PDF'
+                                }
+                            ]
+                          
+                        ,
+                        initComplete: function () {
+                            var btns = $('.dt-button');
+                            btns.addClass('btn btn-success btn-sm');
+                            btns.removeClass('dt-button');
+    
+                        },
+    
+                    "processing": true,
+    
+    
+                    "ajax": {
+                      "url": 'ajax.php',
+                      
+                      "data": {
+                        mesUtilidad: mesU,
+                        mes: mes,
+                        anio:anio
+                      },
+                          dataSrc:""
+                    },
+                    
+                    "columns": [{
+                        "data": "id_venta"
+                      },
+                      {
+                        "data": "codproducto"
+                      },
+                      {
+                        "data": "descripcion"
+                      },
+                      {
+                        "data": "cantidad"
+                      },
+                      {
+                        "data": "precio"
+                      },
+                      {
+                        "data": "precioPVP"
+                      },
+                      {
+                        "data": "iva"
+                      },
+                      {
+                        "data": "totalDescuento"
+                      },
+                      {
+                        "data": "totalCosto"
+                      },
+                      {
+                        "data": "totalPVP"
+                      },
+                      {
+                        "data": "utilidad"
+                      },
+                      {
+                        "data": "fecha_venta"
+                      },
+                      {
+                        "data": "nombre_usuario"
+                      },
+                      {
+                        "data": "nombre_cliente"
+                      },
+                      {
+                        "data": "transaccion"
+                      }
+                    ],
+
+                    footerCallback: function (row, data, start, end, display) {
+                        let api = this.api();
+                 
+                        // Remove the formatting to get integer data for summation
+                        let intVal = function (i) {
+                            return typeof i === 'string'
+                                ? i.replace(/[\$,]/g, '') * 1
+                                : typeof i === 'number'
+                                ? i
+                                : 0;
+                        };
+                 
+                       
+                        /******************* TOTAL Costo */
+                        // Total over all pages
+                        total = api
+                            .column(8)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(8, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                
+                
+                        /******************* TOTAL PVP */
+                        // Total over all pages
+                        total = api
+                            .column(9)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(9, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                
+                
+                        /******************* TOTAL UTILIDAD */
+                        // Total over all pages
+                        total = api
+                            .column(10)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(10, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                    },
+                    
+                    
+                    "order": [
+                      [0, "asc"]
+                    ]
+                  });
+                  
+
+
+
+                }else if(tipoFecha === 'A'){
+
+                    $('#tblUtilidad').DataTable().destroy();
+                    document.querySelector("#detalleUtilidad").innerHTML = '';
+
+                    var anio=$('#anio_utilidad').val();
+                    var nombreArchivo='Detalle utilidad anual '+anio;
+                    var table = $('#tblUtilidad').DataTable({
+              
+
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                        },
+                        
+                        dom: 'lBfrtip',
+                       
+                            buttons: [
+                                {
+                                    extend:'print',
+                                    text:"Imprimir",
+                                    title:nombreArchivo,
+                                    titleAttr:'Imprimir Detalle'
+                                }, 
+                                {
+                                    extend:'excelHtml5',
+                                    text:"Excel",
+                                    title:nombreArchivo,
+                                    titleAttr:'Exportar a Excel'
+                                },
+                                {
+                                    extend:'pdfHtml5',
+                                    text:"PDF",
+                                    title:nombreArchivo,
+                                    titleAttr:'Exportar en PDF'
+                                    }
+                                ]
+                              
+                            ,
+                            initComplete: function () {
+                                var btns = $('.dt-button');
+                                btns.addClass('btn btn-success btn-sm');
+                                btns.removeClass('dt-button');
+        
+                            },
+        
+                        "processing": true,
+        
+        
+                        "ajax": {
+                          "url": 'ajax.php',
+                          
+                          "data": {
+                            anioUtilidad: anioU,
+                            
+                            anio:anio
+                          },
+                              dataSrc:""
+                        },
+                        
+                        "columns": [{
+                            "data": "id_venta"
+                          },
+                          {
+                            "data": "codproducto"
+                          },
+                          {
+                            "data": "descripcion"
+                          },
+                          {
+                            "data": "cantidad"
+                          },
+                          {
+                            "data": "precio"
+                          },
+                          {
+                            "data": "precioPVP"
+                          },
+                          {
+                            "data": "iva"
+                          },
+                          {
+                            "data": "totalDescuento"
+                          },
+                          {
+                            "data": "totalCosto"
+                          },
+                          {
+                            "data": "totalPVP"
+                          },
+                          {
+                            "data": "utilidad"
+                          },
+                          {
+                            "data": "fecha_venta"
+                          },
+                          {
+                            "data": "nombre_usuario"
+                          },
+                          {
+                            "data": "nombre_cliente"
+                          },
+                          {
+                            "data": "transaccion"
+                          }
+                        ],
+    
+                        footerCallback: function (row, data, start, end, display) {
+                            let api = this.api();
+                     
+                            // Remove the formatting to get integer data for summation
+                            let intVal = function (i) {
+                                return typeof i === 'string'
+                                    ? i.replace(/[\$,]/g, '') * 1
+                                    : typeof i === 'number'
+                                    ? i
+                                    : 0;
+                            };
+                     
+                           
+                            /******************* TOTAL Costo */
+                            // Total over all pages
+                            total = api
+                                .column(8)
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Total over this page
+                            pageTotal = api
+                                .column(8, { page: 'current' })
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Update footer
+                            api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                    
+                    
+                            /******************* TOTAL PVP */
+                            // Total over all pages
+                            total = api
+                                .column(9)
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Total over this page
+                            pageTotal = api
+                                .column(9, { page: 'current' })
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Update footer
+                            api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                    
+                    
+                            /******************* TOTAL UTILIDAD */
+                            // Total over all pages
+                            total = api
+                                .column(10)
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Total over this page
+                            pageTotal = api
+                                .column(10, { page: 'current' })
+                                .data()
+                                .reduce((a, b) => intVal(a) + intVal(b), 0);
+                     
+                            // Update footer
+                            api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                        },
+                        
+                        
+                        "order": [
+                          [0, "asc"]
+                        ]
+                      });
+
+                
+                }else{
+
+                    $('#tblUtilidad').DataTable().destroy();
+                    document.querySelector("#detalleUtilidad").innerHTML = '';
+
+                 }
+        }
+
+
+
+</script>
  <?php
  }
 }else{
