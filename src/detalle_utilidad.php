@@ -53,6 +53,20 @@ if (!empty($_SESSION['idUser'])){
                                         </div>
                                      </div>
 
+                                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" id="panelPorFechasUtilidad" style="display:none">
+                                        
+                                                    <div class="form-group">
+                                                        <label for="fecha_utilidad_i" class=" text-dark font-weight-bold">Fecha Desde:</label>
+                                                        <input id="fecha_utilidad_i" class="form-control" type="date" name="fecha_utilidad_i" value="<?php echo date('Y-m-d',strtotime('-1 day')) ?>" />
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="fecha_utilidad_f" class=" text-dark font-weight-bold">Fecha Hasta:</label>
+                                                        <input id="fecha_utilidad_f" class="form-control" type="date" name="fecha_utilidad_f" value="<?php echo date('Y-m-d',strtotime('14 day')) ?>" />
+                                                    </div>
+
+                                     </div>
+
                                      <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" id="panelAnoUtilidad" style="display:none">
                                         <div class="form-group">
                                             <label for="anio_utilidad" class=" text-dark font-weight-bold">Año:</label>
@@ -73,6 +87,7 @@ if (!empty($_SESSION['idUser'])){
                                                          <option value="D">Diario</option>
                                                          <option value="M">Mensual</option>
                                                          <option value="A">Anual</option>
+                                                         <option value="T">Rango Fechas</option>
                                                     
                                                 </select>
 
@@ -168,7 +183,7 @@ if (!empty($_SESSION['idUser'])){
 </div>
 <script>
 
-
+const nombre_archivo_salida="Detalle de insumos"
  // DETALLE UTILIDAD
 
 
@@ -195,6 +210,8 @@ if (!empty($_SESSION['idUser'])){
             $("#panelDiaUtilidad").css('display','initial'); 
             $("#panelMesUtilidad").css('display','none'); 
             $("#panelAnoUtilidad").css('display','none');
+            
+            $("#panelPorFechasUtilidad").css('display','none');
             $('#tblUtilidad').DataTable().destroy();
             document.querySelector("#detalleUtilidad").innerHTML = '';
 
@@ -203,6 +220,7 @@ if (!empty($_SESSION['idUser'])){
             $("#panelDiaUtilidad").css('display','none'); 
             $("#panelMesUtilidad").css('display','initial'); 
             $("#panelAnoUtilidad").css('display','none');
+             $("#panelPorFechasUtilidad").css('display','none');
             $('#tblUtilidad').DataTable().destroy();
             document.querySelector("#detalleUtilidad").innerHTML = '';
 
@@ -214,6 +232,20 @@ if (!empty($_SESSION['idUser'])){
                 $("#panelDiaUtilidad").css('display','none'); 
                 $("#panelMesUtilidad").css('display','none'); 
                 $("#panelAnoUtilidad").css('display','initial'); 
+                 $("#panelPorFechasUtilidad").css('display','none');
+                $('#tblUtilidad').DataTable().destroy();
+                document.querySelector("#detalleUtilidad").innerHTML = '';
+    
+    
+              
+    
+                }
+                
+                else if($("#tipoFecha").val() === "T"){ 
+                $("#panelDiaUtilidad").css('display','none'); 
+                $("#panelMesUtilidad").css('display','none'); 
+                $("#panelAnoUtilidad").css('display','none'); 
+                 $("#panelPorFechasUtilidad").css('display','initial');
                 $('#tblUtilidad').DataTable().destroy();
                 document.querySelector("#detalleUtilidad").innerHTML = '';
     
@@ -224,6 +256,7 @@ if (!empty($_SESSION['idUser'])){
             $("#panelDiaUtilidad").css('display','none'); 
             $("#panelMesUtilidad").css('display','none'); 
             $("#panelAnoUtilidad").css('display','none'); 
+            $("#panelPorFechasUtilidad").css('display','none');
             $('#tblUtilidad').DataTable().destroy();
             document.querySelector("#detalleUtilidad").innerHTML = '';
 
@@ -252,17 +285,7 @@ if (!empty($_SESSION['idUser'])){
                        
                         fecha_u = $("#fecha_utilidad").val();
 
-                           // if(fecha_u.trim() === "" || isNaN(new Date(fecha_u).getTime())){ 
-                            //                $('#panelDia').css('display','none');  
-
-                           // }else{
-
-                            //                 $('#panelDia').css('display','initial');
-                                        
-                                           // $('#fecha_sel').text(formatoFecha(fecha_u));
-                               
-
-                           // }
+                        
 
 
                     }else if(tipoFecha === 'M'){ 
@@ -272,7 +295,17 @@ if (!empty($_SESSION['idUser'])){
 
                         }
                        
-                    }else{
+                    }else if(tipoFecha === 'T'){ 
+                        
+                        if($('#tblUtilidad').DataTable().data().any()){ 
+                        $('#tblUtilidad').DataTable().destroy();
+
+                        }
+                       
+                    }
+                    
+                    
+                    else{
 
                      //   $('#panelDia').css('display','none');
                         if($('#tblUtilidad').DataTable().data().any()){ 
@@ -297,13 +330,14 @@ if (!empty($_SESSION['idUser'])){
             let fechaU = 'fechaUtilidad';
             let mesU ='mesUtilidad';
             let anioU ='anioUtilidad';
+            let rangoU ='RangoFechasUtilidad';
 
             var tipoFecha= $('#tipoFecha').val();
             let fecha=  formatoFecha($('#fecha_utilidad').val());
          
             //alert(fecha);
             if(tipoFecha === 'D'){ 
-             var nombreArchivo='Detalle utilidad dia '+fecha;
+             var nombreArchivo=nombre_archivo_salida+' '+fecha;
                 //Reiniciar Datatable
             $('#tblUtilidad').DataTable().destroy();
             
@@ -485,7 +519,7 @@ if (!empty($_SESSION['idUser'])){
                 var mes=$('#mes_utilidad').val();
                 var anio=$('#mes_a_utilidad').val();
 
-                var nombreArchivo='Detalle utilidad mes '+mes+' '+anio;
+                var nombreArchivo=nombre_archivo_salida+' mes '+mes+' '+anio;
 
                 var table = $('#tblUtilidad').DataTable({
               
@@ -665,7 +699,7 @@ if (!empty($_SESSION['idUser'])){
                     document.querySelector("#detalleUtilidad").innerHTML = '';
 
                     var anio=$('#anio_utilidad').val();
-                    var nombreArchivo='Detalle utilidad anual '+anio;
+                    var nombreArchivo=nombre_archivo_salida+' anual '+anio;
                     var table = $('#tblUtilidad').DataTable({
               
 
@@ -836,6 +870,192 @@ if (!empty($_SESSION['idUser'])){
                       });
 
                 
+                }else if(tipoFecha === 'T'){
+
+                    $('#tblUtilidad').DataTable().destroy();
+                    document.querySelector("#detalleUtilidad").innerHTML = '';
+                    var nombreArchivo=nombre_archivo_salida+' Rango Fechas';
+                    
+                    let fecha_i=  formatoFecha($('#fecha_utilidad_i').val());
+                    let fecha_f=  formatoFecha($('#fecha_utilidad_f').val());
+
+
+                    var table = $('#tblUtilidad').DataTable({
+              
+
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                    },
+                    
+                    dom: 'lBfrtip',
+                   
+                        buttons: [
+                            {
+                                extend:'print',
+                                text:"Imprimir",
+                                title:nombreArchivo,
+                                titleAttr:'Imprimir Detalle'
+                            }, 
+                            {
+                                extend:'excelHtml5',
+                                text:"Excel",
+                                title:nombreArchivo,
+                                titleAttr:'Exportar a Excel'
+                            },
+                            {
+                                extend:'pdfHtml5',
+                                text:"PDF",
+                                title:nombreArchivo,
+                                titleAttr:'Exportar en PDF'
+                                }
+                            ]
+                          
+                        ,
+                        initComplete: function () {
+                            var btns = $('.dt-button');
+                            btns.addClass('btn btn-success btn-sm');
+                            btns.removeClass('dt-button');
+    
+                        },
+    
+                    "processing": true,
+    
+    
+                    "ajax": {
+                      "url": 'ajax.php',
+                      
+                      "data": {
+                        RangoFechasUtilidad: rangoU,
+                        fecha_i: fecha_i,
+                        fecha_f: fecha_f
+                      },
+                          dataSrc:""
+                    },
+                    
+                    "columns": [{
+                        "data": "id_venta"
+                      },
+                      {
+                        "data": "codproducto"
+                      },
+                      {
+                        "data": "descripcion"
+                      },
+                      {
+                        "data": "cantidad"
+                      },
+                      {
+                        "data": "precio"
+                      },
+                      {
+                        "data": "precioPVP"
+                      },
+                      {
+                        "data": "iva"
+                      },
+                      {
+                        "data": "totalDescuento"
+                      },
+                      {
+                        "data": "totalCosto"
+                      },
+                      {
+                        "data": "totalPVP"
+                      },
+                      {
+                        "data": "utilidad"
+                      },
+                      {
+                        "data": "fecha_venta"
+                      },
+                      {
+                        "data": "nombre_usuario"
+                      },
+                      {
+                        "data": "nombre_cliente"
+                      },
+                      {
+                        "data": "transaccion"
+                      }
+                    ],
+
+                    footerCallback: function (row, data, start, end, display) {
+                        let api = this.api();
+                 
+                        // Remove the formatting to get integer data for summation
+                        let intVal = function (i) {
+                            return typeof i === 'string'
+                                ? i.replace(/[\$,]/g, '') * 1
+                                : typeof i === 'number'
+                                ? i
+                                : 0;
+                        };
+                 
+                       
+                        /******************* TOTAL Costo */
+                        // Total over all pages
+                        total = api
+                            .column(8)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(8, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(8).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                
+                
+                        /******************* TOTAL PVP */
+                        // Total over all pages
+                        total = api
+                            .column(9)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(9, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(9).footer().innerHTML = '$' + pageTotal.toFixed(2)+ ' <span style="color:red">( Total: $' + total.toFixed(2)  + ')</span>';
+                
+                
+                        /******************* TOTAL UTILIDAD */
+                        // Total over all pages
+                        total = api
+                            .column(10)
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Total over this page
+                        pageTotal = api
+                            .column(10, { page: 'current' })
+                            .data()
+                            .reduce((a, b) => intVal(a) + intVal(b), 0);
+                 
+                        // Update footer
+                        api.column(10).footer().innerHTML = '$' + pageTotal.toFixed(2) + ' <span style="color:red">( Total: $' + total.toFixed(2) + ')</span>';
+                    },
+                    
+                    
+                    "order": [
+                      [0, "asc"]
+                    ]
+                  });
+
+
+
+
+
+
+
+
                 }else{
 
                     $('#tblUtilidad').DataTable().destroy();

@@ -450,6 +450,47 @@ else if(isset($_GET['anioUtilidad'])){
     die();
 
 }
+else if(isset($_GET['RangoFechasUtilidad'])){
+
+
+    $fecha_i = $_GET['fecha_i'];
+
+    $date1 = explode('/', $fecha_i);
+    $fecha1 = $date1[2].'-'.$date1[1].'-'.$date1[0];
+
+
+    $fecha_f = $_GET['fecha_f'];
+
+    $date2 = explode('/', $fecha_f);
+    $fecha2 = $date2[2].'-'.$date2[1].'-'.$date2[0];
+    
+    $id = $_SESSION['idUser'];
+    $datos = array();
+    $detalle = mysqli_query($conexion, "SELECT * FROM viutilidad where  CAST(fecha_venta AS DATE) between '$fecha1' and '$fecha2'  ");
+    while ($row = mysqli_fetch_assoc($detalle)) {
+        $data['id_venta'] = $row['id_venta'];
+        $data['codproducto'] = $row['codproducto'];
+        $data['descripcion'] = $row['descripcion'];
+        $data['cantidad'] = $row['cantidad'];
+        $data['precio'] = $row['precio'];
+        $data['precioPVP'] = $row['precioPVP'];
+        $data['iva'] = $row['iva'];
+        $data['totalDescuento'] = $row['totalDescuento'];
+        $data['totalCosto'] = $row['totalCosto'];
+        $data['totalPVP'] = $row['totalPVP'];
+        $data['utilidad'] = $row['utilidad'];
+        $data['fecha_venta'] = $row['fecha_venta'];
+        $data['nombre_usuario'] = $row['nombre_usuario'];
+        $data['nombre_cliente'] = $row['nombre_cliente'];
+        $data['transaccion'] = $row['transaccion'];
+
+        
+        array_push($datos, $data);
+    }
+    echo json_encode($datos);
+    die();
+
+}
 
 
 
