@@ -1,4 +1,6 @@
 <?php
+
+try{ 
 require "../conexion.php";
 $usuarios = mysqli_query($conexion, "SELECT * FROM usuario");
 $total['usuarios'] = mysqli_num_rows($usuarios);
@@ -188,4 +190,10 @@ include_once "includes/header.php";
     </div>
 </div>
 
-<?php include_once "includes/footer.php"; ?>
+<?php include_once "includes/footer.php";
+}catch(Exception $e){
+
+    echo "Error: ".$e->getMessage();
+}
+
+?>

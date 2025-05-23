@@ -1,5 +1,7 @@
 <?php
 
+try{ 
+    
 include "../conexion.php";
 include "includes/components.php";
 
@@ -10,6 +12,9 @@ if (empty($_SESSION['active'])) {
 $id_user = $_SESSION['idUser'];
 
 }
+
+
+
 
 
 
@@ -122,3 +127,12 @@ $id_user = $_SESSION['idUser'];
             <!-- End Navbar -->
             <div class="content bg">
                 <div class="container-fluid">
+
+                <?php   
+                }catch(Exception $e){
+
+                echo "Error: ".$e->getMessage();
+                }
+
+                
+                ?>

@@ -1,4 +1,5 @@
 <?php
+try{ 
 session_start();
 if (!empty($_SESSION['active'])) {
     header('location: src/');
@@ -13,6 +14,7 @@ if (!empty($_SESSION['active'])) {
                         </button>
                     </div>';
         } else {
+            
             require_once "conexion.php";
             $user = mysqli_real_escape_string($conexion, $_POST['usuario']);
             $clave = md5(mysqli_real_escape_string($conexion, $_POST['clave']));
@@ -37,6 +39,11 @@ if (!empty($_SESSION['active'])) {
             }
         }
     }
+}
+
+}catch(Exception $e){
+
+    echo "Error: ".$e->getMessage();
 }
 ?>
 <!DOCTYPE html>
