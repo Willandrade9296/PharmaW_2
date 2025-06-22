@@ -72,7 +72,7 @@ if (!empty($_SESSION['active'])) {
         <?php echo (isset($alert)) ? $alert : '' ; ?>
 							<div class="card" id="card-login">
 								<div class="card-header card-header-primary text-center">
-									<h4 class="card-title">Sistema Farmacias</h4>
+									<h4 class="card-title">Clínica SAÚDE - Farmacia 1</h4>
 									
 								</div>
 								<div class="card-body">

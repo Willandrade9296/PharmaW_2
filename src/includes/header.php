@@ -24,13 +24,13 @@ $id_user = $_SESSION['idUser'];
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+   <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Pharma W</title>
+    <title>Farmacia 1</title>
     <link href="../assets/css/material-dashboard.css" rel="stylesheet" />
     
 
@@ -57,7 +57,7 @@ $id_user = $_SESSION['idUser'];
     <div class="wrapper ">
         <div class="sidebar" data-color="blue"  >
             <div class="logo "><a href="./" class="simple-text logo-normal">
-                    Pharma W
+                    Farmacia 1
                 </a></div>
             <div class="sidebar-wrapper">
             <ul class="nav">
