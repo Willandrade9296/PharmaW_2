@@ -100,6 +100,50 @@ $(document).ready(function() {
                 ]
             });
 
+             $('.tbldowngen').DataTable({
+                language: {
+                    "url": urlDataTable
+                },
+
+                dom: 'lBfrtip',
+                   
+                        buttons: [
+                            {
+                                extend:'print',
+                                text:"Imprimir",
+                                title:'Descarga',
+                                titleAttr:'Imprimir Detalle'
+                            }, 
+                            {
+                                extend:'excelHtml5',
+                                text:"Excel",
+                                title:'Descarga',
+                                titleAttr:'Exportar a Excel'
+                            },
+                            {
+                                extend:'pdfHtml5',
+                                text:"PDF",
+                                title:'Descarga',
+                                titleAttr:'Exportar en PDF'
+                                }
+                            ]
+                          
+                        ,
+                        initComplete: function () {
+                            var btns = $('.dt-button');
+                            btns.addClass('btn btn-success btn-sm');
+                            btns.removeClass('dt-button');
+    
+                        },
+    
+
+                "order": [
+                    [0, "desc"]
+                ]
+            });
+
+           
+
 
             $('#tbl').DataTable({
                 language: {

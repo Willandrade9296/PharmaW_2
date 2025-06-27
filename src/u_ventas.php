@@ -51,59 +51,72 @@ if (!empty($_POST)) {
 
             <div class="col-md-12">
                 <div class="collapse multi-collapse show " id="divVentas">
-                <div class="table-responsive">
-                    <table class="table table-sm table-bordered table-hover" id="tbl">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>ID venta</th>
-                                <th>ID Producto</th>
-                                <th>Producto</th>
-                                <th>Tipo prod.</th>
-                                <th>Cant.</th>
-                                <th>Precio PVP</th>
-                                <th>Precio Total</th>
-                                <th>Fecha Venta</th>
-                                <th>Tipo Trans.</th>
-                                <th>Usuario</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            include "../conexion.php";
-
-                            $query = mysqli_query($conexion, "SELECT * FROM viventas_uti ORDER BY fecha desc");
-                            $result = mysqli_num_rows($query);
-                            if ($result > 0) {
-                                while ($data = mysqli_fetch_assoc($query)) { ?>
-                                    <tr>
-                                        <td><?php echo $data['id_venta']; ?></td>
-                                        <td><?php echo $data['id_producto']; ?></td>
-                                        <td><?php echo $data['descripcion']; ?></td>
-                                        <td><?php echo $data['tipo_prod']; ?></td>
-                                        <td><?php echo $data['cantidad']; ?></td>
-                                        <td><?php echo $data['precioPVP']; ?></td>
-                                        <td><?php echo $data['total']; ?></td>
-                                        <td><?php echo $data['fecha']; ?></td>
-                                        <td><?php echo $data['tipo_trans']; ?></td>
-                                        <td><?php echo $data['nombre']; ?></td>
-                                        <td style="width: 200px;">
-                                            <form action="eliminar_venta.php?id_venta=<?php echo $data['id_venta']; ?>&id_prod=<?php echo $data['id_producto']; ?>&tipo_prod=<?php echo $data['tipo_prod']; ?>" method="post" class="confirmar d-inline">
-                                                <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                            <?php }
-                            } ?>
-                        </tbody>
-
-                    </table>
-                </div>
+                    <div class="card">
+                        <div class="card-header">
+                           <h4> Ventas </h4>
                         </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover tbldowngen" >
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th>ID venta</th>
+                                            <th>ID Producto</th>
+                                            <th>Producto</th>
+                                            <th>Tipo prod.</th>
+                                            <th>Cant.</th>
+                                            <th>Precio PVP</th>
+                                            <th>Precio Total</th>
+                                            <th>Fecha Venta</th>
+                                            <th>Tipo Trans.</th>
+                                            <th>Usuario</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include "../conexion.php";
+
+                                        $query = mysqli_query($conexion, "SELECT * FROM viventas_uti ORDER BY fecha desc");
+                                        $result = mysqli_num_rows($query);
+                                        if ($result > 0) {
+                                            while ($data = mysqli_fetch_assoc($query)) { ?>
+                                                <tr>
+                                                    <td><?php echo $data['id_venta']; ?></td>
+                                                    <td><?php echo $data['id_producto']; ?></td>
+                                                    <td><?php echo $data['descripcion']; ?></td>
+                                                    <td><?php echo $data['tipo_prod']; ?></td>
+                                                    <td><?php echo $data['cantidad']; ?></td>
+                                                    <td><?php echo $data['precioPVP']; ?></td>
+                                                    <td><?php echo $data['total']; ?></td>
+                                                    <td><?php echo $data['fecha']; ?></td>
+                                                    <td><?php echo $data['tipo_trans']; ?></td>
+                                                    <td><?php echo $data['nombre']; ?></td>
+                                                    <td style="width: 200px;">
+                                                        <form action="eliminar_venta.php?id_venta=<?php echo $data['id_venta']; ?>&id_prod=<?php echo $data['id_producto']; ?>&tipo_prod=<?php echo $data['tipo_prod']; ?>" method="post" class="confirmar d-inline">
+                                                            <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                        <?php }
+                                        } ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
 
                 <div class="collapse multi-collapse " id="divVentasE">
+
+                <div class="card">
+                        <div class="card-header">
+                          <h4>  Eliminadas </h4>
+                        </div>
+                     <div class="card-body">
                      <div class="table-responsive">
-                    <table class="table table-sm table-bordered table-hover" id="tbl2">
+                    <table class="table table-sm table-bordered table-hover tbldowngen" >
                         <thead class="thead-light">
                             <tr>
                                 <th>ID venta</th>
@@ -144,7 +157,11 @@ if (!empty($_POST)) {
                         </tbody>
 
                     </table>
+                    </div>
+                    </div>
+
                 </div>
+
                     
                 </div>
            
