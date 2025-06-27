@@ -86,17 +86,40 @@ if (!empty($_POST)) {
                                                     <td><?php echo $data['id_producto']; ?></td>
                                                     <td><?php echo $data['descripcion']; ?></td>
                                                     <td><?php echo $data['tipo_prod']; ?></td>
-                                                    <td><?php echo $data['cantidad']; ?></td>
+                                                    <td >
+                                                          <input 
+                                                                class="form-control" 
+                                                                id="cantUti_<?php echo $data['id_venta']; ?>_<?php echo $data['id_producto']; ?>" 
+                                                                placeholder="Cant." 
+                                                                type="number" 
+                                                                min="0" 
+                                                                max="<?php echo $data['cantidad']; ?>"  
+                                                                step="1" 
+                                                                value="<?php echo $data['cantidad']; ?>"
+                                                            >    
+                                                    </td>
+                                                   
                                                     <td><?php echo $data['precioPVP']; ?></td>
                                                     <td><?php echo $data['total']; ?></td>
                                                     <td><?php echo $data['fecha']; ?></td>
                                                     <td><?php echo $data['tipo_trans']; ?></td>
                                                     <td><?php echo $data['nombre']; ?></td>
                                                     <td style="width: 200px;">
-                                                        <form action="eliminar_venta.php?id_venta=<?php echo $data['id_venta']; ?>&id_prod=<?php echo $data['id_producto']; ?>&tipo_prod=<?php echo $data['tipo_prod']; ?>" method="post" class="confirmar d-inline">
-                                                            <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                                        </form>
-                                                    </td>
+                                                                  <form 
+                                                                    action="eliminar_venta.php" 
+                                                                    method="get" 
+                                                                    class="confirmar d-inline"
+                                                                    onsubmit="return actualizarCantidad(this, 'cantUti_<?php echo $data['id_venta']; ?>_<?php echo $data['id_producto']; ?>')"
+                                                                >
+                                                                    <input type="hidden" name="id_venta" value="<?php echo $data['id_venta']; ?>">
+                                                                    <input type="hidden" name="id_prod" value="<?php echo $data['id_producto']; ?>">
+                                                                    <input type="hidden" name="tipo_prod" value="<?php echo $data['tipo_prod']; ?>">
+                                                                    <input type="hidden" name="cant" id="cantidadEnviar_<?php echo $data['id_venta']; ?>">
+                                                                    <button class="btn btn-danger btn-sm" type="submit">
+                                                                        <i class='fas fa-trash-alt'></i>
+                                                                    </button>
+                                                                </form>
+                                                        </td>
                                                 </tr>
                                         <?php }
                                         } ?>
@@ -174,6 +197,20 @@ if (!empty($_POST)) {
         </div>
     </div>
 </div>
+
+<script>
+function actualizarCantidad(form, idInputCant) {
+    // Obtiene el input de cantidad por su ID único
+    const inputCant = document.getElementById(idInputCant);
+    // Asigna su valor al campo oculto 'cant' del formulario
+    form.querySelector('input[name="cant"]').value = inputCant.value;
+    return true; // Permite el envío del formulario
+}
+
+</script>
+
+
+
 <?php  } 
 }else{
     header("Location: ../index.php");
