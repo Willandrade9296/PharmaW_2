@@ -26,8 +26,9 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
      $id_prod= $_GET['id_prod'];
      $id_tipo_prod= $_GET['tipo_prod'];
      $cantidad_elim=$_GET['cant'];
+     $razon=$_GET['razon'];
 
-
+echo $razon;
       $detalle_ventas = mysqli_query($conexion, "SELECT * FROM detalle_venta WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
             $result1 = mysqli_num_rows($detalle_ventas);
             while ($data1 = mysqli_fetch_assoc($detalle_ventas)) { 
@@ -38,8 +39,8 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
 
     if($cantidad_elim <= $cantidad){ 
     
-    $query_copy= mysqli_query($conexion, "INSERT INTO ventas_eliminadas (descripcion,id_detalle,id_producto,id_venta,tipo_prod,cantidad,descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,usuario,usuario_mod,fecha_mod) 
-    SELECT descripcion,id,id_producto,id_venta,tipo_prod,'$cantidad_elim',descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,nombre,'$id_user',now() FROM viventas_uti WHERE id_venta = $id and id_producto= $id_prod and tipo_prod='$id_tipo_prod'");
+    $query_copy= mysqli_query($conexion, "INSERT INTO ventas_eliminadas (descripcion,id_detalle,id_producto,id_venta,tipo_prod,cantidad,descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,usuario,usuario_mod,fecha_mod,razon) 
+    SELECT descripcion,id,id_producto,id_venta,tipo_prod,'$cantidad_elim',descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,nombre,'$id_user',now(),'$razon' FROM viventas_uti WHERE id_venta = $id and id_producto= $id_prod and tipo_prod='$id_tipo_prod'");
     
     if($query_copy == true){
 
