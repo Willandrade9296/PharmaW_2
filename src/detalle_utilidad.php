@@ -346,7 +346,7 @@ const nombre_archivo_salida="Detalle de insumos"
               
 
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                    "url": "../assets/json/Spanish-DataTable.json"
                 },
                 
                 dom: 'lBfrtip',
@@ -525,7 +525,7 @@ const nombre_archivo_salida="Detalle de insumos"
               
 
                     "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                        "url": "../assets/json/Spanish-DataTable.json"
                     },
                     
                     dom: 'lBfrtip',
@@ -704,7 +704,7 @@ const nombre_archivo_salida="Detalle de insumos"
               
 
                         "language": {
-                            "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                            "url": "../assets/json/Spanish-DataTable.json"
                         },
                         
                         dom: 'lBfrtip',
@@ -884,7 +884,7 @@ const nombre_archivo_salida="Detalle de insumos"
               
 
                     "language": {
-                        "url": "//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"
+                        "url": "../assets/json/Spanish-DataTable.json"
                     },
                     
                     dom: 'lBfrtip',

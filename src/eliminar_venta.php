@@ -1,7 +1,8 @@
 <?php
 session_start();
-
+include_once "includes/components.php";
 require("../conexion.php");
+
 
 function devolucion_productos($conn,$id_producto,$tipo_prod,$cantidad){
 
@@ -25,13 +26,9 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
      $id_prod= $_GET['id_prod'];
      $id_tipo_prod= $_GET['tipo_prod'];
      $cantidad_elim=$_GET['cant'];
-    
-    $query_copy= mysqli_query($conexion, "INSERT INTO ventas_eliminadas (descripcion,id_detalle,id_producto,id_venta,tipo_prod,cantidad,descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,usuario,usuario_mod,fecha_mod) 
-    SELECT descripcion,id,id_producto,id_venta,tipo_prod,'$cantidad_elim',descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,nombre,'$id_user',now() FROM viventas_uti WHERE id_venta = $id and id_producto= $id_prod and tipo_prod='$id_tipo_prod'");
-    
-    if($query_copy == true){
 
-            $detalle_ventas = mysqli_query($conexion, "SELECT * FROM detalle_venta WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
+
+      $detalle_ventas = mysqli_query($conexion, "SELECT * FROM detalle_venta WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
             $result1 = mysqli_num_rows($detalle_ventas);
             while ($data1 = mysqli_fetch_assoc($detalle_ventas)) { 
               $cantidad= $data1['cantidad'];
@@ -39,9 +36,18 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
 
             }
 
+    if($cantidad_elim <= $cantidad){ 
+    
+    $query_copy= mysqli_query($conexion, "INSERT INTO ventas_eliminadas (descripcion,id_detalle,id_producto,id_venta,tipo_prod,cantidad,descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,usuario,usuario_mod,fecha_mod) 
+    SELECT descripcion,id,id_producto,id_venta,tipo_prod,'$cantidad_elim',descuento,precio,iva,precioPVP,total,fecha,tipo_trans,id_usuario,nombre,'$id_user',now() FROM viventas_uti WHERE id_venta = $id and id_producto= $id_prod and tipo_prod='$id_tipo_prod'");
+    
+    if($query_copy == true){
 
+           
+
+                         
                                 if($result1 > 1){ 
-                               // $ventas = mysqli_query($conexion, "UPDATE ventas SET total= total - $total  WHERE id=$id");
+                             
                                 
 
                                    if($cantidad == $cantidad_elim){ 
@@ -52,8 +58,9 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
                                      $detalle_eliminadi=  mysqli_query($conexion, "UPDATE detalle_venta set cantidad=cantidad-$cantidad_elim, total=precioPVP*$cantidad_elim WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
                                 
                                    }
+
                                 }else{
-                                 //$ventas = mysqli_query($conexion, "DELETE FROM ventas  WHERE id=$id");
+                                
                                
                                 
                                      if($cantidad == $cantidad_elim){ 
@@ -65,10 +72,16 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
                                 
                                    }
                                 }
+                              
          
                            
     
     }
+  }else{
+
+    $alert = mostrarMensaje('No se realizó eliminación.','w');
+
+  }
    
    mysqli_close($conexion);
 
