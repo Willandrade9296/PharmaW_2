@@ -999,6 +999,8 @@ function editarProducto(e,id) {
             $('#tipo').val(datos.id_tipo);
             $('#presentacion').val(datos.id_presentacion);
             $('#laboratorio').val(datos.id_lab);
+            $('#grupoC').val(datos.id_grupo);
+            
             $('#vencimiento').val(datos.vencimiento);
             $('#cantidad').val(datos.existencia);
             

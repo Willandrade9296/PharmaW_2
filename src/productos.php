@@ -58,8 +58,10 @@ if (!empty($_POST)) {
         $vencimiento = $_POST['vencimiento'];
    //   }
 
-    if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio) || empty($grupoC)   || empty($precio) || $precio <  0  || empty($precioPVP) || $precioPVP <  0 || empty($cantidad) || $cantidad <  0 ||
+    if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio)   || $precio <  0  || $precioPVP <  0 || $cantidad <  0 ||
     $tipo=="*" || $presentacion=="*" || $laboratorio=="*" ) {
+     
+
      
                     $alert = mostrarMensaje('Todos los campos son obligatorios','w');
     } else {
