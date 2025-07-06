@@ -54,14 +54,13 @@ if (!empty($_POST)) {
     $precioIVA= $_POST['precioIva'];
     $iva=$_POST['iva'];
     $infor=$_POST['inform'];
+    $fraccion_inv=$_POST['fraccion_inv'];
    /* if (!empty($_POST['accion'])) {  */
         $vencimiento = $_POST['vencimiento'];
    //   }
 
     if (empty($codigo) || empty($producto) || empty($tipo) || empty($presentacion) || empty($laboratorio)   || $precio <  0  || $precioPVP <  0 || $cantidad <  0 ||
     $tipo=="*" || $presentacion=="*" || $laboratorio=="*" ) {
-     
-
      
                     $alert = mostrarMensaje('Todos los campos son obligatorios','w');
     } else {
@@ -183,15 +182,36 @@ if (!empty($_POST)) {
                         }
 
 
+                    if($fraccion_inv <= ($fraccion * $cantidad)){ 
 
-            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $existencia_fr,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
-            if ($query_update) {
-             
-                    $alert = mostrarMensaje('Producto Modificado','i');
-            } else {
-              
-                   $alert = mostrarMensaje('Error al modificar','w');
-            }
+                        if ( $fraccion_inv == 0){ 
+                            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= ($fraccion * $cantidad),precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+                            if ($query_update) {
+                            
+                                    $alert = mostrarMensaje('Producto Modificado','i');
+                            } else {
+                            
+                                $alert = mostrarMensaje('Error al modificar','w');
+                            }
+                        }else{
+                           
+                             $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $fraccion_inv,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+                            if ($query_update) {
+                            
+                                    $alert = mostrarMensaje('Producto Modificado','i');
+                            } else {
+                            
+                                $alert = mostrarMensaje('Error al modificar','w');
+                            }
+
+                        }
+
+
+
+
+                        }else{
+                              $alert = mostrarMensaje("En fracción inventario no es permitido ingresar mas fracciones que las calculadas.",'w');
+                        }
         }
     }
 }
@@ -359,6 +379,11 @@ if (!empty($_POST)) {
                                                     <label for="PrecioFr" class="text-dark font-weight-bold">Precio por Fr.:</label>
                                                     <input type="number" placeholder="Precio Fracción" class="form-control" name="PrecioFr" id="PrecioFr" min="0" step="0.01">
                                               </div>
+
+                                               <div class="form-group">
+                                                    <label for="fraccion_inv" class="text-dark font-weight-bold">Fracciones Inventario:</label>
+                                                    <input type="number" style="background-color: #f8fbac; text-align:center;" placeholder="Fracciones Inventario" class="form-control" name="fraccion_inv" id="fraccion_inv" min="0" step="1"  />
+                                              </div>
                                            
                                         </div>
                                             </div>
@@ -461,6 +486,8 @@ if (!empty($_POST)) {
                     </div>
     </div>
 </div>
+
+
 <?php  } 
  }else{
 
