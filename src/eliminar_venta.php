@@ -1,5 +1,8 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include_once "includes/components.php";
 require("../conexion.php");
 
@@ -28,7 +31,7 @@ if (!empty($_GET['id_venta']) && !empty($_GET['id_prod'])) {
      $cantidad_elim=$_GET['cant'];
      $razon=$_GET['razon'];
 
-echo $razon;
+
       $detalle_ventas = mysqli_query($conexion, "SELECT * FROM detalle_venta WHERE id_venta=$id AND id_producto=$id_prod AND tipo_prod='$id_tipo_prod'");
             $result1 = mysqli_num_rows($detalle_ventas);
             while ($data1 = mysqli_fetch_assoc($detalle_ventas)) { 
@@ -78,11 +81,11 @@ echo $razon;
                            
     
     }
-  }else{
+      }else{
 
-    $alert = mostrarMensaje('No se realizó eliminación.','w');
+        $alert = mostrarMensaje('No se realizó eliminación.','w');
 
-  }
+      }
    
    mysqli_close($conexion);
 
