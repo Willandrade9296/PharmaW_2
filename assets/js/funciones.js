@@ -108,24 +108,68 @@ $(document).ready(function() {
                 dom: 'lBfrtip',
                    
                         buttons: [
-                            {
-                                extend:'print',
-                                text:"Imprimir",
-                                title:'Descarga',
-                                titleAttr:'Imprimir Detalle'
-                            }, 
+                            
                             {
                                 extend:'excelHtml5',
                                 text:"Excel",
                                 title:'Descarga',
-                                titleAttr:'Exportar a Excel'
-                            },
-                            {
-                                extend:'pdfHtml5',
-                                text:"PDF",
-                                title:'Descarga',
-                                titleAttr:'Exportar en PDF'
-                                }
+                                titleAttr:'Exportar a Excel',
+								 
+												   action: function(e, dt, button, config) {
+										// Desactivar el botón temporalmente para evitar múltiples clics
+										button.prop('disabled', true);
+										
+										try {
+											// 1. Obtener datos de exportación
+											var data = dt.buttons.exportData();
+											
+											// 2. Actualizar valores de inputs
+											dt.rows().nodes().each(function(i) {
+												$(this).find('input').each(function() {
+													var colIdx = $(this).closest('td').index();
+													if (data.body[i] && data.body[i][colIdx] !== undefined) {
+														data.body[i][colIdx] = $(this).val();
+													}
+												});
+											});
+											
+											// 3. Configuración extendida para Excel
+											var excelConfig = $.extend(true, {}, config, {
+												exportOptions: {
+													format: {
+														body: function(data, row, column, node) {
+															// Priorizar valores de inputs
+															var $input = $(node).find('input');
+															return $input.length ? $input.val() : data;
+														}
+													}
+												}
+											});
+											
+											// 4. Ejecutar exportación
+											$.fn.dataTable.ext.buttons.excelHtml5.action.call(
+												dt.button(button.node),
+												e,
+												dt,
+												button,
+												excelConfig,
+												data // Pasar los datos modificados
+											);
+											
+										} catch (error) {
+											console.error("Error en exportación:", error);
+										} finally {
+											// Rehabilitar el botón después de 1 segundo
+											setTimeout(function() {
+												button.prop('disabled', false);
+											}, 1000);
+										}
+									}						 
+    	
+          
+    
+													
+                            }
                             ]
                           
                         ,
