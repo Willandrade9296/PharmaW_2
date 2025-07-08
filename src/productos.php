@@ -181,6 +181,13 @@ if (!empty($_POST)) {
                                 $precioCalcFr_C="0";
                         }
 
+                      
+            /** Se setea campo para evitar error en cadena string */
+                    if($fraccion_inv == "" || empty($fraccion_inv)){
+                         $fraccion_inv=0;
+                    }
+
+
 
                     if($fraccion_inv <= ($fraccion * $cantidad)){ 
 
@@ -382,7 +389,7 @@ if (!empty($_POST)) {
 
                                                <div class="form-group">
                                                     <label for="fraccion_inv" class="text-dark font-weight-bold">Fracciones Inventario:</label>
-                                                    <input type="number" style="background-color: #f8fbac; text-align:center;" placeholder="Fracciones Inventario" class="form-control" name="fraccion_inv" id="fraccion_inv" min="0" step="1"  />
+                                                    <input type="number" style="background-color: #f8fbac; text-align:center;" placeholder="Fracciones Inventario" class="form-control" name="fraccion_inv" id="fraccion_inv" value="0" min="0" step="1"  />
                                               </div>
                                            
                                         </div>
