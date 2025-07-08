@@ -1050,7 +1050,7 @@ function editarProducto(e,id) {
             
             $('#iva').val(datos.iva);
             $('#inform').val(datos.info_prod);
-            $('#fracion_Inv').val(datos.existencia_fr);
+            $('#fraccion_inv').val(datos.existencia_fr);
 
 
             if (datos.vencimiento != '0000-00-00') {
