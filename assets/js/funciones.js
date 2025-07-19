@@ -1035,7 +1035,7 @@ function editarCliente(id) {
     });
 }
 
-function editarUsuario(id) {
+function editarUsuario(id,nombre) {
     const action = "editarUsuario";
     $.ajax({
         url: 'ajax.php',
@@ -1043,7 +1043,8 @@ function editarUsuario(id) {
         async: true,
         data: {
             editarUsuario: action,
-            id: id
+            id: id,
+            nombre:nombre
         },
         success: function (response) {
             const datos = JSON.parse(response);

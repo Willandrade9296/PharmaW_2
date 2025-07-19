@@ -4,6 +4,7 @@ session_start();
 include_once "includes/header.php";
 
 $id = $_GET['id'];
+$nombre_usuario=$_GET['nombre'];
 if (!empty ($id)){
 
 
@@ -30,7 +31,17 @@ if (isset($_POST['permisos'])) {
         }
 
         $alert = mostrarMensaje('Permisos Asignado','i');
-      
+
+        /*SE ACTUALIZA EL ESTADO DE LA OPCION OTORGADA AL USUARIO */
+        
+  
+
+        $consulta = mysqli_query($conexion, "SELECT * FROM detalle_permisos WHERE id_usuario = $id");
+                $datos = array();
+                        foreach ($consulta as $asignado) {
+                            $datos[$asignado['id_permiso']] = true;
+                        }
+
     }
 }
 
@@ -44,6 +55,11 @@ if (isset($_POST['permisos'])) {
 									
 								</div>
             <div class="card-body">
+               
+
+                <blockquote class="blockquote">
+                 <p>Permisos para usuario: <abbr title="attribute"><?php  echo $nombre_usuario ?></abbr> </p>
+                </blockquote>
                 <form method="post" action="">
                     <?php echo (isset($alert)) ? $alert : '' ; ?>
                     <?php while ($row = mysqli_fetch_assoc($sqlpermisos)) { ?>

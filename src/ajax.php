@@ -252,6 +252,8 @@ if (isset($_GET['q'])) {
     exit;
 } else if (isset($_GET['editarUsuario'])) {
     $idusuario = $_GET['id'];
+    $nombre = $_GET['nombre'];
+
     $sql = mysqli_query($conexion, "SELECT * FROM usuario WHERE idusuario = $idusuario");
     $data = mysqli_fetch_array($sql);
     echo json_encode($data);

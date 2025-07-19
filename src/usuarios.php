@@ -131,7 +131,7 @@ if (!empty($_POST)) {
         </thead>
         <tbody>
             <?php
-            $query = mysqli_query($conexion, "SELECT * FROM usuario");
+            $query = mysqli_query($conexion, "SELECT * FROM usuario order by nombre");
             $result = mysqli_num_rows($query);
             if ($result > 0) {
                 while ($data = mysqli_fetch_assoc($query)) { ?>
@@ -142,8 +142,8 @@ if (!empty($_POST)) {
                         <td><?php echo $data['correo']; ?></td>
                         <td><?php echo $data['usuario']; ?></td>
                         <td>
-                            <a href="rol.php?id=<?php echo $data['idusuario']; ?>" class="btn btn-warning "><i class='fas fa-key'></i></a>
-                            <a href="#" onclick="editarUsuario(<?php echo $data['idusuario']; ?>)" class="btn btn-success "><i class='fas fa-edit'></i></a>
+                            <a href="rol.php?id=<?php echo $data['idusuario']; ?>&nombre=<?php echo $data['nombre']; ?>" class="btn btn-warning "><i class='fas fa-key'></i></a>
+                            <a href="#" onclick="editarUsuario(<?php echo $data['idusuario']; ?>,<?php echo $data['nombre']; ?>)" class="btn btn-success "><i class='fas fa-edit'></i></a>
                             <form action="eliminar_usuario.php?id=<?php echo $data['idusuario']; ?>" method="post" class="confirmar d-inline">
                                 <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
                             </form>
