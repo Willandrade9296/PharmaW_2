@@ -188,6 +188,16 @@ include_once "includes/header.php";
             </div>
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h3 class="title-2 m-b-40">Productos por vencer</h3>
+            </div>
+            <div class="card-body">
+                <canvas id="ProductosPvenc"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include_once "includes/footer.php";

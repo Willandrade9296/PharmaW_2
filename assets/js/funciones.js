@@ -914,6 +914,45 @@ if (document.getElementById("ProductosVendidos")) {
     });
 }
 
+
+if (document.getElementById("ProductosPvenc")) {
+    const action = "fecCad";
+    $.ajax({
+        url: 'chart.php',
+        type: 'POST',
+        async: true,
+        data: {
+            action
+        },
+        success: function (response) {
+            if (response != 0) {
+                var data = JSON.parse(response);
+                var nombre = [];
+                var cantidad = [];
+                for (var i = 0; i < data.length; i++) {
+                    nombre.push(data[i]['descripcion']);
+                    cantidad.push(data[i]['mesesVenc']);
+                }
+                var ctx = document.getElementById("ProductosPvenc");
+                var myPieChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: nombre,
+                        datasets: [{
+                            data: cantidad,
+                            backgroundColor: ['#C82A54', '#EF280F', '#23BAC4', '#8C4966', '#FF689D', '#E7D40A', '#E36B2C', '#69C36D', '#581845', '#024A86'],
+                        }],
+                    },
+                });
+            }
+        },
+        error: function (error) {
+            console.log(error);
+
+        }
+    });
+}
+
 function btnCambiar(e) {
     e.preventDefault();
     const actual = document.getElementById('actual').value;
