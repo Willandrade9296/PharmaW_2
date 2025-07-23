@@ -542,14 +542,25 @@ if (!empty($_POST)) {
                                                             <th><b>Frac./Unid.</b></th>
                                                             <th><b>Prec./Frac.</b></th>
                                                             <th><b>IVA</b></th>
-                                                            <th><b>Acciones</b></th>
+                                                            <th style="cursor: pointer;">
+                                                                <input type="checkbox" id="selectAllCol1" onclick="event.stopPropagation();  toggleCheckboxes('Col1')">
+                                                                <b>General</b>
+                                                            </th>
+                                                            <th style="cursor: pointer;">
+                                                                <input type="checkbox" id="selectAllCol2" onclick="event.stopPropagation();  toggleCheckboxes('Col2')">
+                                                                <b>Quirofano</b>
+                                                            </th>
+                                                            <th style="cursor: pointer;">
+                                                                <input type="checkbox" id="selectAllCol3" onclick="event.stopPropagation();  toggleCheckboxes('Col3')">
+                                                                <b>C. Paro</b>
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
                                                     //  include "../conexion.php";
 
-                                                        $query = mysqli_query($conexion, "SELECT p.*, t.id, t.tipo, pr.id, pr.nombre FROM producto p INNER JOIN tipos t ON p.id_tipo = t.id INNER JOIN presentacion pr ON p.id_presentacion = pr.id");
+                                                        $query = mysqli_query($conexion, "SELECT * FROM producto ");
                                                         $result = mysqli_num_rows($query);
                                                         if ($result > 0) {
                                                             while ($data = mysqli_fetch_assoc($query)) { 
@@ -568,11 +579,20 @@ if (!empty($_POST)) {
                                                                     <td><?php echo $data['precioFr']; ?></td>
                                                                     <td><?php echo $data['iva']; ?></td>
                                                                     <td>
-                                                                        <a href="#" onclick="editarProducto(event,<?php echo $data['codproducto']; ?>)" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-
-                                                                        <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
-                                                                            <button class="btn btn-danger btn-sm" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                                                        </form>
+                                                                        <div class="form-check form-check-inline m-4">
+                                                                        <input  type="checkbox"  id="chk1<?php echo $data['codproducto']; ?>" value="" />
+                                                                       
+                                                                        </div>
+                                                                    </td>
+                                                                     <td>
+                                                                        <div class="form-check form-check-inline m-4">
+                                                                        <input type="checkbox"  id="chk2<?php echo $data['codproducto']; ?>" value="" />
+                                                                        </div>
+                                                                    </td>
+                                                                     <td>
+                                                                        <div class="form-check form-check-inline m-4">
+                                                                        <input  type="checkbox"  id="chk3<?php echo $data['codproducto']; ?>" value=""/>
+                                                                        </div>
                                                                     </td>
                                                                 </tr>
                                                         <?php }
@@ -594,6 +614,29 @@ if (!empty($_POST)) {
 
 </div>
 </div>
+
+<script>
+     function toggleCheckboxes(columna) {
+        // Mapeamos los nombres de columna a los números de prefijo
+        const columnMap = {
+            'Col1': '1',
+            'Col2': '2',
+            'Col3': '3'
+        };
+        
+        const prefix = columnMap[columna];
+        const selectAllCheckbox = document.getElementById(`selectAll${columna}`);
+        const checkboxes = document.querySelectorAll(`input[id^="chk${prefix}"]`);
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = selectAllCheckbox.checked;
+        });
+
+        return false;
+    }
+
+   
+</script>
 
 <?php  } 
  }else{
