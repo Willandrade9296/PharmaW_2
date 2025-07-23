@@ -130,33 +130,33 @@ if (!empty($_POST)) {
             if($presentacion == '4' ){ 
 
 
-                            if ($existencia_fr_actual > 0){ 
-                                
+                                            if ($existencia_fr_actual > 0){ 
+                                                
 
-                                     if ( ($fraccion * $cantidad) >= $existencia_fr_actual)
-                                     {
+                                                    if ( ($fraccion * $cantidad) >= $existencia_fr_actual)
+                                                    {
 
-                                         $cantidad_temp= $cantidad - $cantidad_actual;
+                                                        $cantidad_temp= $cantidad - $cantidad_actual;
 
-                                         $existencia_fr=$existencia_fr_actual + ($fraccion * $cantidad_temp) ;
-                                         
-                                     }
-                                     else{
-                                         
-     
+                                                        $existencia_fr=$existencia_fr_actual + ($fraccion * $cantidad_temp) ;
+                                                        
+                                                    }
+                                                    else{
+                                                        
+                    
 
-                                          $existencia_fr=$existencia_fr_actual - ($existencia_fr_actual - ($fraccion * $cantidad));
-
-
-                                     } 
+                                                        $existencia_fr=$existencia_fr_actual - ($existencia_fr_actual - ($fraccion * $cantidad));
 
 
+                                                    } 
 
 
 
-                            }else{
-                                $existencia_fr= $fraccion*$cantidad;
-                            } 
+
+
+                                            }else{
+                                                $existencia_fr= $fraccion*$cantidad;
+                                            } 
 
 
                             $precioCalcFr= precioFraccion($precioPVP,$fraccion,$precioFr);
@@ -182,43 +182,60 @@ if (!empty($_POST)) {
                         }
 
                       
-            /** Se setea campo para evitar error en cadena string */
+                 /** Se setea campo para evitar error en cadena string */
                     if($fraccion_inv == "" || empty($fraccion_inv)){
                          $fraccion_inv=0;
                     }
 
 
+                                       if($presentacion == '4' ){ 
+                                                    if($fraccion_inv <= ($fraccion * $cantidad)){ 
 
-                    if($fraccion_inv <= ($fraccion * $cantidad)){ 
+                                                        if ( $fraccion_inv == 0){ 
+                                                            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= ($fraccion * $cantidad),precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+                                                            if ($query_update) {
+                                                            
+                                                                    $alert = mostrarMensaje('Producto Modificado','i');
+                                                            } else {
+                                                            
+                                                                $alert = mostrarMensaje('Error al modificar','w');
+                                                            }
+                                                        }else{
+                                                        
+                                                            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $fraccion_inv,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+                                                            if ($query_update) {
+                                                            
+                                                                    $alert = mostrarMensaje('Producto Modificado','i');
+                                                            } else {
+                                                            
+                                                                $alert = mostrarMensaje('Error al modificar','w');
+                                                            }
 
-                        if ( $fraccion_inv == 0){ 
-                            $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= ($fraccion * $cantidad),precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
-                            if ($query_update) {
-                            
-                                    $alert = mostrarMensaje('Producto Modificado','i');
-                            } else {
-                            
-                                $alert = mostrarMensaje('Error al modificar','w');
-                            }
-                        }else{
-                           
-                             $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= $fraccion_inv,precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
-                            if ($query_update) {
-                            
-                                    $alert = mostrarMensaje('Producto Modificado','i');
-                            } else {
-                            
-                                $alert = mostrarMensaje('Error al modificar','w');
-                            }
-
-                        }
-
-
+                                                        }
 
 
-                        }else{
-                              $alert = mostrarMensaje("En fracción inventario no es permitido ingresar mas fracciones que las calculadas.",'w');
-                        }
+
+
+                                                        }else{
+                                                            $alert = mostrarMensaje("En fracción inventario no es permitido ingresar mas fracciones que las calculadas.",'w');
+                                                        }
+
+                                                    }else{
+
+
+                                                      $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio, precioIVA= $precioIVA,precioPVP=$precioPVP, existencia = $cantidad, fraccion= $fraccion, existencia_fr= ($fraccion * $cantidad),precioFr= $precioFr ,precioFr_o= $precioCalcFr,precioFr_c= $precioCalcFr_C, id_lab = $laboratorio,id_presentacion= $presentacion,id_tipo= $tipo , id_grupo='$grupoC' ,vencimiento = '$vencimiento', iva = $iva, info_prod='$infor' WHERE codproducto = $id");
+                                                            if ($query_update) {
+                                                            
+                                                                    $alert = mostrarMensaje('Producto Modificado','i');
+                                                            } else {
+                                                            
+                                                                $alert = mostrarMensaje('Error al modificar','w');
+                                                            }
+
+
+
+                                                    }
+                    
         }
     }
 }
@@ -231,7 +248,7 @@ if (!empty($_POST)) {
 
 <div class="row">
         <div class="col-md-12">
-                        <div class="row">
+                        <div class="row" style="display:none">
                                     <div class="col-lg-3">
                                         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#divProductos" aria-expanded="false" aria-controls="divProductos"><i class="fas fa-cubes mr-2 fa-2x"></i>Productos</button>
                             
@@ -602,6 +619,21 @@ if (!empty($_POST)) {
                                                 </table>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                                    </div>
+                                            <div class="col-md-6">
+                                                            <div class="row">
+                                                                        <div class="col-lg-6" style="margin-top:1em;">
+                                                                            <button class="btn btn-success" type="button" ><i class="fa fa-share mr-2 fa-2x"></i> Realizar Traslado</button>
+                                                                
+                                                                        </div>
+                                                                        
+                                                            </div>
+                                            </div>
                                     </div>
                     </div>
                 </div>
