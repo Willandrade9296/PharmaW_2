@@ -206,7 +206,7 @@ if (!empty($_POST)) {
                                         <h4> Realizar Traslados </h4>
                                         </div>
                                     <div class="card-body">
-                <form id="trasladoForm" method="post">
+                <form id="trasladoForm" method="post" >
                                     <div class="table-responsive">
                                     <table class="table table-sm table-bordered table-hover tbldowngen" >
                                         <thead class="thead-light">
@@ -264,6 +264,7 @@ if (!empty($_POST)) {
                                                                         data-idproducto="<?php echo $data['id_producto']; ?>"
                                                                         data-descripcion="<?php echo $data['descripcion']; ?>"
                                                                         data-tipo_prod="<?php echo $data['tipo_prod']; ?>"
+                                                                        data-cantidad="<?php echo $data['cantidad']; ?>"
                                                                         <?php
                                                                                                                         if ( strpos($data['cliente'] , "General")  !== false    ) {
                                                                                                                             echo "checked";
@@ -279,9 +280,10 @@ if (!empty($_POST)) {
                                                                          data-idproducto="<?php echo $data['id_producto']; ?>"
                                                                          data-descripcion="<?php echo $data['descripcion']; ?>"
                                                                          data-tipo_prod="<?php echo $data['tipo_prod']; ?>"
+                                                                         data-cantidad="<?php echo $data['cantidad']; ?>"
                                                    
                                                                                                                  <?php
-                                                                                                                        if ( strpos($data['cliente'] , "Reserva")  !== false  || strpos($data['cliente'] , "Quirofano")  !== false   ) {
+                                                                                                                        if ( strpos($data['cliente'] , "Reserva")  !== false   ) {
                                                                                                                             echo "checked";
                                                                                                                         }
                                                                                                                         ?> />
@@ -295,9 +297,10 @@ if (!empty($_POST)) {
                                                                          data-idproducto="<?php echo $data['id_producto']; ?>" 
                                                                          data-descripcion="<?php echo $data['descripcion']; ?>"
                                                                          data-tipo_prod="<?php echo $data['tipo_prod']; ?>"
+                                                                         data-cantidad="<?php echo $data['cantidad']; ?>"
 
                                                                          <?php
-                                                                                                                        if ( strpos($data['cliente'] , "Paro")  !== false   ) {
+                                                                                                                        if ( strpos($data['cliente'] , "Coche Paro")  !== false   ) {
                                                                                                                             echo "checked";
                                                                                                                         }
                                                                                                                         ?> />
@@ -319,7 +322,7 @@ if (!empty($_POST)) {
 
                                                  </div>
                                                 <div class="col-md-6">
-                                                    <input type="submit" value="Realizar Traslado" class="btn btn-lg btn-success" id="btnGrabarTrasl">
+                                                    <input type="submit"  value="Realizar Traslado" class="btn btn-lg btn-success" id="btnGrabarTrasl">
                                                     
                                                 </div>
                                             </div>
@@ -393,6 +396,7 @@ document.getElementById('btnGrabarTrasl').addEventListener('click', function() {
         const idProducto = row.querySelector('td:nth-child(2)').textContent;
         const descripcion = row.querySelector('td:nth-child(3)').textContent;
         const tipoProd = row.querySelector('td:nth-child(4)').textContent;
+        const cantidad = row.querySelector('td:nth-child(5)').textContent;
         
         const chk1 = row.querySelector('.chk1')?.checked || false;
         const chk2 = row.querySelector('.chk2')?.checked || false;
@@ -407,6 +411,7 @@ document.getElementById('btnGrabarTrasl').addEventListener('click', function() {
                 id_producto: idProducto,
                 descripcion:descripcion,
                 tipo_prod:tipoProd,
+                cant:cantidad,
                 general: chk1 ? 1 : 0,
                 reserva: chk2 ? 1 : 0,
                 cparo: chk3 ? 1 : 0
@@ -431,15 +436,15 @@ document.getElementById('btnGrabarTrasl').addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('Traslado realizado con éxito');
-           // location.reload(); // Recargar la página para ver cambios
+            alert('Traslado realizado con éxito '+data.message);
+            location.reload(); // Recargar la página para ver cambios
         } else {
             alert('Error: ' + data.message);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Ocurrió un error al procesar el traslado');
+        alert('Ocurrió un error al procesar el traslado: '+error);
     });
     
 });
