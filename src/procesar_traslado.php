@@ -83,9 +83,9 @@ try {
 
                                                $count=0;
                                                
-                                             $sql1= "SELECT count(*) as total FROM v_clinica2.producto where codigo=? ";
+                                             $sql1= "SELECT count(*) as total FROM v_clinica2.producto where descripcion=?";
                                                  $stmt1 = mysqli_prepare($conexion, $sql1);
-                                                 mysqli_stmt_bind_param($stmt1, "i", $registro['id_producto']);
+                                                 mysqli_stmt_bind_param($stmt1, "s",$registro['descripcion']);
                                                  if (!mysqli_stmt_execute($stmt1)) { 
                                                     throw new Exception("Error al insertar registro en paso_reserva: " . mysqli_error($conexion));
                                                  }
@@ -100,15 +100,15 @@ try {
                                                  if($count==0){
                                                  
 
-                                                       if($registro['tipo_prod'] == 'U' ){ 
+                                                       if($registro['tipo_prod'] == "U" ){ 
                                                            $sql2= " INSERT INTO v_clinica2.producto (codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,existencia,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod)   
-                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where codigo=? ";
+                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where descripcion=? ";
                                                             $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                            mysqli_stmt_bind_param($stmt2, "ii",$registro['cant'], $registro['id_producto']);
+                                                            mysqli_stmt_bind_param($stmt2, "is",$registro['cant'],$registro['descripcion']);
                                                             if (!mysqli_stmt_execute($stmt2)) { 
                                                                 throw new Exception("Error al insertar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                             }
-
+                                                           $codPrueba=$registro['id_producto']."  ".$registro['descripcion'];
                                                              mysqli_stmt_free_result($stmt2);
                                                             mysqli_stmt_close($stmt2);
 
@@ -125,15 +125,15 @@ try {
                                                                         }
 
                                                                         mysqli_stmt_free_result($stmt_elim);
-                                                                        mysqli_stmt_close($stmt_elim);
+                                                                        mysqli_stmt_close($stmt_elim); 
 
-                                                        }else if($registro['tipo_prod'] == 'F'){
+                                                        }else if($registro['tipo_prod'] == "F"){
 
                                                                  $fraccion=0;
 
-                                                                 $sql_prev="SELECT fraccion FROM producto where codigo=?";
+                                                                 $sql_prev="SELECT fraccion FROM producto where  descripcion=?";
                                                                   $stmt_prev = mysqli_prepare($conexion, $sql_prev);
-                                                                  mysqli_stmt_bind_param($stmt_prev, "i",$registro['id_producto']);
+                                                                  mysqli_stmt_bind_param($stmt_prev, "s", $registro['descripcion']);
                                                                   mysqli_stmt_execute($stmt_prev);
                                                                     mysqli_stmt_bind_result($stmt_prev,$fraccion);  
                                                                      mysqli_stmt_fetch($stmt_prev);
@@ -158,9 +158,9 @@ try {
 
 
                                                                     $sql2= " INSERT INTO v_clinica2.producto (codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,existencia,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod)   
-                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,?,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where codigo=? ";
+                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,?,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where  descripcion=?";
                                                                         $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                                        mysqli_stmt_bind_param($stmt2, "iii",$existencia,$registro['cant'], $registro['id_producto']);
+                                                                        mysqli_stmt_bind_param($stmt2, "iis",$existencia,$registro['cant'],$registro['descripcion']);
                                                                         if (!mysqli_stmt_execute($stmt2)) { 
                                                                             throw new Exception("Error al insertar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                                         }
@@ -194,10 +194,10 @@ try {
 
                                                         $acumcount+=$count;
 
-                                                        if($registro['tipo_prod'] == 'U' ){ 
-                                                           $sql2= " UPDATE v_clinica2.producto SET existencia=existencia+?  where codigo=? ";
+                                                        if($registro['tipo_prod'] == "U" ){ 
+                                                           $sql2= " UPDATE v_clinica2.producto SET existencia=existencia+?  where descripcion=? ";
                                                             $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                            mysqli_stmt_bind_param($stmt2, "ii",$registro['cant'], $registro['id_producto']);
+                                                            mysqli_stmt_bind_param($stmt2, "is",$registro['cant'], $registro['descripcion']);
                                                             if (!mysqli_stmt_execute($stmt2)) { 
                                                                 throw new Exception("Error al actualizar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                             }
@@ -225,9 +225,9 @@ try {
                                                             
                                                             $fraccion=0;
 
-                                                                 $sql_prev="SELECT fraccion FROM producto where codigo=?";
+                                                                 $sql_prev="SELECT fraccion FROM producto where descripcion=?";
                                                                   $stmt_prev = mysqli_prepare($conexion, $sql_prev);
-                                                                  mysqli_stmt_bind_param($stmt_prev, "i",$registro['id_producto']);
+                                                                  mysqli_stmt_bind_param($stmt_prev, "s",$registro['descripcion']);
                                                                    mysqli_stmt_execute($stmt_prev);
                                                                     mysqli_stmt_bind_result($stmt_prev,$fraccion);  
                                                                      mysqli_stmt_fetch($stmt_prev);
@@ -251,9 +251,9 @@ try {
                                                                      mysqli_stmt_close($stmt_prev);
 
 
-                                                            $sql2= " UPDATE v_clinica2.producto SET  existencia=existencia+?  ,existencia_fr=existencia_fr+?  where codigo=?  ";
+                                                            $sql2= " UPDATE v_clinica2.producto SET  existencia=existencia+?  ,existencia_fr=existencia_fr+?  where  descripcion=? ";
                                                             $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                            mysqli_stmt_bind_param($stmt2, "iii",$existencia,$registro['cant'], $registro['id_producto']);
+                                                            mysqli_stmt_bind_param($stmt2, "iis",$existencia,$registro['cant'], $registro['descripcion']);
                                                             if (!mysqli_stmt_execute($stmt2)) { 
                                                                 throw new Exception("Error al actualizar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                             }
@@ -346,9 +346,9 @@ try {
 
                                                $count=0;
                                                
-                                             $sql1= "SELECT count(*) as total FROM v_clinica3.producto where codigo=? ";
+                                             $sql1= "SELECT count(*) as total FROM v_clinica3.producto where codproducto=? AND descripcion=?";
                                                  $stmt1 = mysqli_prepare($conexion, $sql1);
-                                                 mysqli_stmt_bind_param($stmt1, "i", $registro['id_producto']);
+                                                 mysqli_stmt_bind_param($stmt1, "is", $registro['id_producto'],$registro['descripcion']);
                                                  if (!mysqli_stmt_execute($stmt1)) { 
                                                     throw new Exception("Error al insertar registro en paso_reserva: " . mysqli_error($conexion));
                                                  }
@@ -365,9 +365,9 @@ try {
 
                                                        if($registro['tipo_prod'] == 'U' ){ 
                                                            $sql2= " INSERT INTO v_clinica3.producto (codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,existencia,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod)   
-                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where codigo=? ";
+                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where  descripcion=?";
                                                             $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                            mysqli_stmt_bind_param($stmt2, "ii",$registro['cant'], $registro['id_producto']);
+                                                            mysqli_stmt_bind_param($stmt2, "is",$registro['cant'], $registro['descripcion']);
                                                             if (!mysqli_stmt_execute($stmt2)) { 
                                                                 throw new Exception("Error al insertar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                             }
@@ -390,13 +390,13 @@ try {
                                                                         mysqli_stmt_free_result($stmt_elim);
                                                                         mysqli_stmt_close($stmt_elim);
 
-                                                        }else if($registro['tipo_prod'] == 'F'){
+                                                        }else if($registro['tipo_prod'] == "F"){
 
                                                                  $fraccion=0;
 
-                                                                 $sql_prev="SELECT fraccion FROM producto where codigo=?";
+                                                                 $sql_prev="SELECT fraccion FROM producto where descripcion=?";
                                                                   $stmt_prev = mysqli_prepare($conexion, $sql_prev);
-                                                                  mysqli_stmt_bind_param($stmt_prev, "i",$registro['id_producto']);
+                                                                  mysqli_stmt_bind_param($stmt_prev, "s",$registro['descripcion']);
                                                                   mysqli_stmt_execute($stmt_prev);
                                                                     mysqli_stmt_bind_result($stmt_prev,$fraccion);  
                                                                      mysqli_stmt_fetch($stmt_prev);
@@ -421,9 +421,9 @@ try {
 
 
                                                                     $sql2= " INSERT INTO v_clinica3.producto (codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,existencia,existencia_fr,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod)   
-                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,?,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where codigo=? ";
+                                                                     SELECT codigo,descripcion,precio,precioIVA,precioPVP,precioFr,precioFr_o,precioFr_c,?,?,fraccion,id_lab,id_presentacion,id_tipo,id_grupo,vencimiento,iva,info_prod FROM producto where descripcion=? ";
                                                                         $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                                        mysqli_stmt_bind_param($stmt2, "iii",$existencia,$registro['cant'], $registro['id_producto']);
+                                                                        mysqli_stmt_bind_param($stmt2, "iis",$existencia,$registro['cant'], $registro['descripcion']);
                                                                         if (!mysqli_stmt_execute($stmt2)) { 
                                                                             throw new Exception("Error al insertar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                                         }
@@ -458,9 +458,9 @@ try {
                                                         $acumcount+=$count;
 
                                                         if($registro['tipo_prod'] == 'U' ){ 
-                                                           $sql2= " UPDATE v_clinica3.producto SET existencia=existencia+?  where codigo=? ";
+                                                           $sql2= " UPDATE v_clinica3.producto SET existencia=existencia+?  where  descripcion=? ";
                                                             $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                            mysqli_stmt_bind_param($stmt2, "ii",$registro['cant'], $registro['id_producto']);
+                                                            mysqli_stmt_bind_param($stmt2, "is",$registro['cant'], $registro['descripcion']);
                                                             if (!mysqli_stmt_execute($stmt2)) { 
                                                                 throw new Exception("Error al actualizar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                             }
@@ -488,9 +488,9 @@ try {
                                                             
                                                             $fraccion=0;
 
-                                                                 $sql_prev="SELECT fraccion FROM producto where codigo=?";
+                                                                 $sql_prev="SELECT fraccion FROM producto where descripcion=?";
                                                                   $stmt_prev = mysqli_prepare($conexion, $sql_prev);
-                                                                  mysqli_stmt_bind_param($stmt_prev, "i",$registro['id_producto']);
+                                                                  mysqli_stmt_bind_param($stmt_prev, "s",$registro['descripcion']);
                                                                    mysqli_stmt_execute($stmt_prev);
                                                                     mysqli_stmt_bind_result($stmt_prev,$fraccion);  
                                                                      mysqli_stmt_fetch($stmt_prev);
@@ -514,9 +514,9 @@ try {
                                                                      mysqli_stmt_close($stmt_prev);
 
 
-                                                            $sql2= " UPDATE v_clinica3.producto SET  existencia=existencia+?  ,existencia_fr=existencia_fr+?  where codigo=?  ";
+                                                            $sql2= " UPDATE v_clinica3.producto SET  existencia=existencia+?  ,existencia_fr=existencia_fr+?  where descripcion=?  ";
                                                             $stmt2 = mysqli_prepare($conexion, $sql2);
-                                                            mysqli_stmt_bind_param($stmt2, "iii",$existencia,$registro['cant'], $registro['id_producto']);
+                                                            mysqli_stmt_bind_param($stmt2, "iis",$existencia,$registro['cant'],$registro['descripcion']);
                                                             if (!mysqli_stmt_execute($stmt2)) { 
                                                                 throw new Exception("Error al actualizar registro en productos en v_clinica2: " . mysqli_error($conexion));
                                                             }
